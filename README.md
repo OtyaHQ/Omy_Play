@@ -2,11 +2,13 @@
 
 <img src="assets/branding/otya_app_icon.webp" alt="Otya" width="112" height="112" />
 
-# Otya
+# Otya Media
 
 **Private. Powerful. Offline-first media.**
 
-Otya by PeterSmart Link combines local video and music playback, nearby Send, Private media, practical media tools and optional connected Together/account services without making core playback depend on the cloud.
+**Otya Media** is the offline-first media player in the Otya OS family, operated by Otya Hold Ltd. It combines local video and music playback, nearby Send, Private media, practical media tools and optional connected Together/account services without making core playback depend on the cloud.
+
+The GitHub repository and internal Android package identifiers may retain their existing `OtyaPlayer` names until a separate compatibility-reviewed code and release migration is approved.
 
 [Otya](https://petersmartlink.com) · [Documents](https://petersmartlink.com/docs) · [Download](https://petersmartlink.com/download/otya-player) · [Security](SECURITY.md)
 
@@ -68,6 +70,6 @@ Do not publish source archives, internal deployment instructions, backend creden
 
 <div align="center">
 
-**Otya · PeterSmart Link**
+**Otya Media · Otya Hold Ltd**
 
 </div>
