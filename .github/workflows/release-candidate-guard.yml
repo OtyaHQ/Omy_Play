@@ -25,9 +25,29 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Require a new immutable build number
+      - name: Require a new immutable build number for release-impacting changes
         shell: bash
-        run: bash scripts/verify-release-candidate-version.sh
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+          HEAD_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+            bash scripts/verify-release-candidate-version.sh
+            exit 0
+          fi
+          if [ -z "$BASE_SHA" ] || [ "$BASE_SHA" = "0000000000000000000000000000000000000000" ]; then
+            echo "No comparable base commit; enforce release candidate identity."
+            bash scripts/verify-release-candidate-version.sh
+            exit 0
+          fi
+          changed="$(git diff --name-only "$BASE_SHA" "$HEAD_SHA")"
+          if printf '%s\\n' "$changed" | grep -Eq '^(android/|lib/|assets/|pubspec\\.yaml$|pubspec\\.lock$|scripts/verify-android-release-apk\\.sh$|\\.github/workflows/(release|release-apk|release-mode-validation|play-closed-test)\\.yml$)'; then
+            bash scripts/verify-release-candidate-version.sh
+          else
+            echo "No release-impacting files changed; immutable build number check is not applicable."
+          fi
 
       - name: Verify Play and privacy publication contract
         shell: bash
