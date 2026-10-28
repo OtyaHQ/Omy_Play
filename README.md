@@ -2,13 +2,13 @@
 
 <img src="assets/branding/otya_app_icon.webp" alt="Otya" width="112" height="112" />
 
-# Otya
+# Otya Media
 
 **Private. Powerful. Offline-first media.**
 
-Otya by PeterSmart Link combines local video and music playback, nearby Send, Private media, practical media tools and optional connected Together/account services without making core playback depend on the cloud.
+Otya Media, part of Otya OS, combines local video and music playback, nearby Send, Private media, practical media tools and optional connected Together/account services without making core playback depend on the cloud.
 
-[Otya](https://petersmartlink.com) · [Documents](https://petersmartlink.com/docs) · [Download](https://petersmartlink.com/download/otya-player) · [Security](SECURITY.md)
+[Otya Media](https://petersmartlink.com) · [Documents](https://petersmartlink.com/docs) · [Download](https://petersmartlink.com/download/otya-player) · [Security](SECURITY.md)
 
 </div>
 
