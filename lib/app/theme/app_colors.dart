@@ -12,10 +12,10 @@ abstract class AppColors {
   static const Color border = Color(0xFF353442);
   static const Color borderSubtle = Color(0xFF282732);
 
-  // Otya uses one restrained violet family. Cyan remains available only for
+  // Otya uses its restrained teal brand family. Cyan remains available only for
   // explicit media/connection status, never as decorative chrome.
-  static const Color brandViolet = Color(0xFF8B6CFF);
-  static const Color brandVioletDeep = Color(0xFF6547DB);
+  static const Color brandViolet = Color(0xFF18A999);
+  static const Color brandVioletDeep = Color(0xFF0F766E);
   static const Color brandCyan = Color(0xFF45D8E6);
   static const Color brandBlue = brandViolet;
   static const Color brandDeepBlue = brandVioletDeep;
@@ -32,8 +32,8 @@ abstract class AppColors {
   static const Color accentGreen = Color(0xFF48C78E);
   static const Color accentAmber = brandYellow;
 
-  static const Color glowBlue = Color(0x1F8B6CFF);
-  static const Color glowViolet = Color(0x168B6CFF);
+  static const Color glowBlue = Color(0x1F18A999);
+  static const Color glowViolet = Color(0x1618A999);
 
   static const LinearGradient accentGradient = LinearGradient(
     colors: [brandViolet, brandVioletDeep],
