@@ -42,8 +42,136 @@ jobs:
         run: |
           set -euo pipefail
           tracked="$(git ls-files)"
-          if printf '%s\n' "$tracked" | grep -E '(^|/)(\.env($|\.)|\.dev\.vars$|key\.properties$|keystore\.jks$|.*\.(jks|keystore|p12|pfx|pem|key)$|.*firebase-adminsdk.*\.json$|service-account.*\.json$)' | grep -Ev '(^|/)\.env\.example$'; then
-            echo '::error::Potential credential or signing material is tracked.'
+          sensitive_paths="$(printf '%s\n' "$tracked" | grep -E '(^|/)(\.env($|\.)|\.dev\.vars$|key\.properties$|keystore\.jks$|.*\.(jks|keystore|p12|pfx|pem|key)$|.*firebase-adminsdk.*\.json$|service-account.*\.json$)' | grep -Ev '(^|/)\.env\.example
+
+      - name: Block private keys and provider tokens
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git grep -n -I -E -- '^-----BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY-----$'; then
+            echo '::error::Private key material is committed.'
+            exit 1
+          fi
+          if git grep -n -I -E -- '"type"[[:space:]]*:[[:space:]]*"service_account"'; then
+            echo '::error::A Google/Firebase service-account document is committed.'
+            exit 1
+          fi
+          if git grep -n -I -E -- '"private_key"[[:space:]]*:[[:space:]]*"-----BEGIN'; then
+            echo '::error::Embedded JSON private-key material is committed.'
+            exit 1
+          fi
+          if git grep -n -I -E -- '[0-9]{8,12}:[A-Za-z0-9_-]{25,}'; then
+            echo '::error::Possible Telegram bot token committed to source.'
+            exit 1
+          fi
+          if git grep -n -I -E -- '\bre_[A-Za-z0-9_-]{20,}\b'; then
+            echo '::error::Possible Resend API key committed to source.'
+            exit 1
+          fi
+          if git grep -n -I -E -- '\b(ghp|github_pat)_[A-Za-z0-9_]{20,}\b'; then
+            echo '::error::Possible GitHub access token committed to source.'
+            exit 1
+          fi
+          if git grep -n -I -E -- '\bsk-[A-Za-z0-9_-]{20,}\b'; then
+            echo '::error::Possible AI/provider secret key committed to source.'
+            exit 1
+          fi
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: gradle
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.32.x"
+          channel: stable
+          cache: true
+
+      - name: Install locked dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s pubspec.lock || { echo 'ERROR: committed pubspec.lock is missing'; exit 1; }
+          BEFORE="$(sha256sum pubspec.lock | awk '{print $1}')"
+          flutter pub get
+          AFTER="$(sha256sum pubspec.lock | awk '{print $1}')"
+          test "$BEFORE" = "$AFTER" || {
+            git diff -- pubspec.lock
+            echo 'ERROR: flutter pub get changed the committed dependency graph'
+            exit 1
+          }
+          git diff --exit-code -- pubspec.lock
+
+      - name: Generate code
+        run: dart run build_runner build --delete-conflicting-outputs
+
+      - name: Check code strictly
+        run: flutter analyze
+
+      - name: Run tests
+        run: flutter test
+
+      - name: Check Firebase settings
+        env:
+          FIREBASE_API_KEY: ${{ vars.FIREBASE_API_KEY }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$FIREBASE_API_KEY" || { echo "ERROR: FIREBASE_API_KEY is missing"; exit 1; }
+
+      - name: Build debug test APK with production runtime defines
+        env:
+          FIREBASE_API_KEY: ${{ vars.FIREBASE_API_KEY }}
+          OTYA_SELF_UPDATE: 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          source scripts/android-release-config.sh
+          flutter build apk --debug \
+            --target-platform android-arm64 \
+            "${OTYA_RELEASE_DART_DEFINES[@]}"
+          cp build/app/outputs/flutter-apk/app-debug.apk build/Otya-test.apk
+
+      - name: Verify test APK identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          APK=build/Otya-test.apk
+          test -f "$APK" || { echo "ERROR: Otya test APK not found"; exit 1; }
+          test "$(stat -c%s "$APK")" -gt 5000000 || { echo "ERROR: APK is too small"; exit 1; }
+          sha256sum "$APK" | tee build/Otya-test-checksum.txt
+          APKSIGNER="$(find "$ANDROID_HOME/build-tools" -type f -name apksigner -print | sort -V | tail -n 1)"
+          test -x "$APKSIGNER" || { echo "ERROR: Android apksigner was not found"; exit 1; }
+          "$APKSIGNER" verify --verbose --print-certs "$APK" | tee build/Otya-test-signing.txt
+
+          APKKIT="$(find "$ANDROID_HOME" -type f -name apkanalyzer -print | sort | tail -n 1)"
+          test -x "$APKKIT" || { echo "ERROR: apkanalyzer was not found"; exit 1; }
+          "$APKKIT" manifest application-id "$APK" | tee build/Otya-test-application-id.txt
+          "$APKKIT" manifest version-name "$APK" | tee build/Otya-test-version-name.txt
+          "$APKKIT" manifest version-code "$APK" | tee build/Otya-test-version-code.txt
+
+      - name: Save Otya test APK
+        if: github.event_name == 'workflow_dispatch'
+        uses: actions/upload-artifact@v4
+        with:
+          name: Otya-test
+          if-no-files-found: error
+          retention-days: 3
+          path: |
+            build/Otya-test.apk
+            build/Otya-test-checksum.txt
+            build/Otya-test-signing.txt
+            build/Otya-test-application-id.txt
+            build/Otya-test-version-name.txt
+            build/Otya-test-version-code.txt
+ || true)"
+          if [ -n "$sensitive_paths" ]; then
+            echo '::error::Potential credential or signing material is tracked. Matching paths:'
+            printf '%s\n' "$sensitive_paths"
             exit 1
           fi
 
