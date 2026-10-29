@@ -42,7 +42,12 @@ jobs:
         run: |
           set -euo pipefail
           tracked="$(git ls-files)"
-          sensitive_paths="$(printf '%s\n' "$tracked" | grep -E '(^|/)(\.env($|\.)|\.dev\.vars$|key\.properties$|keystore\.jks$|.*\.(jks|keystore|p12|pfx|pem|key)$|.*firebase-adminsdk.*\.json$|service-account.*\.json$)' | grep -Ev '(^|/)\.env\.example
+          sensitive_paths="$(printf '%s\n' "$tracked" | grep -E '(^|/)(\.env($|\.)|\.dev\.vars$|key\.properties$|keystore\.jks$|.*\.(jks|keystore|p12|pfx|pem|key)$|.*firebase-adminsdk.*\.json$|service-account.*\.json$)' | grep -Ev '(^|/)\.env\.example$' || true)"
+          if [ -n "$sensitive_paths" ]; then
+            echo '::error::Potential credential or signing material is tracked. Matching paths:'
+            printf '%s\n' "$sensitive_paths"
+            exit 1
+          fi
 
       - name: Block private keys and provider tokens
         shell: bash
