@@ -6,7 +6,6 @@ on:
     paths-ignore:
       - '**/*.md'
       - 'docs/**'
-      - '.github/**'
   pull_request:
     branches: [main]
     paths-ignore:
@@ -79,6 +78,20 @@ jobs:
             echo '::error::Possible AI/provider secret key committed to source.'
             exit 1
           fi
+
+      - name: Reclaim unused runner disk space
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo 'Disk space before cleanup:'
+          df -h /
+          # These preinstalled toolchains and Android emulator images are not
+          # used by this workflow (which builds an APK without an emulator).
+          # Keep the Android SDK platform/build-tools and NDK intact.
+          sudo rm -rf /usr/share/dotnet /usr/local/share/powershell /usr/local/lib/android/sdk/system-images
+          sudo apt-get clean
+          echo 'Disk space after cleanup:'
+          df -h /
 
       - name: Set up Java 17
         uses: actions/setup-java@v5
