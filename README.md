@@ -2,11 +2,23 @@
 
 <img src="assets/branding/otya_app_icon.webp" alt="Otya" width="112" height="112" />
 
-# Otya
+# Otya Media
 
 **Private. Powerful. Offline-first media.**
 
-Otya by PeterSmart Link combines local video and music playback, nearby Send, Private media, practical media tools and optional connected Together/account services without making core playback depend on the cloud.
+Otya Media is the local-first media player in the Otya ecosystem, owned by Otya Hold Ltd. The existing `OtyaPlayer` repository slug is retained for compatibility; this documentation update does not rename the repository, application ID, package, release channel, or public endpoints.
+
+Otya Media combines local video and music playback, nearby Send, Private media, practical media tools and optional connected Together/account services without making core playback depend on the cloud.
+
+## Ecosystem boundaries
+
+- **Otya OS** is the unified platform.
+- **Otya End** provides shared backend and identity services where needed; it is not required for local playback.
+- **OtyaPoint** is the shop/business operations application and does not gain access to private media through this app.
+- **OtyaHub** is the public developer surface; do not publish private infrastructure inventories, signing material, or internal service credentials there.
+- **Next** is a separate private owner application and does not grant owner privileges to the consumer media app.
+
+Preserve the offline-first playback guarantee and existing user data during any future integration or naming migration. Coordinate ecosystem-wide changes through https://github.com/PeterSmartLink/Otya-Server/issues/236.
 
 [Otya](https://petersmartlink.com) · [Documents](https://petersmartlink.com/docs) · [Download](https://petersmartlink.com/download/otya-player) · [Security](SECURITY.md)
 
