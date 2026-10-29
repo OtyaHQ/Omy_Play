@@ -25,11 +25,28 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Detect release-relevant changes in pull requests
+        id: release_changes
+        if: github.event_name == 'pull_request'
+        shell: bash
+        env:
+          BASE_REF: ${{ github.base_ref }}
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin "$BASE_REF"
+          if git diff --name-only "origin/$BASE_REF...HEAD" | grep -Eq '^(lib/|android/|pubspec\.yaml$|pubspec\.lock$|assets/|scripts/verify-(release-candidate-version|play-publication-contract|android-release-apk)\.sh$|\.github/workflows/(release|release-apk|play-closed-test|release-mode-validation)\.yml$)'; then
+            echo "release_relevant=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "release_relevant=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Require a new immutable build number
+        if: github.event_name != 'pull_request' || steps.release_changes.outputs.release_relevant == 'true'
         shell: bash
         run: bash scripts/verify-release-candidate-version.sh
 
       - name: Verify Play and privacy publication contract
+        if: github.event_name != 'pull_request' || steps.release_changes.outputs.release_relevant == 'true'
         shell: bash
         run: bash scripts/verify-play-publication-contract.sh
 
