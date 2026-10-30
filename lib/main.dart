@@ -42,9 +42,12 @@ Future<void> main() async {
     // the player. A local storage/provider failure during reporter setup used
     // to abort main() before runApp(), leaving the user with a launch crash.
     try {
-      await CrashReporter.instance.init();
+      await CrashReporter.instance
+          .init()
+          .timeout(const Duration(seconds: 3));
     } catch (error, stack) {
-      debugPrint('[CrashReporter] init failed; continuing startup: $error\\n$stack');
+      // A timeout or local reporter failure must not block the first app frame.
+      debugPrint('[CrashReporter] init failed or timed out; continuing startup: $error\\n$stack');
     }
     await _safeBackground('playback platform', _ensurePlaybackPlatform);
     await _safeBackground('system UI', _configureSystemUi);
@@ -241,9 +244,12 @@ Future<void> _safeBackground(
   Future<void> Function() task,
 ) async {
   try {
-    await task();
+    // Bound plugin startup waits so a hung platform service cannot hold the
+    // user on the launch screen forever. Playback initialization remains
+    // retryable through the existing _ensurePlaybackPlatform guard.
+    await task().timeout(const Duration(seconds: 8));
   } catch (e, st) {
-    debugPrint('[Background:$name] Error: $e\n$st');
+    debugPrint('[Background:$name] Error or timeout: $e\\n$st');
     CrashReporter.instance.report(e, st);
   }
 }
