@@ -38,7 +38,14 @@ Future<void> main() async {
     // Android still had no foreground MediaSession/Now Playing notification.
     AudioHandlerSingleton.instance.configureEnsureReady(_ensurePlaybackPlatform);
 
-    await CrashReporter.instance.init();
+    // Crash reporting is useful but must never be a prerequisite for opening
+    // the player. A local storage/provider failure during reporter setup used
+    // to abort main() before runApp(), leaving the user with a launch crash.
+    try {
+      await CrashReporter.instance.init();
+    } catch (error, stack) {
+      debugPrint('[CrashReporter] init failed; continuing startup: $error\\n$stack');
+    }
     await _safeBackground('playback platform', _ensurePlaybackPlatform);
     await _safeBackground('system UI', _configureSystemUi);
 
