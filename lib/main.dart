@@ -38,7 +38,7 @@ Future<void> main() async {
     // Android still had no foreground MediaSession/Now Playing notification.
     AudioHandlerSingleton.instance.configureEnsureReady(_ensurePlaybackPlatform);
 
-    await CrashReporter.instance.init();
+    await _safeBackground('crash reporter', CrashReporter.instance.init);
     await _safeBackground('playback platform', _ensurePlaybackPlatform);
     await _safeBackground('system UI', _configureSystemUi);
 
