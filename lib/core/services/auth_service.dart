@@ -402,7 +402,7 @@ class AuthService {
             }),
           )
           .timeout(_timeout);
-      return _handleAuthResponse(res);
+      return await _handleAuthResponse(res);
     } catch (e) {
       debugPrint('[AuthService] Login request failed: ${e.runtimeType}');
       return const AuthResult(ok: false, error: _networkError);
@@ -431,7 +431,7 @@ class AuthService {
             }),
           )
           .timeout(_timeout);
-      return _handleAuthResponse(res);
+      return await _handleAuthResponse(res);
     } catch (e) {
       debugPrint('[AuthService] Google auth request failed: ${e.runtimeType}');
       return const AuthResult(ok: false, error: _networkError);
