@@ -1,0 +1,47 @@
+name: Refresh Flutter lockfile for toolchain branch
+
+on:
+  push:
+    branches:
+      - chore/android-toolchain-refresh-2026-11-09
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-otya-media-pub-lock
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out toolchain branch
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: true
+
+      - name: Install Flutter stable 3.47.2
+        uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2.23.0
+        with:
+          flutter-version: "3.47.2"
+          channel: stable
+          cache: false
+
+      - name: Resolve dependencies
+        run: flutter pub get
+
+      - name: Commit resolved dependency lock
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pubspec.lock
+          if git diff --cached --quiet; then
+            echo "pubspec.lock already matches Flutter 3.47.2."
+            exit 0
+          fi
+          git commit -m "chore: refresh Flutter lockfile for 3.47.2"
+          git push origin HEAD:chore/android-toolchain-refresh-2026-11-09
