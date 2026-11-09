@@ -184,7 +184,7 @@ class _OtyaPlayerAppState extends ConsumerState<OtyaPlayerApp> {
 
     if (_checking) {
       return MaterialApp(
-        title: 'Otya',
+        title: 'Otya Media',
         debugShowCheckedModeBanner: false,
         theme: AppTheme.light,
         darkTheme: _darkTheme(settings.themeMode),
@@ -204,7 +204,7 @@ class _OtyaPlayerAppState extends ConsumerState<OtyaPlayerApp> {
                 const OtyaLogo(iconOnly: true, fontSize: 68),
                 const SizedBox(height: 16),
                 Text(
-                  'Otya',
+                  'Otya Media',
                   style: TextStyle(
                     color: AppColors.textPrimaryOf(context),
                     fontSize: 18,
