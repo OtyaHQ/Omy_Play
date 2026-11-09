@@ -1,21 +1,25 @@
-// ADS DISABLED — ProGate passes straight through to child until Play Store launch.
-// Original rewarded-ad paywall preserved in git history (chore/remove-ads-until-play-store).
-// To re-enable: restore original file and uncomment google_mobile_ads in pubspec.yaml.
 import 'package:flutter/material.dart';
 
-/// Wraps any Pro-only feature.
-/// While ads are disabled, all Pro features are freely accessible.
+/// Backwards-compatible wrapper for existing feature call sites.
+///
+/// Otya Media currently has no paid feature entitlement or advertisement
+/// check. Every feature wrapped here remains available to the user. Keep this
+/// transparent wrapper until all legacy call sites can be removed safely.
 class ProGate extends StatelessWidget {
-  final Widget child;
-  final String featureName;
-  final String? featureDescription;
-
   const ProGate({
     super.key,
     required this.child,
     required this.featureName,
     this.featureDescription,
   });
+
+  final Widget child;
+
+  /// Retained for source compatibility with older callers.
+  final String featureName;
+
+  /// Retained for source compatibility with older callers.
+  final String? featureDescription;
 
   @override
   Widget build(BuildContext context) => child;
