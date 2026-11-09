@@ -373,7 +373,7 @@ class AuthService {
             }),
           )
           .timeout(_timeout);
-      return _handleAuthResponse(res);
+      return await _handleAuthResponse(res);
     } catch (e) {
       debugPrint('[AuthService] Register request failed: ${e.runtimeType}');
       return const AuthResult(ok: false, error: _networkError);
