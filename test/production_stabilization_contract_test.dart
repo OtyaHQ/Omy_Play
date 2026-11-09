@@ -27,8 +27,11 @@ void main() {
   test('crash reporting is installed once before the first frame', () {
     final main = File('lib/main.dart').readAsStringSync();
 
-    expect(main, contains('await CrashReporter.instance.init();'));
-    expectNotContains(main, "_safeBackground('crash reporter'");
+    const reporterInit =
+        "unawaited(_safeBackground('crash reporter', CrashReporter.instance.init));";
+    expect(main, contains(reporterInit));
+    expectNotContains(main, 'await CrashReporter.instance.init();');
+    expect(main.indexOf(reporterInit), lessThan(main.indexOf('runApp(')));
     expectNotContains(main, 'FlutterError.onError = (details)');
     expectNotContains(main, 'PlatformDispatcher.instance.onError =');
   });
