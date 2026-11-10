@@ -1,7 +1,7 @@
 # Otya 2026+ Product Standard
 
 **Status:** Engineering product standard  
-**Owner:** PeterSmart Link / Otya  
+**Brand:** Otya · **Current individual operator:** Peter Katabira · **Intended parent:** Otya Holdings Limited (registration in progress)  
 **Applies to:** Android app, Next, public web surfaces, backend contracts, release tooling and user-facing communications  
 **Rule:** This document is a quality gate, not a release claim.
 
