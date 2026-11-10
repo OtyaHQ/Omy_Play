@@ -80,6 +80,6 @@ Do not publish source archives, internal deployment instructions, backend creden
 
 <div align="center">
 
-**Otya · PeterSmart Link**
+**Otya Media · Otya ecosystem**
 
 </div>
