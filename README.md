@@ -6,7 +6,7 @@
 
 **Private. Powerful. Offline-first media.**
 
-Otya Media is the local-first media player in the Otya ecosystem, owned by Otya Hold Ltd. The existing `OtyaPlayer` repository slug is retained for compatibility; this documentation update does not rename the repository, application ID, package, release channel, or public endpoints.
+Otya Media is the local-first media player in the Otya ecosystem. The existing `OtyaPlayer` repository slug is retained for compatibility; this documentation update does not rename the repository, application ID, package, release channel, or public endpoints.
 
 Otya Media combines local video and music playback, nearby Send, Private media, practical media tools and optional connected Together/account services without making core playback depend on the cloud.
 
