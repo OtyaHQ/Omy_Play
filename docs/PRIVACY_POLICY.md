@@ -1,13 +1,25 @@
 # Otya Privacy Policy
 
-**Effective date:** September 5, 2026
+**Effective date:** November 10, 2026
 
-**Policy version:** 1.0
+**Policy version:** 1.1
 
-**Provider:** PeterSmart Link
+**Current individual operator/data controller:** Peter Katabira
+
+**Public brand:** Otya · **Product:** Otya Media
+
+**Intended parent entity:** Otya Holdings Limited (URSB registration in progress; not yet represented as an incorporated provider or holder of existing merchant accounts)
 
 This policy explains how Otya's Android app, account services, website, support
 channels and optional connected features handle information.
+
+Until Otya Holdings Limited is incorporated and formally appointed for the
+relevant services, the current individual operator and data controller is Peter
+Katabira. Otya is the public brand, and Otya Media is this app's product name.
+The intended parent company is still in the URSB registration process; existing
+merchant/provider accounts must remain with their verified individual holder
+until the company is registered and each provider approves a formal transition.
+This notice will be updated before any change to the responsible controller.
 
 ## What stays on your device
 
@@ -133,8 +145,9 @@ support channel.
 
 ## Children
 
-Otya is not directed to children under 13, and PeterSmart Link does not knowingly
-collect personal information from children under 13.
+Otya is not directed to children under 13. Peter Katabira, as the current
+individual operator, does not knowingly collect personal information from
+children under 13.
 
 ## Changes
 
@@ -143,7 +156,7 @@ acceptance is required, Otya will request it through the relevant account flow.
 
 ## Contact
 
-PeterSmart Link
+Peter Katabira · Otya (current individual operator)
 
 Email: **support@petersmartlink.com**
 
