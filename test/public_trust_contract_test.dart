@@ -10,7 +10,7 @@ void main() {
     ).readAsStringSync();
 
     for (final text in [policy, inApp]) {
-      expect(text, contains('September 5, 2026'));
+      expect(text, contains('November 10, 2026'));
       expect(text, contains('Cloudflare'));
       expect(text, contains('Firebase'));
       expect(text, contains('Together'));
