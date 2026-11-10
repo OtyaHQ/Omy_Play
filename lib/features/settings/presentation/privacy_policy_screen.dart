@@ -49,14 +49,19 @@ class _PolicyBody extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: const [
         _PolicyHeading('Otya Privacy Policy'),
-        _PolicyText('Effective date: September 5, 2026 · Version 1.0'),
+        _PolicyText('Effective date: November 10, 2026 · Version 1.1'),
         SizedBox(height: 24),
         _PolicySection(
           title: '1. Who we are',
           body:
-              'Otya is developed and maintained by PeterSmart Link '
-              '(petersmartlink.com). If you have any questions about this '
-              'policy, contact us at support@petersmartlink.com.',
+              'The current individual operator and data controller is Peter '
+              'Katabira. Otya is the public brand and Otya Media is this app. '
+              'Otya Holdings Limited is the intended parent entity, with URSB '
+              'registration in progress; it is not yet represented as an '
+              'incorporated provider or merchant-account holder. Existing '
+              'provider accounts remain in the verified individual holder\'s '
+              'name until incorporation and formal provider approval. For '
+              'questions, contact support@petersmartlink.com.',
         ),
         _PolicySection(
           title: '2. What stays on your device',
@@ -125,14 +130,16 @@ class _PolicyBody extends StatelessWidget {
         _PolicySection(
           title: '8. Children, changes and contact',
           body:
-              'Otya is not directed to children under 13. Material policy '
+              'Otya is not directed to children under 13. Peter Katabira, as the ' 
+              'current individual operator, does not knowingly collect ' 
+              'personal information from children under 13. Material policy '
               'changes will update the effective date and version shown '
               'above.\n\n'
               'Email: support@petersmartlink.com\n'
               'Website: https://petersmartlink.com',
         ),
         SizedBox(height: 32),
-        _PolicyText('© 2026 PeterSmart Link. All rights reserved.'),
+        _PolicyText('© 2026 Otya Media · Otya ecosystem. All rights reserved.'),
       ],
     );
   }
