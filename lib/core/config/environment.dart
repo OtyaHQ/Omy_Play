@@ -60,6 +60,30 @@ abstract final class Environment {
     'DOCS_URL',
     defaultValue: 'https://docs.otya.site',
   );
+  static const String spaceUrl = String.fromEnvironment(
+    'SPACE_URL',
+    defaultValue: 'https://space.otya.site',
+  );
+  static const String statusUrl = String.fromEnvironment(
+    'STATUS_URL',
+    defaultValue: 'https://status.otya.site',
+  );
+
+  /// Exact hosts delivered to the native updater from the same build-time
+  /// Otya configuration. The Android bridge never has its own domain list.
+  static Set<String> get officialHosts {
+    final values = <String>[
+      publicSiteUrl,
+      workerUrl,
+      docsUrl,
+      spaceUrl,
+      statusUrl,
+    ];
+    return values
+        .map((value) => Uri.tryParse(value)?.host.toLowerCase() ?? '')
+        .where((host) => host.isNotEmpty)
+        .toSet();
+  }
   static const String authUrl = '$workerUrl/auth';
   static const String appConfigUrl = '$workerUrl/api/app-config';
   static const String themesUrl = '$workerUrl/api/themes';
