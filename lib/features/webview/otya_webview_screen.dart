@@ -28,10 +28,6 @@ class OtyaWebViewScreen extends StatefulWidget {
 }
 
 class _OtyaWebViewScreenState extends State<OtyaWebViewScreen> {
-  static const _trustedHosts = <String>{
-    
-  };
-
   late final WebViewController _controller;
   bool _isLoading = true;
   bool _hasError = false;
@@ -85,7 +81,7 @@ class _OtyaWebViewScreenState extends State<OtyaWebViewScreen> {
   bool _isTrustedOtyaUri(Uri uri) =>
       uri.scheme == 'https' &&
       uri.userInfo.isEmpty &&
-      _trustedHosts.contains(uri.host.toLowerCase());
+      Environment.isOfficialHost(uri.host);
 
   NavigationDecision _handleNavigation(NavigationRequest request) {
     final uri = Uri.tryParse(request.url);
