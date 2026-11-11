@@ -7,7 +7,7 @@ import 'package:flutter/services.dart';
 class NativeShareService {
   NativeShareService._();
 
-  static const _channel = MethodChannel('com.otyaplayer.app/share');
+  static const _channel = MethodChannel('com.otya.omyplay/share');
 
   static Future<void> shareFile({
     required String path,
