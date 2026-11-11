@@ -452,7 +452,7 @@ class AppRouter {
             state: s,
             child: OtyaWebViewScreen(
               url: args['url'] as String? ??
-                  Environment.publicSiteUrl + '/otya-player',
+                  '${Environment.publicSiteUrl}/otya-player',
               title: args['title'] as String?,
             ),
           );
