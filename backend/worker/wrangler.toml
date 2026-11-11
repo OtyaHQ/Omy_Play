@@ -20,10 +20,10 @@ database_id = "006b1ac1-0e92-4480-b07e-4232724710e8"
 binding = "ASSETS"
 bucket_name = "omy-play-staging-assets"
 
-# Temporary dependency; switch to isolated otya-id-staging before external tests.
+# Dedicated identity dependency: Otya ID staging. Do not bind to production identity in staging.
 [[services]]
 binding = "OTYA_ID"
-service = "otya-auth"
+service = "otya-id-staging"
 
 # FCM_TOKEN_ENCRYPTION_KEY is an out-of-band Worker secret.
 # No FCM Admin service credential is configured in staging.
