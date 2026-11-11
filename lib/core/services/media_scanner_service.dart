@@ -263,7 +263,7 @@ class MediaScannerService {
     }
     if (merged.isNotEmpty) return _finalize(merged);
     try {
-      return _finalize(await _filesystemScan());
+      return await _finalize(await _filesystemScan());
     } catch (e) {
       debugPrint('[Scanner] Filesystem fallback failed: $e');
       return _finalize(const <MediaItem>[]);

@@ -252,13 +252,11 @@ class QueueScreen extends ConsumerWidget {
                           MediaQuery.of(context).padding.bottom + 24,
                         ),
                         itemCount: queue.items.length,
-                        onReorder: (oldIndex, newIndex) {
+                        onReorderItem: (oldIndex, newIndex) {
                           HapticFeedback.mediumImpact();
-                          final adjusted =
-                              newIndex > oldIndex ? newIndex - 1 : newIndex;
                           ref
                               .read(queueProvider.notifier)
-                              .reorder(oldIndex, adjusted);
+                              .reorder(oldIndex, newIndex);
                         },
                         proxyDecorator: (child, index, animation) => Material(
                           color: Colors.transparent,

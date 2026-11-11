@@ -232,7 +232,7 @@ class MediaReceiver {
         debugPrint('[MediaReceiver] Resume offset invalid; restarting transfer.');
         if (await saveFile.exists()) await saveFile.delete();
         await sidecar.writeAsString(fingerprint, flush: true);
-        return download(
+        return await download(
           url: url,
           savePath: saveFile.path,
           onProgress: onProgress,

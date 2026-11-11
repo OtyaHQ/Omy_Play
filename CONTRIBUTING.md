@@ -24,7 +24,7 @@ flutter analyze
 flutter test
 ```
 
-Use Flutter 3.32.x, Java 17 and a supported Android SDK, matching GitHub Actions.
+Use Flutter 3.47.9, Java 17 and a supported Android SDK, matching GitHub Actions.
 
 ## Change rules
 
