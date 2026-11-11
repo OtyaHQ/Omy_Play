@@ -5,7 +5,7 @@ import 'package:path_provider/path_provider.dart';
 /// Manages ALL storage locations for OTYA Player.
 ///
 /// PUBLIC  -> /storage/emulated/0/OTYA Player/  (visible in Files app)
-/// PRIVATE -> /Android/data/com.otyaplayer.app/files/  (app-private)
+/// PRIVATE -> /Android/data/com.otya.omyplay/files/  (app-private)
 class StorageFolderService {
   StorageFolderService._();
   static final StorageFolderService instance = StorageFolderService._();
