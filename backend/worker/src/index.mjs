@@ -29,10 +29,10 @@ export function validAbi(value) {
 
 export function sanitizeCrashText(value, max = 4000) {
   return clean(value, max)
-    .replace(/(?:\/data\/user\/\d+\/[^/\s]+|\/data\/data\/[^/\s]+)/gi, "<app-data>")
-    .replace(/\/storage\/emulated\/\d+/gi, "<device-storage>")
-    .replace(/[A-Z]:\\Users\\[^\\\s]+/gi, "<user-path>")
-    .replace(/\/home\/[^/\s]+/gi, "<user-path>")
+    .replace(/(?:\/data\/user\/\d+\/\S+|\/data\/data\/\S+)/gi, "<app-data>")
+    .replace(/\/storage\/emulated\/\d+(?:\/\S*)?/gi, "<device-storage>")
+    .replace(/[A-Z]:\\Users\\\S+/gi, "<user-path>")
+    .replace(/\/home\/\S+/gi, "<user-path>")
     .replace(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi, "<email>")
     .replace(/\+?[0-9][0-9 ()-]{7,}[0-9]/g, "<phone>")
     .replace(/\b(?:bearer|token|authorization)\s*[:=]?\s*[A-Za-z0-9._~-]{12,}/gi, "<redacted-token>")
@@ -42,6 +42,58 @@ export function sanitizeCrashText(value, max = 4000) {
 async function sha256(value) {
   const digest = new Uint8Array(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(String(value))));
   return Array.from(digest, byte => byte.toString(16).padStart(2, "0")).join("");
+}
+
+const FCM_TOKEN_AAD = new TextEncoder().encode("omy-play:fcm-token:v1");
+
+function decodeBase64Bytes(value) {
+  if (typeof value !== "string" || !value.trim()) throw new Error("fcm_token_encryption_not_configured");
+  const normalized = value.trim().replace(/-/g, "+").replace(/_/g, "/");
+  const padded = normalized + "=".repeat((4 - normalized.length % 4) % 4);
+  let binary;
+  try { binary = atob(padded); }
+  catch { throw new Error("fcm_token_encryption_not_configured"); }
+  return Uint8Array.from(binary, character => character.charCodeAt(0));
+}
+
+function encodeBase64Url(bytes) {
+  let binary = "";
+  for (const byte of bytes) binary += String.fromCharCode(byte);
+  return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
+}
+
+async function fcmEncryptionKey(env) {
+  const raw = decodeBase64Bytes(env?.FCM_TOKEN_ENCRYPTION_KEY);
+  if (raw.byteLength !== 32) throw new Error("fcm_token_encryption_not_configured");
+  return crypto.subtle.importKey("raw", raw, { name: "AES-GCM" }, false, ["encrypt", "decrypt"]);
+}
+
+export async function encryptFcmToken(token, env) {
+  if (typeof token !== "string" || token.length < 20) throw new Error("invalid_fcm_token");
+  const key = await fcmEncryptionKey(env);
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  const ciphertext = new Uint8Array(await crypto.subtle.encrypt(
+    { name: "AES-GCM", iv, additionalData: FCM_TOKEN_AAD, tagLength: 128 },
+    key,
+    new TextEncoder().encode(token),
+  ));
+  return "v1:" + encodeBase64Url(iv) + ":" + encodeBase64Url(ciphertext);
+}
+
+export async function decryptFcmToken(envelope, env) {
+  if (typeof envelope !== "string") throw new Error("invalid_fcm_token_ciphertext");
+  const parts = envelope.split(":");
+  if (parts.length !== 3 || parts[0] !== "v1") throw new Error("invalid_fcm_token_ciphertext");
+  const iv = decodeBase64Bytes(parts[1]);
+  const ciphertext = decodeBase64Bytes(parts[2]);
+  if (iv.byteLength !== 12 || ciphertext.byteLength < 17) throw new Error("invalid_fcm_token_ciphertext");
+  const key = await fcmEncryptionKey(env);
+  const plaintext = await crypto.subtle.decrypt(
+    { name: "AES-GCM", iv, additionalData: FCM_TOKEN_AAD, tagLength: 128 },
+    key,
+    ciphertext,
+  );
+  return new TextDecoder().decode(plaintext);
 }
 
 async function readJson(request, maxBytes = 16_384) {
@@ -127,9 +179,16 @@ async function registerDevice(request, env, identity, body, requestId) {
     if (token.length < 20) return json({ error: "invalid_fcm_token", requestId }, 400, requestId);
   }
   const tokenHash = token ? await sha256(token) : null;
+  let encryptedToken = null;
+  if (token) {
+    try { encryptedToken = await encryptFcmToken(token, env); }
+    catch {
+      return json({ error: "fcm_token_encryption_not_configured", requestId }, 503, requestId);
+    }
+  }
   await env.DB.prepare(
     "INSERT INTO devices (device_id,user_id,fcm_token,fcm_token_hash,app_version,version_code,abi,platform,model,android_version,locale,registered_at,last_seen_at,disabled_at) VALUES (?1,?2,?3,?4,?5,?6,?7,?8,?9,?10,?11,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,NULL) ON CONFLICT(device_id) DO UPDATE SET user_id=excluded.user_id,fcm_token=COALESCE(excluded.fcm_token,devices.fcm_token),fcm_token_hash=COALESCE(excluded.fcm_token_hash,devices.fcm_token_hash),app_version=excluded.app_version,version_code=excluded.version_code,abi=excluded.abi,platform=excluded.platform,model=excluded.model,android_version=excluded.android_version,locale=excluded.locale,last_seen_at=CURRENT_TIMESTAMP,disabled_at=NULL"
-  ).bind(deviceId, identity?.userId || null, token || null, tokenHash, appVersion, versionCode, abi, platform, model, androidVersion, locale).run();
+  ).bind(deviceId, identity?.userId || null, encryptedToken, tokenHash, appVersion, versionCode, abi, platform, model, androidVersion, locale).run();
   return json({ data: { deviceId, registered: true }, requestId }, 200, requestId);
 }
 
