@@ -8,7 +8,7 @@ Otya supports Google Sign-In and stores recovery data in the signed-in user's hi
 2. Enable **Google Drive API**.
 3. Configure the OAuth consent screen with the public product brand **Otya**. Keep the current verified operator/legal contact details in the Google project owner and consent disclosures until the company is incorporated and the project is formally transferred.
 4. Add the scope `https://www.googleapis.com/auth/drive.appdata` as the optional Drive recovery permission.
-5. Create an **Android OAuth client** for package `com.otyaplayer.app` and register the SHA-1/SHA-256 fingerprints of the real release signing certificate. Add the debug certificate only if local debug Google Sign-In is required.
+5. Create an **Android OAuth client** for package `com.otya.omyplay` and register the SHA-1/SHA-256 fingerprints of the real release signing certificate. Add the debug certificate only if local debug Google Sign-In is required.
 6. Create a **Web OAuth client**. Its client ID is the server client ID/audience used by both Flutter and `otya-auth`.
 
 ## GitHub
