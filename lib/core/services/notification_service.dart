@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'shared_notification_plugin.dart';
+import '../config/environment.dart';
 
 /// Manages Otya local notifications.
 ///
@@ -14,7 +15,6 @@ class NotificationService {
   NotificationService._();
   static final NotificationService instance = NotificationService._();
 
-  static const _officialHost = 'petersmartlink.com';
   static const _permissionPromptKey = 'notification_permission_prompted_v1';
   Future<bool?>? _permissionPromptInFlight;
 
@@ -81,7 +81,7 @@ class NotificationService {
       return false;
     }
     final host = uri.host.toLowerCase();
-    return host == _officialHost || host.endsWith('.$_officialHost');
+    return Environment.isOfficialHost(host);
   }
 
   Future<void> _openPayload(String payload) async {
