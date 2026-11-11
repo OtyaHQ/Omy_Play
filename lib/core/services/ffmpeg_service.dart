@@ -9,7 +9,7 @@ class FfmpegService {
   FfmpegService._();
   static final FfmpegService instance = FfmpegService._();
 
-  static const _channel = MethodChannel('com.otyaplayer.app/media_tools_v2');
+  static const _channel = MethodChannel('com.otya.omyplay/media_tools_v2');
 
   String? _lastErrorMessage;
   String? get lastErrorMessage => _lastErrorMessage;
