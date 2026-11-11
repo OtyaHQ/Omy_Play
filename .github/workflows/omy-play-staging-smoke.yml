@@ -23,6 +23,7 @@ jobs:
       - name: Check app config and themes
         run: |
           set -euo pipefail
+          base="https://omy-play-api-staging.petersmartlink.workers.dev"
           config="$(curl --max-time 20 -fsS "$base/v1/config")"
           themes="$(curl --max-time 20 -fsS "$base/v1/themes")"
           node -e 'JSON.parse(process.argv[1])' "$config"
