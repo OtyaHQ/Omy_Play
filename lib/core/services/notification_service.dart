@@ -108,7 +108,7 @@ class NotificationService {
     await initSharedNotificationsPlugin();
     final safeProgress = progress.clamp(0, 100).toInt();
     final androidDetails = AndroidNotificationDetails(
-      'com.otyaplayer.app.tools.progress',
+      'com.otya.omyplay.tools.progress',
       'Otya Tools — Progress',
       channelDescription: 'Audio extraction and video trim progress (silent)',
       importance: Importance.low,
@@ -135,7 +135,7 @@ class NotificationService {
   }) async {
     await initSharedNotificationsPlugin();
     const androidDetails = AndroidNotificationDetails(
-      'com.otyaplayer.app.tools.complete',
+      'com.otya.omyplay.tools.complete',
       'Otya Tools — Complete',
       channelDescription: 'Audio extraction and video trim completion alerts',
       importance: Importance.high,
@@ -159,7 +159,7 @@ class NotificationService {
   }) async {
     await initSharedNotificationsPlugin();
     const androidDetails = AndroidNotificationDetails(
-      'com.otyaplayer.app.tools.error',
+      'com.otya.omyplay.tools.error',
       'Otya Tools — Error',
       channelDescription: 'Audio extraction and video trim error alerts',
       importance: Importance.high,
