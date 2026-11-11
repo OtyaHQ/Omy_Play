@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:otya_player/shared/widgets/pro_gate.dart';
+import 'package:omy_play/shared/widgets/pro_gate.dart';
 
 void main() {
   testWidgets('legacy ProGate keeps every wrapped feature available', (tester) async {
