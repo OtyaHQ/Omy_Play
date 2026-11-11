@@ -1,6 +1,6 @@
 // lib/features/webview/otya_webview_screen.dart
 //
-// Trusted full-screen OTYA WebView. Only official PeterSmart Link HTTPS pages
+// Trusted full-screen OTYA WebView. Only configured official Otya HTTPS pages
 // are allowed to execute inside the in-app JavaScript context. Off-domain links
 // are handed to the system browser and never inherit OTYA's authenticated page.
 
