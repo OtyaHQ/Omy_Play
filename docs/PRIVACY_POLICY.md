@@ -6,7 +6,7 @@
 
 **Current individual operator/data controller:** Peter Katabira
 
-**Public brand:** Otya · **Product:** Otya Media
+**Public brand:** Otya · **Product:** Omy Play
 
 **Intended parent entity:** Otya Holdings Limited (URSB registration in progress; not yet represented as an incorporated provider or holder of existing merchant accounts)
 
@@ -15,7 +15,7 @@ channels and optional connected features handle information.
 
 Until Otya Holdings Limited is incorporated and formally appointed for the
 relevant services, the current individual operator and data controller is Peter
-Katabira. Otya is the public brand, and Otya Media is this app's product name.
+Katabira. Otya is the public brand, and Omy Play is this app's product name.
 The intended parent company is still in the URSB registration process; existing
 merchant/provider accounts must remain with their verified individual holder
 until the company is registered and each provider approves a formal transition.

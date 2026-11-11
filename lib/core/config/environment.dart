@@ -3,7 +3,7 @@ import 'dart:ffi';
 /// Values that define the installed Otya application and must stay stable
 /// across environments. These are safe to compile into the APK.
 abstract final class AppContract {
-  static const String appName = 'Otya Media';
+  static const String appName = 'Omy Play';
   static const String appPackageId = 'com.otyaplayer.app';
 
   /// Otya's current authentication contract. The server is authoritative;

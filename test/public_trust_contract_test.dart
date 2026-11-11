@@ -41,7 +41,7 @@ void main() {
     expect(contributing, contains('github.com/PeterSmartLink/OtyaPlayer'));
     expect(contributing, isNot(contains('gitlab.com/apk-v1')));
     expect(changelog, contains('## [1.0.0] — 2026-09-03'));
-    expect(strings, contains('<string name="app_name">Otya Media</string>'));
+    expect(strings, contains('<string name="app_name">Omy Play</string>'));
     expect(strings, isNot(contains('OTYA Player')));
   });
 }
