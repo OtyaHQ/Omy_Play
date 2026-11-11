@@ -44,3 +44,13 @@ Never use Firebase Storage or Firestore as the playback library or media backup.
 The staging D1 schema has been applied and checked: 13 product tables, 4 active theme seeds, 1 default configuration record, no device records and no foreign-key violations. The backend source package has unit/contract tests and schema tests.
 
 **This repository branch still needs the backend package to be checked into Git, then deployed and smoke-tested against the staging Worker before the backend can be marked integrated.** The existing shared production Worker and old release paths remain untouched until the new Worker is validated and a cutover is separately approved.
+
+## Latest validation — 11 November 2026
+
+- JavaScript syntax validation: passed.
+- Worker contract tests: 8/8 passed.
+- Schema verifier: passed (13 product tables, default config, four active themes, foreign keys).
+- Dedicated Firebase registration: `omyplay-otya-prod`, app ID `1:181484175543:android:b7eae0234df6eb7e370d32`, package `com.otya.omyplay`.
+- Backend source package artifact: isolated under `backend/` in the downloadable foundation archive. It is not yet copied into this GitHub branch or deployed as a Cloudflare Worker.
+
+A test found and fixed an application-identity privacy regression: the crash telemetry scrubber previously redacted only the retired package path. It now redacts app-data paths generically, and regression coverage checks both new and legacy package names.
