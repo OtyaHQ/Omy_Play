@@ -23,6 +23,62 @@ const clean = (value, max = 240) => typeof value === "string"
   ? value.replace(/[\u0000-\u001f\u007f]/g, " ").trim().slice(0, max)
   : "";
 
+function decodeBase64(value) {
+  const normalized = value.replace(/-/g, "+").replace(/_/g, "/");
+  const binary = atob(normalized.padEnd(Math.ceil(normalized.length / 4) * 4, "="));
+  return Uint8Array.from(binary, character => character.charCodeAt(0));
+}
+
+function encodeBase64(bytes) {
+  let binary = "";
+  for (const byte of bytes) binary += String.fromCharCode(byte);
+  return btoa(binary);
+}
+
+async function importFcmEncryptionKey(secret, usage) {
+  if (typeof secret !== "string" || !secret.trim()) return null;
+  try {
+    const raw = decodeBase64(secret.trim());
+    if (raw.byteLength !== 32) return null;
+    return await crypto.subtle.importKey("raw", raw, { name: "AES-GCM" }, false, [usage]);
+  } catch {
+    return null;
+  }
+}
+
+export async function encryptFcmToken(token, secret) {
+  if (typeof token !== "string" || token.length < 20 || token.length > 4096) {
+    return { ok: false, error: "invalid_fcm_token" };
+  }
+  const key = await importFcmEncryptionKey(secret, "encrypt");
+  if (!key) return { ok: false, error: "fcm_token_encryption_not_configured" };
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  const encrypted = new Uint8Array(await crypto.subtle.encrypt(
+    { name: "AES-GCM", iv },
+    key,
+    new TextEncoder().encode(token),
+  ));
+  return { ok: true, value: "v1." + encodeBase64(iv) + "." + encodeBase64(encrypted) };
+}
+
+export async function decryptFcmToken(value, secret) {
+  if (typeof value !== "string") return { ok: false, error: "invalid_ciphertext" };
+  const parts = value.split(".");
+  if (parts.length !== 3 || parts[0] !== "v1") return { ok: false, error: "unsupported_ciphertext_version" };
+  const key = await importFcmEncryptionKey(secret, "decrypt");
+  if (!key) return { ok: false, error: "fcm_token_encryption_not_configured" };
+  try {
+    const decrypted = await crypto.subtle.decrypt(
+      { name: "AES-GCM", iv: decodeBase64(parts[1]) },
+      key,
+      decodeBase64(parts[2]),
+    );
+    return { ok: true, value: new TextDecoder().decode(decrypted) };
+  } catch {
+    return { ok: false, error: "fcm_token_decryption_failed" };
+  }
+}
+
 export function validAbi(value) {
   return ALLOWED_ABIS.has(String(value || "").toLowerCase());
 }
@@ -127,9 +183,15 @@ async function registerDevice(request, env, identity, body, requestId) {
     if (token.length < 20) return json({ error: "invalid_fcm_token", requestId }, 400, requestId);
   }
   const tokenHash = token ? await sha256(token) : null;
+  let storedToken = null;
+  if (token) {
+    const encrypted = await encryptFcmToken(token, env.FCM_TOKEN_ENCRYPTION_KEY);
+    if (!encrypted.ok) return json({ error: encrypted.error, requestId }, 503, requestId);
+    storedToken = encrypted.value;
+  }
   await env.DB.prepare(
     "INSERT INTO devices (device_id,user_id,fcm_token,fcm_token_hash,app_version,version_code,abi,platform,model,android_version,locale,registered_at,last_seen_at,disabled_at) VALUES (?1,?2,?3,?4,?5,?6,?7,?8,?9,?10,?11,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,NULL) ON CONFLICT(device_id) DO UPDATE SET user_id=excluded.user_id,fcm_token=COALESCE(excluded.fcm_token,devices.fcm_token),fcm_token_hash=COALESCE(excluded.fcm_token_hash,devices.fcm_token_hash),app_version=excluded.app_version,version_code=excluded.version_code,abi=excluded.abi,platform=excluded.platform,model=excluded.model,android_version=excluded.android_version,locale=excluded.locale,last_seen_at=CURRENT_TIMESTAMP,disabled_at=NULL"
-  ).bind(deviceId, identity?.userId || null, token || null, tokenHash, appVersion, versionCode, abi, platform, model, androidVersion, locale).run();
+  ).bind(deviceId, identity?.userId || null, storedToken, tokenHash, appVersion, versionCode, abi, platform, model, androidVersion, locale).run();
   return json({ data: { deviceId, registered: true }, requestId }, 200, requestId);
 }
 
