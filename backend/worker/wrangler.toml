@@ -10,7 +10,6 @@ ENVIRONMENT = "staging"
 PRODUCT_CODE = "OMY_PLAY"
 APP_PACKAGE_ID = "com.otya.omyplay"
 FIREBASE_PROJECT_ID = "omyplay-otya-prod"
-AI_ENABLED = "false"
 
 [[d1_databases]]
 binding = "DB"
