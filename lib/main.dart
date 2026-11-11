@@ -49,7 +49,7 @@ Future<void> main() async {
         overrides: [
           settingsProvider.overrideWith((ref) => settingsNotifier),
         ],
-        child: const OtyaPlayerApp(),
+        child: const OmyPlayApp(),
       ),
     );
 
