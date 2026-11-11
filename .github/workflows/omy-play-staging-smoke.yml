@@ -1,4 +1,4 @@
-name: Omy Play staging smoke
+name: Omy Play staging smoke (workers.dev)
 on:
   push:
     branches: [omy-play-backend-foundation]
