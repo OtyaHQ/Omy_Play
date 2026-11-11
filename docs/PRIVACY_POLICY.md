@@ -104,7 +104,7 @@ Otya uses service providers only for the connected function involved:
   analytics and performance measurement when enabled by Otya's current policy;
 - **Google Identity and Drive** when you choose Google Sign-In or Drive recovery;
 - **Resend** for transactional and support email; and
-- **Telegram** when you choose a Telegram sign-in or community interaction.
+- **Telegram** when you link the official Otya bot for notifications or optional delivery of an email security code. Telegram does not sign you in or establish your Otya identity.
 
 These providers process information under their own terms and privacy policies.
 Otya does not include an advertising SDK in the current v1 Android build.
@@ -131,8 +131,8 @@ Otya account screen or your Google account. Information that must be retained
 for security, fraud prevention or legal compliance may be kept only for the
 applicable purpose and period.
 
-For help with access or deletion, contact **support@petersmartlink.com** or use
-the privacy controls at **https://space.petersmartlink.com**.
+For help with access or deletion, contact **support@otya.site** or use
+the privacy controls at **https://space.otya.site**.
 
 ## Security
 
@@ -158,6 +158,6 @@ acceptance is required, Otya will request it through the relevant account flow.
 
 Peter Katabira · Otya (current individual operator)
 
-Email: **support@petersmartlink.com**
+Email: **support@otya.site**
 
-Website: **https://petersmartlink.com**
+Website: **https://otya.site**

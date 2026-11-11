@@ -10,23 +10,23 @@ The video surface has one pointer owner for hidden-state gestures. `VideoGesture
 
 The in-app browser may execute first-party HTTPS pages only on the exact production surfaces:
 
-- `petersmartlink.com`
-- `www.petersmartlink.com`
-- `space.petersmartlink.com`
-- `docs.petersmartlink.com`
-- `status.petersmartlink.com`
+- `otya.site`
+- `www.otya.site`
+- `space.otya.site`
+- `docs.otya.site`
+- `status.otya.site`
 
 Off-domain navigation remains external. APK/archive/executable navigation is also handed to the system instead of being rendered inside the WebView. Account authentication continuity must be verified separately because an app bearer token and an HttpOnly browser cookie are different session mechanisms.
 
 ## Release authority
 
-Direct PeterSmart Link APK builds use `https://petersmartlink.com/latest` as the canonical release authority. A response is accepted as a published update only when all of the following agree:
+Direct Otya APK builds use `https://otya.site/latest` as the canonical release authority. A response is accepted as a published update only when all of the following agree:
 
 - `published` is explicitly `true`;
 - `tag` matches `vX.Y.Z+BUILD`;
 - the tag's public version equals `version`;
 - the tag's build equals `versionCode`;
-- the selected ABI has an official PeterSmart Link HTTPS download target.
+- the selected ABI has an official Otya HTTPS download target.
 
 Google Play builds do not sideload from the direct APK channel; their update delivery remains owned by Google Play. Failure, pre-release and Play-managed states must never be reported as “up to date”.
 

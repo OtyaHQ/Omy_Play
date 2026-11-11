@@ -70,4 +70,4 @@ are preserved in Git history and are not public Otya releases.
 
 - Signed ARM64 and ARM32 APKs for direct public testing.
 - Signed Android App Bundle for later store submission.
-- Canonical download and release information at petersmartlink.com.
+- Canonical download and release information at otya.site.

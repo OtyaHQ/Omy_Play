@@ -92,7 +92,7 @@ void main() {
 
     expect(fcm, contains("uri.scheme != 'https'"));
     expect(fcm, isNot(contains("{'https', 'http'}")));
-    expect(push, contains("host.endsWith('.\$_officialHost')"));
+    expect(push, contains('Environment.isOfficialHost(host)'));
     expect(push, contains('blocked untrusted notification URL'));
   });
 }

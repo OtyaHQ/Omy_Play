@@ -1,6 +1,6 @@
 // lib/features/webview/otya_webview_screen.dart
 //
-// Trusted full-screen OTYA WebView. Only official PeterSmart Link HTTPS pages
+// Trusted full-screen OTYA WebView. Only configured official Otya HTTPS pages
 // are allowed to execute inside the in-app JavaScript context. Off-domain links
 // are handed to the system browser and never inherit OTYA's authenticated page.
 
@@ -28,14 +28,6 @@ class OtyaWebViewScreen extends StatefulWidget {
 }
 
 class _OtyaWebViewScreenState extends State<OtyaWebViewScreen> {
-  static const _trustedHosts = <String>{
-    'petersmartlink.com',
-    'www.petersmartlink.com',
-    'space.petersmartlink.com',
-    'docs.petersmartlink.com',
-    'status.petersmartlink.com',
-  };
-
   late final WebViewController _controller;
   bool _isLoading = true;
   bool _hasError = false;
@@ -89,7 +81,7 @@ class _OtyaWebViewScreenState extends State<OtyaWebViewScreen> {
   bool _isTrustedOtyaUri(Uri uri) =>
       uri.scheme == 'https' &&
       uri.userInfo.isEmpty &&
-      _trustedHosts.contains(uri.host.toLowerCase());
+      Environment.isOfficialHost(uri.host);
 
   NavigationDecision _handleNavigation(NavigationRequest request) {
     final uri = Uri.tryParse(request.url);

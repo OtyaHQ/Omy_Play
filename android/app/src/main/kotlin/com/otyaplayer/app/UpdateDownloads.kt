@@ -15,7 +15,6 @@ class UpdateDownloads(private val activity: Activity) {
     companion object {
         private const val APK_CONTENT_TYPE = "application/vnd.android.package-archive"
         private val TAG_RE = Regex("^v[0-9]+\\.[0-9]+\\.[0-9]+\\+[1-9][0-9]*$")
-        private val OFFICIAL_HOSTS = setOf("petersmartlink.com", "www.petersmartlink.com")
         private val APK_PATHS = setOf("/apk/arm64", "/apk/arm32")
     }
 
@@ -29,8 +28,9 @@ class UpdateDownloads(private val activity: Activity) {
         require(TAG_RE.matches(tag))
     }
 
-    private fun requireOfficialApk(uri: Uri, tag: String) {
-        require(uri.scheme == "https" && uri.host in OFFICIAL_HOSTS)
+    private fun requireOfficialApk(uri: Uri, tag: String, trustedHosts: Set<String>) {
+        val host = uri.host?.lowercase().orEmpty()
+        require(uri.scheme == "https" && host.isNotEmpty() && host in trustedHosts)
         require(uri.userInfo == null && (uri.port == -1 || uri.port == 443) && uri.fragment == null)
         require(uri.path in APK_PATHS)
         requireTag(tag)
@@ -74,9 +74,9 @@ class UpdateDownloads(private val activity: Activity) {
         }
     }
 
-    private fun enqueue(url: String, tag: String): Long {
+    private fun enqueue(url: String, tag: String, trustedHosts: Set<String>): Long {
         val uri = Uri.parse(url)
-        requireOfficialApk(uri, tag)
+        requireOfficialApk(uri, tag, trustedHosts)
 
         val manager = manager()
         val prefs = prefs()
@@ -128,7 +128,13 @@ class UpdateDownloads(private val activity: Activity) {
                     "download" -> {
                         val url = call.argument<String>("url") ?: ""
                         val tag = call.argument<String>("tag") ?: ""
-                        result.success(enqueue(url, tag))
+                        val trustedHosts = call.argument<List<String>>("trustedHosts")
+                            .orEmpty()
+                            .map { it.trim().lowercase() }
+                            .filter { it.isNotEmpty() && it.matches(Regex("^[a-z0-9.-]+$")) }
+                            .toSet()
+                        require(trustedHosts.isNotEmpty())
+                        result.success(enqueue(url, tag, trustedHosts))
                     }
                     "status" -> {
                         val tag = call.argument<String>("tag") ?: ""

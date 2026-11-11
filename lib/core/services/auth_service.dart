@@ -1,6 +1,6 @@
 // lib/core/services/auth_service.dart
 //
-// Calls https://petersmartlink.com/auth/* endpoints.
+// Calls the configured Otya Account authentication endpoint.
 //
 // SECURITY: access_token and refresh_token are stored ONLY in
 // flutter_secure_storage (Android Keystore / iOS Secure Enclave).

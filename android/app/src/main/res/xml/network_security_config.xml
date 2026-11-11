@@ -4,7 +4,7 @@
   Web Mirror. Android Network Security Config cannot express RFC1918 wildcard
   IP ranges (for example every 192.168.x.x address), so dynamic phone/hotspot
   addresses require cleartext at the base policy. OTYA's internet endpoints are
-  hard-coded as HTTPS and the PeterSmart Link domain is explicitly HTTPS-only.
+  hard-coded as HTTPS and the Otya domain is explicitly HTTPS-only.
 -->
 <network-security-config>
     <base-config cleartextTrafficPermitted="true">
@@ -14,7 +14,7 @@
     </base-config>
 
     <domain-config cleartextTrafficPermitted="false">
-        <domain includeSubdomains="true">petersmartlink.com</domain>
+        <domain includeSubdomains="true">otya.site</domain>
         <trust-anchors>
             <certificates src="system" />
         </trust-anchors>

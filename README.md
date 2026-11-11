@@ -18,9 +18,9 @@ Otya Media combines local video and music playback, nearby Send, Private media, 
 - **OtyaHub** is the public developer surface; do not publish private infrastructure inventories, signing material, or internal service credentials there.
 - **Next** is a separate private owner application and does not grant owner privileges to the consumer media app.
 
-Preserve the offline-first playback guarantee and existing user data during any future integration or naming migration. Coordinate ecosystem-wide changes through https://github.com/PeterSmartLink/Otya-Server/issues/236.
+Preserve the offline-first playback guarantee and existing user data during any future integration or naming migration. Coordinate shared platform changes through the Otya ecosystem repositories at https://github.com/otyahq.
 
-[Otya](https://petersmartlink.com) · [Documents](https://petersmartlink.com/docs) · [Download](https://petersmartlink.com/download/otya-player) · [Security](SECURITY.md)
+[Otya](https://otya.site) · [Documents](https://docs.otya.site) · [Download](https://otya.site/download/otya-player) · [Security](SECURITY.md)
 
 </div>
 
@@ -70,9 +70,9 @@ A public Otya release is valid only when its exact immutable build tag and curre
 
 Official public surfaces:
 
-- Otya: **https://petersmartlink.com**
-- Documents: **https://petersmartlink.com/docs**
-- Download: **https://petersmartlink.com/download/otya-player**
+- Otya: **https://otya.site**
+- Documents: **https://docs.otya.site**
+- Download: **https://otya.site/download/otya-player**
 
 Do not publish source archives, internal deployment instructions, backend credentials, signing material, private endpoints or infrastructure inventories as customer documentation.
 

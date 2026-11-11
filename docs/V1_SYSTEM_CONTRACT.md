@@ -154,9 +154,9 @@ OTYA must remain responsive on lower-end Android phones and adapt to tablets, fo
 
 ## Trusted web and update surfaces
 
-OTYA's in-app WebView is a trusted product surface, not a general browser. Only official `petersmartlink.com` HTTPS pages may execute inside its unrestricted JavaScript context; off-domain links open in the system browser.
+OTYA's in-app WebView is a trusted product surface, not a general browser. Only official `otya.site` HTTPS pages may execute inside its unrestricted JavaScript context; off-domain links open in the system browser.
 
-Update metadata may only launch official PeterSmart Link HTTPS destinations. OTYA does not request package-installer permission and does not silently install APKs.
+Update metadata may only launch official Otya HTTPS destinations. OTYA does not request package-installer permission and does not silently install APKs.
 
 ## Updates and releases
 

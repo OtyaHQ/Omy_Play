@@ -97,7 +97,7 @@ data = {
     "changelog":   changelog,
     "minSdk":      int("$MIN_SDK"),
     "targetSdk":   int("$TARGET_SDK"),
-    "workerUrl":   "https://petersmartlink.com"
+    "workerUrl":   "https://api.otya.site"
 }
 
 with open("$OUTPUT_FILE", "w") as f:

@@ -61,7 +61,7 @@ class _PolicyBody extends StatelessWidget {
               'incorporated provider or merchant-account holder. Existing '
               'provider accounts remain in the verified individual holder\'s '
               'name until incorporation and formal provider approval. For '
-              'questions, contact support@petersmartlink.com.',
+              'questions, contact support@otya.site.',
         ),
         _PolicySection(
           title: '2. What stays on your device',
@@ -124,7 +124,7 @@ class _PolicyBody extends StatelessWidget {
               'storage or uninstall the app. You can delete an authenticated '
               'Otya cloud account from the account screen. Google Drive '
               'recovery data is controlled separately and can also be deleted. '
-              'Visit space.petersmartlink.com or contact support for '
+              'Visit space.otya.site or contact support for '
               'data-access or deletion help.',
         ),
         _PolicySection(
@@ -135,8 +135,8 @@ class _PolicyBody extends StatelessWidget {
               'personal information from children under 13. Material policy '
               'changes will update the effective date and version shown '
               'above.\n\n'
-              'Email: support@petersmartlink.com\n'
-              'Website: https://petersmartlink.com',
+              'Email: support@otya.site\n'
+              'Website: https://otya.site',
         ),
         SizedBox(height: 32),
         _PolicyText('© 2026 Otya Media · Otya ecosystem. All rights reserved.'),

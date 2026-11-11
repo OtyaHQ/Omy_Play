@@ -20,7 +20,7 @@ enum UpdateCheckState {
 
 /// Checks the canonical public Otya release authority.
 ///
-/// Direct PeterSmart Link builds update from one immutable ABI-specific APK.
+/// Direct Otya builds update from one immutable ABI-specific APK.
 /// Google Play builds never sideload from that channel. Release truth comes
 /// from /latest and is accepted only when the server marks it published and
 /// its immutable tag, public version and build number agree.
@@ -30,11 +30,6 @@ class UpdateService {
 
   static const String _prefLastCheck = 'update_last_check';
   static final RegExp _releaseTag = RegExp(r'^v(\d+\.\d+\.\d+)\+([1-9]\d*)$');
-  static const Set<String> _officialHosts = {
-    'petersmartlink.com',
-    'www.petersmartlink.com',
-  };
-
   Future<UpdateInfo?>? _checkInFlight;
   bool _checkInFlightForced = false;
   UpdateCheckState _lastState = UpdateCheckState.idle;
@@ -209,7 +204,7 @@ class UpdateService {
     if (uri == null ||
         uri.scheme != 'https' ||
         uri.userInfo.isNotEmpty ||
-        !_officialHosts.contains(uri.host.toLowerCase())) {
+        !Environment.isOfficialHost(uri.host)) {
       return null;
     }
     return uri.toString();

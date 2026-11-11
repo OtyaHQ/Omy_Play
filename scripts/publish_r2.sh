@@ -31,7 +31,7 @@ PUBSPEC_CODE="${PUBSPEC_VERSION##*+}"
 }
 VERSION_CODE="$PUBSPEC_CODE"
 
-WORKER_URL="${WORKER_URL:-https://petersmartlink.com}"
+WORKER_URL="${WORKER_URL:-https://api.otya.site}"
 WORKER_URL="${WORKER_URL%/}"
 
 : "${AWS_ACCESS_KEY_ID:?R2 access key is required}"

@@ -289,8 +289,6 @@ class FcmService {
 
   bool _isOfficialHttpsUri(Uri uri) {
     if (uri.scheme != 'https' || uri.userInfo.isNotEmpty) return false;
-    final host = uri.host.toLowerCase();
-    return host == 'petersmartlink.com' ||
-        host.endsWith('.petersmartlink.com');
+    return Environment.isOfficialHost(uri.host);
   }
 }

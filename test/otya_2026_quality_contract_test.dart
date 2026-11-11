@@ -32,7 +32,7 @@ void main() {
     expect(manifest, isNot(contains('android.permission.REQUEST_INSTALL_PACKAGES')));
   });
 
-  test('PeterSmart Link internet traffic remains HTTPS-only at Android policy', () {
+  test('Otya internet traffic remains HTTPS-only at Android policy', () {
     final network = read(
       'android/app/src/main/res/xml/network_security_config.xml',
     );
@@ -41,7 +41,7 @@ void main() {
       network,
       contains('<domain-config cleartextTrafficPermitted="false">'),
     );
-    expect(network, contains('petersmartlink.com'));
+    expect(network, contains('<domain includeSubdomains="true">otya.site</domain>'));
   });
 
   test('release terminology keeps coded, tested, built and released distinct', () {
