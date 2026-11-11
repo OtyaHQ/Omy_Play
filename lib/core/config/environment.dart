@@ -26,17 +26,17 @@ abstract final class AppContract {
 abstract final class Environment {
   static const String workerUrl = String.fromEnvironment(
     'WORKER_URL',
-    defaultValue: 'https://petersmartlink.com',
+    defaultValue: 'https://otya.site',
   );
 
   static const String publicSiteUrl = String.fromEnvironment(
     'PUBLIC_SITE_URL',
-    defaultValue: 'https://petersmartlink.com',
+    defaultValue: 'https://otya.site',
   );
 
   static const String supportEmail = String.fromEnvironment(
     'SUPPORT_EMAIL',
-    defaultValue: 'support@petersmartlink.com',
+    defaultValue: 'support@otya.site',
   );
 
   // Compatibility aliases used throughout the current app.
@@ -58,7 +58,7 @@ abstract final class Environment {
   static const String downloadUrl = '$workerUrl/download/otya-player';
   static const String docsUrl = String.fromEnvironment(
     'DOCS_URL',
-    defaultValue: 'https://docs.petersmartlink.com',
+    defaultValue: 'https://docs.otya.site',
   );
   static const String authUrl = '$workerUrl/auth';
   static const String appConfigUrl = '$workerUrl/api/app-config';
