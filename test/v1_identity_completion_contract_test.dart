@@ -20,7 +20,7 @@ void main() {
     expect(account, contains('AccountLinkService.instance.addPrimaryEmail'));
     expect(account, contains("title: 'Add email'"));
     expect(account, contains("title: 'Sign-in methods'"));
-    expect(account, contains('https://space.petersmartlink.com/u/'));
+    expect(account, contains('Environment.spaceUrl'));
     expect(account, contains("'sessions' => 'devices'"));
     expect(account, contains("'connected' => 'providers'"));
   });
