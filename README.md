@@ -6,25 +6,23 @@
 
 **Private. Powerful. Offline-first media.**
 
-Omy Play is the local-first media player in the Otya ecosystem. Its Android application ID is `com.otya.omyplay` and its dedicated Firebase project is `omyplay-otya-prod`. The existing repository slug and historical download aliases are retained while the separate backend and release migration are validated.
+Omy Play is the local-first media application in the Otya ecosystem. Its Android application ID is `com.otya.omyplay` and its dedicated Firebase project is `omyplay-otya-prod`.
 
 Omy Play combines local video and music playback, nearby Send, Private media, practical media tools and optional connected Together/account services without making core playback depend on the cloud.
 
-## Ecosystem boundaries
-
-- **Otya OS** is the unified platform.
-- **Otya End** provides shared backend and identity services where needed; it is not required for local playback.
-- **OtyaPoint** is the shop/business operations application and does not gain access to private media through this app.
-- **OtyaHub** is the public developer surface; do not publish private infrastructure inventories, signing material, or internal service credentials there.
-- **Next** is a separate private owner application and does not grant owner privileges to the consumer media app.
-
-Preserve the offline-first playback guarantee and existing user data during any future integration or naming migration. Coordinate ecosystem-wide changes through https://github.com/PeterSmartLink/Otya-Server/issues/236.
-
-[Otya](https://petersmartlink.com) · [Documents](https://petersmartlink.com/docs) · [Download](https://petersmartlink.com/download/otya-player) · [Security](SECURITY.md)
+[Otya](https://otya.site) · [Omy Play source](https://github.com/OtyaHQ/Omy_Play) · [Security](SECURITY.md)
 
 </div>
 
 ---
+
+## Product boundaries
+
+- **OPoint** owns business, retail, inventory and financial operations. It has no access to Omy Play's private media.
+- **OEnd** provides shared identity and approved backend services. Omy Play still owns its product API, database, storage and release workflow.
+- **O** is the separate private owner-AI application. It does not receive local media, Private/Vault files or playback history.
+- **OHub** is the public developer and partner documentation surface. Private credentials and internal operations do not belong there.
+- **Otya ID** provides shared account identity and OTP. Telegram is never a sign-in provider; a linked Telegram bot may only deliver a code after the email identity has been established.
 
 ## Product surfaces
 
@@ -37,42 +35,43 @@ Preserve the offline-first playback guarantee and existing user data during any 
 | **Send** | Authenticated same-Wi-Fi/hotspot media transfer without a cloud relay |
 | **Private** | App-private media protection with device authentication/biometrics and secure PIN fallback |
 | **Together** | Optional invited shared-watch sessions with host-controlled playback, temporary conversation, Moments and reactions |
-| **Account** | Otya-owned authentication, recovery, 2FA and optional Google sign-in |
+| **Account** | Otya ID, email OTP, account recovery and explicitly linked delivery options |
 
-Consumer AI is not part of the Android product surface. Administrative AI remains a server-side owner tool and is not required for local playback.
+## Offline-first guarantee
 
-## Music scope
+Local playback, media scanning, local search, folders, playlists, Send and Private must continue to work when the network, OEnd, Firebase or AI is unavailable.
 
-Otya Music is local-first. The built-in Online Music/Jamendo provider integration has been retired because the available catalog did not meet the product's music-coverage needs.
+Omy Play's music experience is based on media already on the device. The app does not require an online catalog to search or play local music. Removed provider integrations must not be re-enabled through stale remote configuration.
 
-- Search local songs, videos, albums, artists, folders and playlists on the device.
-- Local search must not contact a music provider merely because the user is typing.
-- Jamendo catalog, OAuth, status and download-proxy routes are not part of the current product.
-- Spotify provider plumbing is not bundled as a dormant fallback.
-- Removed music-provider behavior cannot be re-enabled through stale remote configuration.
-- A future provider is outside the current v1 scope and requires a separate reviewed product, security and privacy decision.
+## Privacy and security
 
-## Privacy and security principles
-
-- Core local playback must not depend on Cloudflare, Firebase, AI or any permanently available backend.
-- Production secrets must never be committed or bundled into Flutter.
-- The shared Otya account provides identity across Otya surfaces; third-party service connections remain explicit and separately revocable.
-- Google Drive recovery is explicit and user-initiated.
-- Recovery data must not upload a user's raw media library or Private media.
+- Core media playback does not depend on Cloudflare, Firebase or AI.
+- The app never uploads a user's local media library or Private/Vault content by default.
+- Recovery is explicit and user-initiated; raw media files are not included in account recovery.
+- Production secrets are never committed or bundled into Flutter.
+- The Omy Play backend stores only the connected-service data it owns: app configuration, minimal device registrations, diagnostics, feedback, release metadata and Together control-plane data.
+- FCM messages are notification hints only. The app fetches authoritative state from the Omy Play API.
+- Internet-facing services use HTTPS. Cleartext HTTP is limited to authenticated same-LAN Send/Together links on private/local addresses.
 - Production releases must be signed and fail closed when signing credentials are missing.
-- Internet-facing Otya services use HTTPS. Cleartext HTTP is limited to authenticated same-LAN Send/Together links on private/local addresses.
-- Send accepts supported media only, refuses redirects, verifies the Otya sender marker, checks MIME and declared size, and rejects oversized/unknown-length streams.
-- Security reports use the private process documented in [SECURITY.md](SECURITY.md).
+
+## Backend ownership
+
+| Capability | Owner |
+|---|---|
+| Android media, playback, storage and Private | Omy Play app |
+| Connected app configuration, diagnostics, release metadata and Together signaling | Omy Play backend |
+| Shared account identity and OTP | Otya ID through OEnd |
+| Push delivery and mobile integrity | Omy Play's dedicated Firebase project |
+| Product data and private assets | Omy Play's dedicated Cloudflare D1 and R2 |
+| Source control and release gates | OtyaHQ GitHub organization |
+
+Firebase is a supporting mobile platform, not a second product database. Firestore and Firebase Storage are not required for Omy Play's initial backend.
 
 ## Release validation
 
-A public Otya release is valid only when its exact immutable build tag and current `main` commit agree, strict Flutter analysis and tests pass, publication-equivalent Android release binaries are verified, signing is proven and the public download metadata points to those exact artifacts.
+A release is valid only when its exact immutable build tag and source commit agree, strict Flutter analysis and tests pass, publication-equivalent Android release binaries are verified, signing is proven, and release metadata points to those exact artifacts.
 
-Official public surfaces:
-
-- Otya: **https://petersmartlink.com**
-- Documents: **https://petersmartlink.com/docs**
-- Download: **https://petersmartlink.com/download/otya-player**
+The public domain is being aligned to **otya.site**. Keep compatibility endpoints in code until their replacement routes are verified; do not publish unverified download or support URLs.
 
 Do not publish source archives, internal deployment instructions, backend credentials, signing material, private endpoints or infrastructure inventories as customer documentation.
 
@@ -80,6 +79,6 @@ Do not publish source archives, internal deployment instructions, backend creden
 
 <div align="center">
 
-**Omy Play · Otya ecosystem**
+**Omy Play · Otya**
 
 </div>
