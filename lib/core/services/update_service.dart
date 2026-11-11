@@ -20,7 +20,7 @@ enum UpdateCheckState {
 
 /// Checks the canonical public Otya release authority.
 ///
-/// Direct PeterSmart Link builds update from one immutable ABI-specific APK.
+/// Direct Otya builds update from one immutable ABI-specific APK.
 /// Google Play builds never sideload from that channel. Release truth comes
 /// from /latest and is accepted only when the server marks it published and
 /// its immutable tag, public version and build number agree.
