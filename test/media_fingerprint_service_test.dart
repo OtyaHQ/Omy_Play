@@ -2,7 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:otya_player/features/together/data/media_fingerprint_service.dart';
+import 'package:omy_play/features/together/data/media_fingerprint_service.dart';
 
 void main() {
   test('same bytes under different filenames produce the same identity', () async {
