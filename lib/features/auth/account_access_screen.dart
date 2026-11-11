@@ -312,7 +312,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                   onChanged: (v) => setState(() => _termsAccepted = v ?? false),
                   label: 'I accept the Terms of Service',
                   onOpen: () => context.push('/webview', extra: {
-                    'url': Environment.publicSiteUrl + '/terms',
+                    'url': '${Environment.publicSiteUrl}/terms',
                     'title': 'Terms of Service',
                   }),
                 ),
