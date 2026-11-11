@@ -46,7 +46,7 @@ test("FCM tokens are encrypted at rest and can be decrypted by the server worker
   const encrypted = await encryptFcmToken(token, secret);
   assert.equal(encrypted.ok, true);
   assert.notEqual(encrypted.value, token);
-  assert.match(encrypted.value, /^v1\\./);
+  assert.match(encrypted.value, /^v1\./);
   const decrypted = await decryptFcmToken(encrypted.value, secret);
   assert.deepEqual(decrypted, { ok: true, value: token });
 });
