@@ -55,7 +55,7 @@ class _PolicyBody extends StatelessWidget {
           title: '1. Who we are',
           body:
               'The current individual operator and data controller is Peter '
-              'Katabira. Otya is the public brand and Otya Media is this app. '
+              'Katabira. Otya is the public brand and Omy Play is this app. '
               'Otya Holdings Limited is the intended parent entity, with URSB '
               'registration in progress; it is not yet represented as an '
               'incorporated provider or merchant-account holder. Existing '
@@ -139,7 +139,7 @@ class _PolicyBody extends StatelessWidget {
               'Website: https://petersmartlink.com',
         ),
         SizedBox(height: 32),
-        _PolicyText('© 2026 Otya Media · Otya ecosystem. All rights reserved.'),
+        _PolicyText('© 2026 Omy Play · Otya ecosystem. All rights reserved.'),
       ],
     );
   }
