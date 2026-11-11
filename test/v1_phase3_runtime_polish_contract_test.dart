@@ -90,7 +90,7 @@ void main() {
 
     expect(source, contains("if (uri.scheme == 'file')"));
     expect(source, contains("uri.scheme != 'https'"));
-    expect(source, contains('Environment.isOfficialHost(uri.host)'));
+    expect(source, contains('Environment.isOfficialHost(host)'));
     expect(source, isNot(contains("uri.scheme != 'https' && uri.scheme != 'http'")));
     expect(source, contains('Otya Tools — Progress'));
     expect(source, contains('Otya Tools — Complete'));
