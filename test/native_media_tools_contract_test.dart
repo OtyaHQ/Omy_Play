@@ -12,7 +12,7 @@ void main() {
   test('Flutter media tools use the isolated v2 native plugin', () {
     expect(pubspec, contains('otya_media_tools:'));
     expect(pubspec, contains('path: packages/otya_media_tools'));
-    expect(service, contains("MethodChannel('com.otyaplayer.app/media_tools_v2')"));
+    expect(service, contains("MethodChannel('com.otya.omyplay/media_tools_v2')"));
     expect(service, contains('lastErrorMessage'));
   });
 
