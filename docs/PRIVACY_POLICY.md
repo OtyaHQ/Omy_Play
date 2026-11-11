@@ -104,7 +104,7 @@ Otya uses service providers only for the connected function involved:
   analytics and performance measurement when enabled by Otya's current policy;
 - **Google Identity and Drive** when you choose Google Sign-In or Drive recovery;
 - **Resend** for transactional and support email; and
-- **Telegram** when you choose a Telegram sign-in or community interaction.
+- **Telegram** when you link the official Otya bot for notifications or optional delivery of an email security code. Telegram does not sign you in or establish your Otya identity.
 
 These providers process information under their own terms and privacy policies.
 Otya does not include an advertising SDK in the current v1 Android build.
