@@ -38,15 +38,8 @@ void main() {
       'lib/features/webview/otya_webview_screen.dart',
     ).readAsStringSync();
 
-    for (final host in [
-      'petersmartlink.com',
-      'www.petersmartlink.com',
-      'space.petersmartlink.com',
-      'docs.petersmartlink.com',
-      'status.petersmartlink.com',
-    ]) {
-      expect(browser, contains("'$host'"));
-    }
+    expect(browser, contains('Environment.isOfficialHost(uri.host)'));
+    expect(browser, contains("uri.scheme == 'https'"));
     expect(browser, contains("path.startsWith('/apk/')"));
     expect(browser, contains('LaunchMode.externalApplication'));
   });
