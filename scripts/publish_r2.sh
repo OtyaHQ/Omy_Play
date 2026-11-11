@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Publishes signed Otya APKs to Cloudflare R2, then starts the release workflow.
+# Publishes signed Omy Play APKs to Cloudflare R2, then starts the release workflow.
 
 set -euo pipefail
 
@@ -58,11 +58,11 @@ for APK in "$ARM64_APK" "$ARM32_APK"; do
   SIZE=$(stat -c%s "$APK" 2>/dev/null || stat -f%z "$APK")
   [ "$SIZE" -ge 5000000 ] || { echo "ERROR: $APK looks too small ($SIZE bytes)"; exit 1; }
   [ "$SIZE" -le "$MAX_APK_BYTES" ] || {
-    echo "ERROR: $APK is $SIZE bytes; Otya split APKs must stay at or below $MAX_APK_BYTES bytes"
+    echo "ERROR: $APK is $SIZE bytes; Omy Play split APKs must stay at or below $MAX_APK_BYTES bytes"
     exit 1
   }
   if [ "$SIZE" -gt "$WARN_APK_BYTES" ]; then
-    echo "WARNING: $APK is $SIZE bytes and has crossed Otya's $WARN_APK_BYTES-byte size warning line"
+    echo "WARNING: $APK is $SIZE bytes and has crossed Omy Play's $WARN_APK_BYTES-byte size warning line"
   fi
 done
 
@@ -121,8 +121,8 @@ upload_and_verify() {
   echo "Verified $DEST_KEY: size, APK MIME and cache policy are correct"
 }
 
-ARM64_VERSIONED="releases/${RAW_TAG}/Otya-arm64.apk"
-ARM32_VERSIONED="releases/${RAW_TAG}/Otya-arm32.apk"
+ARM64_VERSIONED="releases/${RAW_TAG}/OmyPlay-arm64.apk"
+ARM32_VERSIONED="releases/${RAW_TAG}/OmyPlay-arm32.apk"
 
 upload_and_verify "$ARM64_APK" "$ARM64_VERSIONED" "public, max-age=31536000, immutable"
 upload_and_verify "$ARM32_APK" "$ARM32_VERSIONED" "public, max-age=31536000, immutable"
@@ -247,14 +247,14 @@ sys.stderr.write(
 sys.exit(1)
 PYEOF
 
-if ! upload_and_verify "$ARM64_APK" "Otya-arm64.apk" "public, max-age=300, must-revalidate"; then
-  echo "WARNING: Otya arm64 shortcut was not refreshed"
+if ! upload_and_verify "$ARM64_APK" "OmyPlay-arm64.apk" "public, max-age=300, must-revalidate"; then
+  echo "WARNING: Omy Play arm64 shortcut was not refreshed"
 fi
-if ! upload_and_verify "$ARM32_APK" "Otya-arm32.apk" "public, max-age=300, must-revalidate"; then
-  echo "WARNING: Otya arm32 shortcut was not refreshed"
+if ! upload_and_verify "$ARM32_APK" "OmyPlay-arm32.apk" "public, max-age=300, must-revalidate"; then
+  echo "WARNING: Omy Play arm32 shortcut was not refreshed"
 fi
 
 echo "====================================================="
-echo " Otya ${RAW_TAG} is ready"
+echo " Omy Play ${RAW_TAG} is ready"
 echo " Download: ${WORKER_URL}/download/otya-player"
 echo "====================================================="
