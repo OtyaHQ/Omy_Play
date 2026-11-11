@@ -58,11 +58,6 @@ class UpdateDialog extends StatefulWidget {
 }
 
 class _UpdateDialogState extends State<UpdateDialog> with WidgetsBindingObserver {
-  static const _officialHosts = <String>{
-    'petersmartlink.com',
-    'www.petersmartlink.com',
-  };
-
   static const _downloads = MethodChannel('com.otyaplayer.app/updates');
   bool _downloadStarted = false;
   UpdateDownloadStatus _status = const UpdateDownloadStatus();
@@ -137,7 +132,7 @@ class _UpdateDialogState extends State<UpdateDialog> with WidgetsBindingObserver
     if (!Environment.selfUpdateEnabled ||
         uri == null ||
         uri.scheme != 'https' ||
-        !_officialHosts.contains(uri.host.toLowerCase()) ||
+        !Environment.isOfficialHost(uri.host) ||
         uri.userInfo.isNotEmpty) {
       if (mounted) {
         setState(() {
