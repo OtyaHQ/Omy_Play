@@ -57,3 +57,11 @@ Before production release:
 5. Store a dedicated Omy Play FCM service credential in Cloudflare Secrets Store, then add an outbox/queue consumer with retry and dead-letter handling.
 6. Verify no local media, Private/Vault content or media identifiers are sent to cloud services by default.
 7. Confirm the app can still play and manage local media with network and AI unavailable.
+
+## FCM token storage hardening
+
+The staging Worker now encrypts FCM registration tokens with AES-256-GCM before writing them to the existing D1 `devices.fcm_token` field. The corresponding SHA-256 token hash remains available for deduplication. The Worker fails closed with `fcm_token_encryption_not_configured` when a token is submitted without a valid key; it never falls back to plaintext storage.
+
+Before testing device registration, create a random 32-byte encryption key, base64-encode it, and store it as the Worker secret `FCM_TOKEN_ENCRYPTION_KEY` for the Omy Play staging Worker only. Do not commit the key or send it in chat. Production must use a separately generated key and documented rotation procedure. Key rotation must support decrypting existing ciphertext during a migration window or re-encrypting all stored tokens before the old key is retired.
+
+FCM sending remains disabled until the Admin credential is configured, token decryption is tested, Queue retry/dead-letter behavior is implemented, and the app verifies authoritative state from the API after every push.
