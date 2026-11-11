@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Shared Android production/release configuration for every Otya artifact.
+# Shared Android production/release configuration for Omy Play.
 # Workflows may intentionally vary only SELF_UPDATE:
 # - direct/R2 APK: true
 # - Google Play AAB: false
