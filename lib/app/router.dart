@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../core/models/media_item.dart';
+import '../core/config/environment.dart';
 import '../core/services/remote_control_service.dart';
 import '../features/air_drop/presentation/air_drop_screen.dart';
 import '../features/auth/auth_screen.dart';
@@ -451,7 +452,7 @@ class AppRouter {
             state: s,
             child: OtyaWebViewScreen(
               url: args['url'] as String? ??
-                  'https://petersmartlink.com/otya-player',
+                  Environment.publicSiteUrl + '/otya-player',
               title: args['title'] as String?,
             ),
           );
