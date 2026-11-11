@@ -192,7 +192,7 @@ Future<void> _initPlaybackPlatformOnce() async {
   final audioHandler = await AudioService.init(
     builder: () => OtyaAudioHandler(),
     config: AudioServiceConfig(
-      androidNotificationChannelId: 'com.otyaplayer.app.audio',
+      androidNotificationChannelId: 'com.otya.omyplay.audio',
       androidNotificationChannelName: 'Otya — Now Playing',
       // Music must retain Android foreground-service protection after Otya
       // leaves the screen. A dismissible media notification can remove that
