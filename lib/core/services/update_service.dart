@@ -30,11 +30,6 @@ class UpdateService {
 
   static const String _prefLastCheck = 'update_last_check';
   static final RegExp _releaseTag = RegExp(r'^v(\d+\.\d+\.\d+)\+([1-9]\d*)$');
-  static const Set<String> _officialHosts = {
-    'petersmartlink.com',
-    'www.petersmartlink.com',
-  };
-
   Future<UpdateInfo?>? _checkInFlight;
   bool _checkInFlightForced = false;
   UpdateCheckState _lastState = UpdateCheckState.idle;
@@ -209,7 +204,7 @@ class UpdateService {
     if (uri == null ||
         uri.scheme != 'https' ||
         uri.userInfo.isNotEmpty ||
-        !_officialHosts.contains(uri.host.toLowerCase())) {
+        !Environment.isOfficialHost(uri.host)) {
       return null;
     }
     return uri.toString();
