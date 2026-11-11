@@ -63,7 +63,7 @@ class _UpdateDialogState extends State<UpdateDialog> with WidgetsBindingObserver
     'www.petersmartlink.com',
   };
 
-  static const _downloads = MethodChannel('com.otyaplayer.app/updates');
+  static const _downloads = MethodChannel('com.otya.omyplay/updates');
   bool _downloadStarted = false;
   UpdateDownloadStatus _status = const UpdateDownloadStatus();
   Timer? _statusTimer;
