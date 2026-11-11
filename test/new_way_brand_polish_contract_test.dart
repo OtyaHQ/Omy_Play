@@ -28,7 +28,7 @@ void main() {
     expect(push, isNot(contains("contentTitle: 'Otya \$version is available'")));
     expect(push, contains("'Otya — Announcements'"));
     expect(push, contains("uri.scheme != 'https'"));
-    expect(push, contains('Environment.isOfficialHost(uri.host)'));
+    expect(push, contains('Environment.isOfficialHost(host)'));
     expect(mainSource, isNot(contains("androidNotificationChannelName: 'OTYA")));
   });
 
