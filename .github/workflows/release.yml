@@ -1,4 +1,4 @@
-# Otya production release pipeline.
+# Omy Play production release pipeline.
 # Each verified public release uses its exact semantic version and immutable
 # build-specific tag, for example v1.1.0+5.
 
