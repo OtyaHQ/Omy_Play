@@ -31,6 +31,7 @@ jobs:
       - name: Confirm private notifications require identity
         run: |
           set -euo pipefail
+          base="https://omy-play-api-staging.petersmartlink.workers.dev"
           status="$(curl --max-time 20 -sS -o /tmp/protected.json -w '%{http_code}' "$base/v1/notifications")"
           cat /tmp/protected.json
           test "$status" = "401"
