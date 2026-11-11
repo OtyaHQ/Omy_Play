@@ -7,6 +7,7 @@ import '../../core/services/auth_provider.dart';
 import '../../core/services/auth_service.dart';
 import '../../core/services/consent_service.dart';
 import '../../core/services/fcm_service.dart';
+import '../../core/config/environment.dart';
 import '../../core/services/google_account_service.dart';
 import '../../shared/widgets/wallpaper_scaffold.dart';
 
@@ -311,7 +312,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                   onChanged: (v) => setState(() => _termsAccepted = v ?? false),
                   label: 'I accept the Terms of Service',
                   onOpen: () => context.push('/webview', extra: {
-                    'url': 'https://petersmartlink.com/terms',
+                    'url': Environment.publicSiteUrl + '/terms',
                     'title': 'Terms of Service',
                   }),
                 ),
