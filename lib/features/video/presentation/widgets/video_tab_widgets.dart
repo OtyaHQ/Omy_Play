@@ -481,7 +481,7 @@ class _VideoThumb extends StatefulWidget {
 }
 
 class _VideoThumbState extends State<_VideoThumb> {
-  static const _channel = MethodChannel('com.otyaplayer.app/media_store');
+  static const _channel = MethodChannel('com.otya.omyplay/media_store');
   static final Map<String, String?> _cache = <String, String?>{};
   static const int _maxCacheEntries = 320;
 
