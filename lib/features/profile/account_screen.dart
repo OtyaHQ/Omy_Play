@@ -402,8 +402,8 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       _ => section,
     };
     final url = validPublicId
-        ? Environment.spaceUrl + '/u/$publicId/$canonicalSection'
-        : Environment.spaceUrl + '/account#$section';
+        ? '${Environment.spaceUrl}/u/$publicId/$canonicalSection'
+        : '${Environment.spaceUrl}/account#$section';
 
     context.push(
       '/webview',
@@ -418,8 +418,8 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     final publicId = _profile?.otyaId?.trim().toUpperCase();
     final validPublicId = publicId != null && RegExp(r'^2IS\d{8}$').hasMatch(publicId);
     final url = validPublicId
-        ? Environment.spaceUrl + '/u/$publicId/account/sign-in-methods'
-        : Environment.spaceUrl + '/account/sign-in-methods/';
+        ? '${Environment.spaceUrl}/u/$publicId/account/sign-in-methods'
+        : '${Environment.spaceUrl}/account/sign-in-methods/';
     context.push('/webview', extra: {'url': url, 'title': 'Sign-in methods'});
   }
 
@@ -610,7 +610,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
               onTap: () => context.push(
                 '/webview',
                 extra: const {
-                  'url': Environment.publicSiteUrl + '/terms',
+                  'url': '${Environment.publicSiteUrl}/terms',
                   'title': 'Terms of Service',
                 },
               ),
