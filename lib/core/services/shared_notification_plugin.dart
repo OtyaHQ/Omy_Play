@@ -68,19 +68,19 @@ const _androidChannels = <AndroidNotificationChannel>[
     importance: Importance.defaultImportance,
   ),
   AndroidNotificationChannel(
-    'com.otyaplayer.app.tools.progress',
+    'com.otya.omyplay.tools.progress',
     'Otya Tools — Progress',
     description: 'Silent progress for active media tools',
     importance: Importance.low,
   ),
   AndroidNotificationChannel(
-    'com.otyaplayer.app.tools.complete',
+    'com.otya.omyplay.tools.complete',
     'Otya Tools — Complete',
     description: 'Alerts when an Otya media task finishes',
     importance: Importance.high,
   ),
   AndroidNotificationChannel(
-    'com.otyaplayer.app.tools.error',
+    'com.otya.omyplay.tools.error',
     'Otya Tools — Errors',
     description: 'Alerts when an Otya media task needs attention',
     importance: Importance.high,
