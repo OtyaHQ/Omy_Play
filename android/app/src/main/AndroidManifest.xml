@@ -82,7 +82,7 @@
         android:resizeable="true" />
 
     <application
-        android:label="Otya"
+        android:label="Omy Play"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher"
