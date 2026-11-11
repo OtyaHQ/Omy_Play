@@ -65,6 +65,33 @@ abstract final class Environment {
   static const String themesUrl = '$workerUrl/api/themes';
   static const String downloadPageUrl = '$publicSiteUrl/download/otya-player';
 
+  /// Accepts hosts supplied by the current Otya release configuration.
+  /// The primary site's subdomains are allowed for branded public surfaces;
+  /// separately configured API and documentation origins are also trusted.
+  static bool isOfficialHost(String value) {
+    final host = value.trim().toLowerCase();
+    if (host.isEmpty) return false;
+
+    final configuredOrigins = <String>[
+      publicSiteUrl,
+      workerUrl,
+      docsUrl,
+    ];
+    final configuredHosts = <String>{};
+    for (final value in configuredOrigins) {
+      final uri = Uri.tryParse(value);
+      if (uri != null && uri.scheme == 'https' && uri.host.isNotEmpty) {
+        configuredHosts.add(uri.host.toLowerCase());
+      }
+    }
+
+    final primary = Uri.tryParse(publicSiteUrl);
+    final primaryHost = primary?.host.toLowerCase();
+    return configuredHosts.contains(host) ||
+        (primaryHost != null &&
+            (host == 'www.$primaryHost' || host.endsWith('.$primaryHost')));
+  }
+
   /// Self-installing APK updates are opt-in. Keep disabled by default so a
   /// release cannot accidentally enable installer behavior.
   static const bool selfUpdateEnabled =
