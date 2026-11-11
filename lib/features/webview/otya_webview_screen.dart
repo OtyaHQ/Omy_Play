@@ -29,11 +29,7 @@ class OtyaWebViewScreen extends StatefulWidget {
 
 class _OtyaWebViewScreenState extends State<OtyaWebViewScreen> {
   static const _trustedHosts = <String>{
-    'otya.site',
-    'www.otya.site',
-    'space.otya.site',
-    'docs.otya.site',
-    'status.otya.site',
+    
   };
 
   late final WebViewController _controller;
