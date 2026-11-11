@@ -69,6 +69,13 @@ abstract final class Environment {
     defaultValue: 'https://status.otya.site',
   );
 
+  // Compatibility endpoint aliases retained for existing feature modules.
+  // All are derived from the configurable API/public origins above.
+  static const String authUrl = '$workerUrl/auth';
+  static const String appConfigUrl = '$workerUrl/api/app-config';
+  static const String themesUrl = '$workerUrl/api/themes';
+  static const String downloadPageUrl = '$publicSiteUrl/download/otya-player';
+
   static const String assetsUrl = String.fromEnvironment(
     'ASSETS_URL',
     defaultValue: 'https://assets.otya.site',
