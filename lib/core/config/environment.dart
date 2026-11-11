@@ -26,7 +26,7 @@ abstract final class AppContract {
 abstract final class Environment {
   static const String workerUrl = String.fromEnvironment(
     'WORKER_URL',
-    defaultValue: 'https://otya.site',
+    defaultValue: 'https://api.otya.site',
   );
 
   static const String publicSiteUrl = String.fromEnvironment(
