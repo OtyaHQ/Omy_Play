@@ -2,13 +2,13 @@
 
 <img src="assets/branding/otya_app_icon.webp" alt="Otya" width="112" height="112" />
 
-# Otya Media
+# Omy Play
 
 **Private. Powerful. Offline-first media.**
 
-Otya Media is the local-first media player in the Otya ecosystem. The existing `OtyaPlayer` repository slug is retained for compatibility; this documentation update does not rename the repository, application ID, package, release channel, or public endpoints.
+Omy Play is the local-first media player in the Otya ecosystem. Its Android application ID is `com.otya.omyplay` and its dedicated Firebase project is `omyplay-otya-prod`. The existing repository slug and historical download aliases are retained while the separate backend and release migration are validated.
 
-Otya Media combines local video and music playback, nearby Send, Private media, practical media tools and optional connected Together/account services without making core playback depend on the cloud.
+Omy Play combines local video and music playback, nearby Send, Private media, practical media tools and optional connected Together/account services without making core playback depend on the cloud.
 
 ## Ecosystem boundaries
 
@@ -80,6 +80,6 @@ Do not publish source archives, internal deployment instructions, backend creden
 
 <div align="center">
 
-**Otya Media · Otya ecosystem**
+**Omy Play · Otya ecosystem**
 
 </div>
