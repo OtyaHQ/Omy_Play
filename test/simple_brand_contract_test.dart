@@ -17,7 +17,7 @@ void main() {
 
     expect(workflow, isNot(contains('OTYA Player')));
     expect(publisher, isNot(contains('OTYA-Player-')));
-    expect(publisher, isNot(contains('OtyaPlayer-arm64.apk')));
-    expect(publisher, isNot(contains('OtyaPlayer-arm32.apk')));
+    expect(publisher, isNot(contains('OmyPlay-arm64.apk')));
+    expect(publisher, isNot(contains('OmyPlay-arm32.apk')));
   });
 }
