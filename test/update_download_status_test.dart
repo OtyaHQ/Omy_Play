@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:otya_player/core/services/update_download_status.dart';
+import 'package:omy_play/core/services/update_download_status.dart';
 
 void main() {
   test('unknown content length keeps progress indeterminate', () {
