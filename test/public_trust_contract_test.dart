@@ -17,7 +17,7 @@ void main() {
       expect(text, contains('Google Drive'));
       expect(text, contains('support@petersmartlink.com'));
       expect(text, isNot(contains('Privacy Policy — Played')));
-      expect(text, isNot(contains('Messages you send to Next')));
+      expect(text, isNot(contains('Messages you send to O')));
       expect(text, isNot(contains('Appwrite')));
       expect(text, isNot(contains('AdMob')));
       expect(text, isNot(contains('We do NOT collect')));
@@ -38,7 +38,7 @@ void main() {
       matches(RegExp(r'first\s+public release line is `1\.0\.0`')),
     );
     expect(security, isNot(contains('1.6.0+10')));
-    expect(contributing, contains('github.com/PeterSmartLink/OtyaPlayer'));
+    expect(contributing, contains('github.com/OtyaHQ/Omy_Play'));
     expect(contributing, isNot(contains('gitlab.com/apk-v1')));
     expect(changelog, contains('## [1.0.0] — 2026-09-03'));
     expect(strings, contains('<string name="app_name">Otya Media</string>'));
