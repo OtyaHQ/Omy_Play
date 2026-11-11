@@ -3,6 +3,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../app/theme/app_colors.dart';
 import '../services/remote_control_service.dart';
+import '../config/environment.dart';
 
 class RemoteControlGate extends StatefulWidget {
   const RemoteControlGate({super.key, required this.child});
@@ -38,7 +39,7 @@ class _RemoteControlGateState extends State<RemoteControlGate> {
   Future<void> _openUpdate() async {
     final url = RemoteControlService.instance.link(
       'download',
-      'https://petersmartlink.com/download/otya-player',
+      Environment.downloadPageUrl,
     );
     final uri = Uri.tryParse(url);
     if (uri == null || uri.scheme != 'https') return;
