@@ -153,6 +153,7 @@ class _UpdateDialogState extends State<UpdateDialog> with WidgetsBindingObserver
         final id = await _downloads.invokeMethod<int>('download', {
           'url': uri.toString(),
           'tag': widget.info.tag,
+          'trustedHosts': Environment.officialHosts.toList(),
         });
         if (id == null) throw StateError('Download was not accepted');
         if (mounted) {
