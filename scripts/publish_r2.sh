@@ -31,7 +31,7 @@ PUBSPEC_CODE="${PUBSPEC_VERSION##*+}"
 }
 VERSION_CODE="$PUBSPEC_CODE"
 
-WORKER_URL="${WORKER_URL:-https://petersmartlink.com}"
+WORKER_URL="${WORKER_URL:-https://otya.site}"
 WORKER_URL="${WORKER_URL%/}"
 
 : "${AWS_ACCESS_KEY_ID:?R2 access key is required}"
@@ -133,6 +133,8 @@ import json, os, sys, urllib.request, urllib.error
 with open(os.environ['CHANGELOG_FILE']) as f:
     changelog = f.read().strip() or 'Fixes and improvements'
 payload = {
+    'productCode': 'OMY_PLAY',
+    'applicationId': 'com.otya.omyplay',
     'tag': os.environ['RAW_TAG'],
     'version': os.environ['VERSION'],
     'versionCode': int(os.environ['VERSION_CODE']),
@@ -256,5 +258,5 @@ fi
 
 echo "====================================================="
 echo " Omy Play ${RAW_TAG} is ready"
-echo " Download: ${WORKER_URL}/download/otya-player"
+echo " Download: ${WORKER_URL}/download/omy-play"
 echo "====================================================="
