@@ -5,7 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   test('Android generates a fresh high-quality thumbnail cache', () {
     final native = File(
-      'android/app/src/main/kotlin/com/otyaplayer/app/MainActivity.kt',
+      'android/app/src/main/kotlin/com/otya/omyplay/MainActivity.kt',
     ).readAsStringSync();
 
     expect(native, contains('video_thumbs_v2'));
