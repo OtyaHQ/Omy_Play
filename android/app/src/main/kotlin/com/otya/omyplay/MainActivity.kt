@@ -1,4 +1,4 @@
-package com.otyaplayer.app
+package com.otya.omyplay
 
 import android.Manifest
 import android.app.PictureInPictureParams
@@ -54,17 +54,17 @@ import java.nio.ByteBuffer
  */
 class MainActivity : AudioServiceFragmentActivity() {
 
-    private val pipChannel = "com.otyaplayer.app/pip"
-    private val mediaChannel = "com.otyaplayer.app/media_store"
-    private val fileChannel = "com.otyaplayer.app/file_ops"
-    private val eqChannel = "com.otyaplayer.app/equalizer"
-    private val phoneChannel = "com.otyaplayer.app/phone_state"
-    private val ffmpegChannel = "com.otyaplayer.app/ffmpeg"
-    private val mediaEventChannel = "com.otyaplayer.app/media_events"
-    private val deviceIdChannel = "com.otyaplayer.app/device_id"
-    private val brightnessChannel = "com.otyaplayer.app/brightness"
-    private val volumeChannel = "com.otyaplayer.app/volume"
-    private val shareChannel = "com.otyaplayer.app/share"
+    private val pipChannel = "com.otya.omyplay/pip"
+    private val mediaChannel = "com.otya.omyplay/media_store"
+    private val fileChannel = "com.otya.omyplay/file_ops"
+    private val eqChannel = "com.otya.omyplay/equalizer"
+    private val phoneChannel = "com.otya.omyplay/phone_state"
+    private val ffmpegChannel = "com.otya.omyplay/ffmpeg"
+    private val mediaEventChannel = "com.otya.omyplay/media_events"
+    private val deviceIdChannel = "com.otya.omyplay/device_id"
+    private val brightnessChannel = "com.otya.omyplay/brightness"
+    private val volumeChannel = "com.otya.omyplay/volume"
+    private val shareChannel = "com.otya.omyplay/share"
 
     private val ioScope = CoroutineScope(Dispatchers.IO + SupervisorJob())
     private var mediaJob: Job? = null
@@ -102,7 +102,7 @@ class MainActivity : AudioServiceFragmentActivity() {
     private fun createAudioNotificationChannel() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return
         val channel = android.app.NotificationChannel(
-            "com.otyaplayer.app.audio",
+            "com.otya.omyplay.audio",
             "Otya — Now Playing",
             android.app.NotificationManager.IMPORTANCE_LOW,
         ).apply {

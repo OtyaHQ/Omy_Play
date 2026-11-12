@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:otya_player/features/together/application/anywhere_together_runtime.dart';
+import 'package:omy_play/features/together/application/anywhere_together_runtime.dart';
 
 void main() {
   test('Anywhere runtime stays a Together layer over the existing player', () {

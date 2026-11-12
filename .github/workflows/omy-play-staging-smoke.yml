@@ -1,0 +1,37 @@
+name: Omy Play staging smoke (workers.dev)
+on:
+  push:
+    branches: [omy-play-backend-foundation]
+    paths:
+      - ".github/workflows/omy-play-staging-smoke.yml"
+      - "backend/**"
+      - "wrangler.omy-play-staging.toml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check public staging health
+        run: |
+          set -euo pipefail
+          base="https://omy-play-api-staging.petersmartlink.workers.dev"
+          health="$(curl --retry 3 --retry-delay 2 --retry-all-errors --max-time 25 -fsS "$base/health")"
+          echo "$health"
+          node -e 'const x=JSON.parse(process.argv[1]); if(x.status!=="ready" || x.schemaReady!==true || x.aiEnabled!==false) process.exit(1)' "$health"
+      - name: Check app config and themes
+        run: |
+          set -euo pipefail
+          base="https://omy-play-api-staging.petersmartlink.workers.dev"
+          config="$(curl --max-time 20 -fsS "$base/v1/config")"
+          themes="$(curl --max-time 20 -fsS "$base/v1/themes")"
+          node -e 'JSON.parse(process.argv[1])' "$config"
+          node -e 'const x=JSON.parse(process.argv[1]); if(!Array.isArray(x.data)) process.exit(1)' "$themes"
+      - name: Confirm private notifications require identity
+        run: |
+          set -euo pipefail
+          base="https://omy-play-api-staging.petersmartlink.workers.dev"
+          status="$(curl --max-time 20 -sS -o /tmp/protected.json -w '%{http_code}' "$base/v1/notifications")"
+          cat /tmp/protected.json
+          test "$status" = "401"

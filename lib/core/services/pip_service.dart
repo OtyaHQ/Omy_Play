@@ -7,7 +7,7 @@ class PipService {
   static final PipService instance = PipService._();
 
   // Channel name must match MainActivity.kt registration.
-  static const _channel = MethodChannel('com.otyaplayer.app/pip');
+  static const _channel = MethodChannel('com.otya.omyplay/pip');
 
   /// Enters PiP mode with the given aspect ratio.
   Future<void> enterPip({double aspectRatioWidth = 16, double aspectRatioHeight = 9}) async {

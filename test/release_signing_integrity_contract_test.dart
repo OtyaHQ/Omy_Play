@@ -21,7 +21,7 @@ void main() {
     expect(source, contains(r'test "$APP_VERSION" = "${RELEASE_TAG#v}"'));
     expect(source, contains('does not exactly match pubspec version'));
     expect(source, contains(r'^[0-9]+\.[0-9]+\.[0-9]+\+[1-9][0-9]*$'));
-    expect(source, contains('expected Otya <version>+<positive build>'));
+    expect(source, contains('expected Omy Play <version>+<positive build>'));
   });
 
   test('production release verifies both APK signers before publication', () {
@@ -30,7 +30,7 @@ void main() {
     expect(source, contains(r'"$APKSIGNER" verify --verbose --print-certs "$ARM32"'));
     expect(source, contains('EXPECTED_SHA256'));
     expect(source, contains('ACTUAL_SHA256'));
-    expect(source, contains('APK certificate does not match official Otya signing key'));
+    expect(source, contains('APK certificate does not match official Omy Play signing key'));
   });
 
   test('Play bundle signature is also verified against the Otya key', () {
@@ -38,6 +38,6 @@ void main() {
     expect(source, contains(r'jarsigner -verify "$AAB"'));
     expect(source, contains(r'keytool -printcert -jarfile "$AAB"'));
     expect(source, contains('AAB_SHA256'));
-    expect(source, contains('AAB certificate does not match official Otya signing key'));
+    expect(source, contains('AAB certificate does not match official Omy Play signing key'));
   });
 }

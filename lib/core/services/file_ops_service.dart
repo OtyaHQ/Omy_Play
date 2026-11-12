@@ -6,7 +6,7 @@ class FileOpsService {
   FileOpsService._();
   static final FileOpsService instance = FileOpsService._();
 
-  static const _ch = MethodChannel('com.otyaplayer.app/file_ops');
+  static const _ch = MethodChannel('com.otya.omyplay/file_ops');
 
   Future<bool> deleteFile(String path) async {
     try {

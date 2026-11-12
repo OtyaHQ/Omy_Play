@@ -369,7 +369,7 @@ class OtyaMediaToolsPlugin : FlutterPlugin, MethodChannel.MethodCallHandler {
     private class MediaToolFailure(val code: String, override val message: String) : RuntimeException(message)
 
     companion object {
-        private const val CHANNEL = "com.otyaplayer.app/media_tools_v2"
+        private const val CHANNEL = "com.otya.omyplay/media_tools_v2"
         private const val DEFAULT_BUFFER_BYTES = 8 * 1024 * 1024
         private const val MAX_BUFFER_BYTES = 32 * 1024 * 1024
     }

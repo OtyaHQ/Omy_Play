@@ -1,4 +1,4 @@
-package com.otyaplayer.app
+package com.otya.omyplay
 
 import android.app.Activity
 import android.app.DownloadManager
@@ -122,7 +122,7 @@ class UpdateDownloads(private val activity: Activity) {
     }
 
     fun register(messenger: BinaryMessenger) {
-        MethodChannel(messenger, "com.otyaplayer.app/updates").setMethodCallHandler { call, result ->
+        MethodChannel(messenger, "com.otya.omyplay/updates").setMethodCallHandler { call, result ->
             try {
                 when (call.method) {
                     "download" -> {

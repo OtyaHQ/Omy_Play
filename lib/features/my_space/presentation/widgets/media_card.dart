@@ -30,7 +30,7 @@ class _MediaCardState extends State<MediaCard>
   late final AnimationController _press;
   late final Animation<double> _scale;
 
-  static const _channel = MethodChannel('com.otyaplayer.app/media_store');
+  static const _channel = MethodChannel('com.otya.omyplay/media_store');
   static const int _kCacheMax = 300;
   static final LinkedHashMap<String, String> _thumbCache = LinkedHashMap();
   static final LinkedHashMap<String, String> _artCache = LinkedHashMap();

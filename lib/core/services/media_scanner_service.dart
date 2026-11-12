@@ -78,7 +78,7 @@ Future<void> _scanDirIsolate(Directory dir, List<MediaItem> out) async {
 class MediaScannerService {
   MediaScannerService._();
   static final MediaScannerService instance = MediaScannerService._();
-  static const _channel = MethodChannel('com.otyaplayer.app/media_store');
+  static const _channel = MethodChannel('com.otya.omyplay/media_store');
 
   static const List<String> _receiveDirs = [
     '/storage/emulated/0/Download',

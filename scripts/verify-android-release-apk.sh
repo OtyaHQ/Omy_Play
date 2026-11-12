@@ -71,7 +71,7 @@ ACTUAL_VERSION_NAME="$(tr -d '\r\n[:space:]' < "$EVIDENCE_DIR/version-name.txt")
 ACTUAL_VERSION_CODE="$(tr -d '\r\n[:space:]' < "$EVIDENCE_DIR/version-code.txt")"
 ACTUAL_DEBUGGABLE="$(tr -d '\r\n[:space:]' < "$EVIDENCE_DIR/debuggable.txt" | tr '[:upper:]' '[:lower:]')"
 
-[ "$ACTUAL_APP_ID" = 'com.otyaplayer.app' ] || fail "wrong applicationId: $ACTUAL_APP_ID"
+[ "$ACTUAL_APP_ID" = 'com.otya.omyplay' ] || fail "wrong applicationId: $ACTUAL_APP_ID"
 [ "$ACTUAL_VERSION_NAME" = "$EXPECTED_VERSION_NAME" ] || fail "versionName mismatch: apk=$ACTUAL_VERSION_NAME pubspec=$EXPECTED_VERSION_NAME"
 [ "$ACTUAL_VERSION_CODE" = "$EXPECTED_VERSION_CODE" ] || fail "versionCode mismatch: apk=$ACTUAL_VERSION_CODE pubspec=$EXPECTED_VERSION_CODE"
 [ "$ACTUAL_DEBUGGABLE" = 'false' ] || fail "release APK is debuggable"
@@ -83,7 +83,7 @@ require_literal "$EVIDENCE_DIR/manifest.xml" 'com.ryanheise.audioservice.AudioSe
 require_literal "$EVIDENCE_DIR/manifest.xml" 'com.ryanheise.audioservice.MediaButtonReceiver' 'media button receiver'
 require_regex "$EVIDENCE_DIR/manifest.xml" 'android:foregroundServiceType="(mediaPlayback|2|0x0*2)"' 'mediaPlayback foreground service type'
 require_literal "$EVIDENCE_DIR/manifest.xml" 'com.ryanheise.audioservice.NOTIFICATION_CHANNEL_ID' 'Now Playing notification channel metadata'
-require_literal "$EVIDENCE_DIR/manifest.xml" 'com.otyaplayer.app.audio' 'Otya Now Playing channel id'
+require_literal "$EVIDENCE_DIR/manifest.xml" 'com.otya.omyplay.audio' 'Otya Now Playing channel id'
 
 require_literal "$EVIDENCE_DIR/permissions.txt" 'android.permission.FOREGROUND_SERVICE' 'foreground service permission'
 require_literal "$EVIDENCE_DIR/permissions.txt" 'android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK' 'media playback foreground service permission'
@@ -109,7 +109,7 @@ reject_literal "$EVIDENCE_DIR/permissions.txt" 'android.permission.MODIFY_AUDIO_
 # R8 must retain Android entry points loaded by class name/reflection.
 require_literal "$EVIDENCE_DIR/dex-packages.txt" 'com.ryanheise.audioservice.AudioService' 'AudioService class after R8'
 require_literal "$EVIDENCE_DIR/dex-packages.txt" 'com.ryanheise.audioservice.MediaButtonReceiver' 'MediaButtonReceiver class after R8'
-require_literal "$EVIDENCE_DIR/dex-packages.txt" 'com.otyaplayer.app.MainActivity' 'Otya MainActivity after R8'
+require_literal "$EVIDENCE_DIR/dex-packages.txt" 'com.otya.omyplay.MainActivity' 'Otya MainActivity after R8'
 require_literal "$EVIDENCE_DIR/dex-packages.txt" 'com.petersmartlink.otya_transfer_android.OtyaTransferAndroidPlugin' 'Otya offline-transfer plugin after R8'
 
 # media_kit must ship a native playback engine for whichever production ABI

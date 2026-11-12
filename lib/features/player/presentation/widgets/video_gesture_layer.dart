@@ -36,8 +36,8 @@ class VideoGestureLayer extends StatefulWidget {
 
 class _VideoGestureLayerState extends State<VideoGestureLayer> {
   static const _brightnessChannel =
-      MethodChannel('com.otyaplayer.app/brightness');
-  static const _volumeChannel = MethodChannel('com.otyaplayer.app/volume');
+      MethodChannel('com.otya.omyplay/brightness');
+  static const _volumeChannel = MethodChannel('com.otya.omyplay/volume');
 
   // Keep the central 24% of the video free of brightness/volume gestures.
   static const double _edgeGestureFraction = .38;

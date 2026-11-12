@@ -9,10 +9,10 @@ void main() {
     final firebase = read('lib/core/services/firebase_platform_service.dart');
     final environment = read('lib/core/config/environment.dart');
 
-    expect(firebase, contains('1:82776565585:android:085cf9b4eecb76e9535570'));
-    expect(firebase, contains("defaultValue: '82776565585'"));
-    expect(firebase, contains("defaultValue: 'otya-player'"));
-    expect(environment, contains("appPackageId = 'com.otyaplayer.app'"));
+    expect(firebase, contains('1:181484175543:android:b7eae0234df6eb7e370d32'));
+    expect(firebase, contains("defaultValue: '181484175543'"));
+    expect(firebase, contains("defaultValue: 'omyplay-otya-prod'"));
+    expect(environment, contains("appPackageId = 'com.otya.omyplay'"));
   });
 
   test('App Check uses debug provider only for debug and Play Integrity otherwise', () {

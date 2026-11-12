@@ -2,8 +2,8 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:otya_player/features/together/data/media_fingerprint_service.dart';
-import 'package:otya_player/features/together/data/together_stream_cache_proxy.dart';
+import 'package:omy_play/features/together/data/media_fingerprint_service.dart';
+import 'package:omy_play/features/together/data/together_stream_cache_proxy.dart';
 
 class _FakeOtyaRangeHost {
   _FakeOtyaRangeHost(this.bytes);

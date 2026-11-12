@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:otya_player/features/together/data/nearby_together_channel.dart';
+import 'package:omy_play/features/together/data/nearby_together_channel.dart';
 
 void main() {
   test('critical Nearby Together messages require acknowledgement', () {

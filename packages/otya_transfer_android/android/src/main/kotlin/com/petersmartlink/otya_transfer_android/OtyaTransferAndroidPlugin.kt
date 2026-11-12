@@ -269,6 +269,6 @@ class OtyaTransferAndroidPlugin : FlutterPlugin, MethodChannel.MethodCallHandler
     }
 
     companion object {
-        private const val CHANNEL = "com.otyaplayer.app/transfer_android"
+        private const val CHANNEL = "com.otya.omyplay/transfer_android"
     }
 }
