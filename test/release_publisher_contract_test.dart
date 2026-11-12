@@ -32,6 +32,10 @@ void main() {
       'upload_and_verify "\$ARM64_APK" "OmyPlay-arm64.apk"',
     );
 
+    expect(script, contains('releases/\${RAW_TAG}/OmyPlay-arm64.apk'));
+    expect(script, contains('releases/\${RAW_TAG}/OmyPlay-arm32.apk'));
+    expect(script, contains('OmyPlay-arm64.apk'));
+    expect(script, contains('OmyPlay-arm32.apk'));
     expect(immutableUpload, greaterThanOrEqualTo(0));
     expect(workflowStart, greaterThan(immutableUpload));
     expect(latestAlias, greaterThan(workflowStart));
