@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { validAbi, sanitizeCrashText, encryptFcmToken, decryptFcmToken } from "../src/index.mjs";
+import { validAbi, validReleaseTag, exactApkUrl, sanitizeCrashText, encryptFcmToken, decryptFcmToken } from "../src/index.mjs";
 
 const TEST_KEY = "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8=";
 const TEST_ENV = { FCM_TOKEN_ENCRYPTION_KEY: TEST_KEY };
@@ -42,4 +42,16 @@ test("encrypts FCM tokens with a random IV and authenticated decryption", async 
 test("fails closed when the FCM encryption key is absent or malformed", async () => {
   await assert.rejects(() => encryptFcmToken("fcm-device-token-test-value-123456", {}));
   await assert.rejects(() => encryptFcmToken("fcm-device-token-test-value-123456", { FCM_TOKEN_ENCRYPTION_KEY: "not-a-valid-key" }));
+});
+
+test("publishes exact immutable Omy Play APK URLs under the product API prefix", () => {
+  assert.equal(validReleaseTag("v1.0.0+1"), true);
+  assert.equal(validReleaseTag("v1.0.0+0"), false);
+  assert.equal(validReleaseTag("v1.0.0+1&other=1"), false);
+  assert.equal(
+    exactApkUrl("https://api.otya.site/omy-play", "arm64", "v1.0.0+1"),
+    "https://api.otya.site/omy-play/apk/arm64?tag=v1.0.0%2B1",
+  );
+  assert.throws(() => exactApkUrl("http://api.otya.site/omy-play", "arm64", "v1.0.0+1"));
+  assert.throws(() => exactApkUrl("https://api.otya.site/omy-play", "x86", "v1.0.0+1"));
 });
