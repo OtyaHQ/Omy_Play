@@ -44,9 +44,9 @@ void main() {
     final updater =
         File('lib/core/widgets/update_dialog.dart').readAsStringSync();
 
+    expect(webview, contains('Environment.isOfficialHost(uri.host)'));
+    expect(updater, contains('Environment.isOfficialHost(uri.host)'));
     for (final source in [webview, updater]) {
-      expect(source, contains("'petersmartlink.com'"));
-      expect(source, contains("'www.petersmartlink.com'"));
       expect(
         source.contains("uri.scheme == 'https'") ||
             source.contains("uri.scheme != 'https'"),
