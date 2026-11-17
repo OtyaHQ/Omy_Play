@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../app/theme/app_colors.dart';
+import '../../core/config/environment.dart';
 import '../../core/services/auth_provider.dart';
 import '../../core/services/auth_service.dart';
 import '../../core/services/consent_service.dart';
@@ -311,7 +312,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                   onChanged: (v) => setState(() => _termsAccepted = v ?? false),
                   label: 'I accept the Terms of Service',
                   onOpen: () => context.push('/webview', extra: {
-                    'url': 'https://petersmartlink.com/terms',
+                    'url': Environment.termsUrl,
                     'title': 'Terms of Service',
                   }),
                 ),
