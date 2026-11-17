@@ -61,7 +61,9 @@ void main() {
     final updates = File('lib/core/services/update_service.dart').readAsStringSync();
     final dialog = File('lib/core/widgets/update_dialog.dart').readAsStringSync();
 
-    expect(updates, contains("data['published'] != true"));
+    expect(updates, contains("final rawData = decoded['data']"));
+    expect(updates, contains("final isPublished = data['published'] == true || data['available'] == true;"));
+    expect(updates, contains("uri.path != '\$apiPathPrefix/apk/\$abi'"));
     expect(
       updates,
       contains("r'^v(\\d+\\.\\d+\\.\\d+)\\+([1-9]\\d*)\$'"),
