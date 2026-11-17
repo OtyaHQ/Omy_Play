@@ -55,7 +55,7 @@ grep -Fq 'You can delete an authenticated Otya cloud account from the account sc
   echo 'ERROR: privacy policy no longer documents in-app account deletion.'
   exit 1
 }
-grep -Fq 'support@petersmartlink.com' "$PRIVACY" || {
+grep -Fq 'support@otya.site' "$PRIVACY" || {
   echo 'ERROR: privacy policy must retain the public support contact.'
   exit 1
 }
