@@ -10,7 +10,7 @@ Omy Play is the local-first media application in the Otya ecosystem. Its Android
 
 Omy Play combines local video and music playback, nearby Send, Private media, practical media tools and optional connected Together/account services without making core playback depend on the cloud.
 
-[Otya](https://otya.site) · [Omy Play source](https://github.com/OtyaHQ/Omy_Play) · [Security](SECURITY.md)
+[Otya](https://otya.site) · [Documents](https://docs.otya.site) · [Download Omy Play](https://otya.site/download/omy-play) · [Omy Play source](https://github.com/OtyaHQ/Omy_Play) · [Security](SECURITY.md)
 
 </div>
 
