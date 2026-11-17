@@ -16,7 +16,7 @@ class UpdateDownloads(private val activity: Activity) {
         private const val APK_CONTENT_TYPE = "application/vnd.android.package-archive"
         private val TAG_RE = Regex("^v[0-9]+\\.[0-9]+\\.[0-9]+\\+[1-9][0-9]*$")
         private val OFFICIAL_HOSTS = setOf("api.otya.site")
-        private val APK_PATHS = setOf("/apk/arm64", "/apk/arm32")
+        private val APK_PATHS = setOf("/omy-play/apk/arm64", "/omy-play/apk/arm32")
     }
 
     private fun manager(): DownloadManager =
