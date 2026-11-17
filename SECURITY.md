@@ -13,7 +13,7 @@ account-recovery material, signing information, OTPs or tokens in a public
 issue.
 
 Use a private GitHub security advisory when available, or contact
-**support@petersmartlink.com** through an official `petersmartlink.com` channel.
+**support@otya.site** through the official Otya website at `https://otya.site` or a private GitHub Security Advisory.
 
 Please include:
 
