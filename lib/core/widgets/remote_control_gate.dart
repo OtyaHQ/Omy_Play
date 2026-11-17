@@ -38,7 +38,7 @@ class _RemoteControlGateState extends State<RemoteControlGate> {
   Future<void> _openUpdate() async {
     final url = RemoteControlService.instance.link(
       'download',
-      'https://petersmartlink.com/download/otya-player',
+      Environment.downloadPageUrl,
     );
     final uri = Uri.tryParse(url);
     if (uri == null || uri.scheme != 'https') return;
