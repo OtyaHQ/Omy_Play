@@ -36,7 +36,7 @@ abstract final class Environment {
 
   static const String supportEmail = String.fromEnvironment(
     'SUPPORT_EMAIL',
-    defaultValue: '',
+    defaultValue: 'support@otya.site',
   );
 
   // Compatibility aliases used throughout the current app.
@@ -64,6 +64,14 @@ abstract final class Environment {
   static const String appConfigUrl = '$workerUrl/api/app-config';
   static const String themesUrl = '$workerUrl/api/themes';
   static const String downloadPageUrl = '$publicSiteUrl/download/omy-play';
+
+  /// Only Otya-owned HTTPS hosts may execute in the privileged in-app WebView.
+  /// Matching on a complete DNS suffix prevents lookalike domains such as
+  /// `otya.site.attacker.example` from being trusted.
+  static bool isOfficialHost(String rawHost) {
+    final host = rawHost.trim().toLowerCase();
+    return host == 'otya.site' || host.endsWith('.otya.site');
+  }
 
   /// Self-installing APK updates are opt-in. Keep disabled by default so a
   /// release cannot accidentally enable installer behavior.
