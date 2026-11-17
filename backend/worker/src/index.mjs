@@ -27,6 +27,26 @@ export function validAbi(value) {
   return ALLOWED_ABIS.has(String(value || "").toLowerCase());
 }
 
+export function validReleaseTag(value) {
+  return typeof value === "string"
+    && value.length <= 32
+    && /^v[0-9]+\\.[0-9]+\\.[0-9]+\\+[1-9][0-9]*$/.test(value);
+}
+
+export function exactApkUrl(apiBase, abi, tag) {
+  if (!validAbi(abi) || !validReleaseTag(tag)) {
+    throw new Error("invalid_release_download_identity");
+  }
+  const base = new URL(apiBase);
+  if (base.protocol !== "https:" || base.username || base.password || base.hash || base.search) {
+    throw new Error("invalid_public_api_base_url");
+  }
+  const prefix = base.pathname.replace(/\\/+$/, "");
+  base.pathname = `${prefix}/apk/${abi}`;
+  base.searchParams.set("tag", tag);
+  return base.toString();
+}
+
 export function sanitizeCrashText(value, max = 4000) {
   return clean(value, max)
     .replace(/(?:\/data\/user\/\d+\/\S+|\/data\/data\/\S+)/gi, "<app-data>")
@@ -237,18 +257,36 @@ async function latestRelease(env, abi, requestId) {
   const row = await env.DB.prepare(
     "SELECT tag,version,version_code,release_notes,min_sdk,target_sdk,published_at FROM releases WHERE status='PUBLISHED' ORDER BY version_code DESC LIMIT 1"
   ).first();
-  if (!row) return json({ data: { available: false, reason: "no_published_release" }, requestId }, 200, requestId);
+  if (!row) {
+    return json({ data: { available: false, published: false, reason: "no_published_release" }, requestId }, 200, requestId);
+  }
+
+  const apiBase = env.PUBLIC_API_BASE_URL || "https://api.otya.site/omy-play";
+  let downloads;
+  try {
+    downloads = {
+      exactArm64: exactApkUrl(apiBase, "arm64", row.tag),
+      exactArm32: exactApkUrl(apiBase, "arm32", row.tag),
+    };
+  } catch {
+    return json({ error: "release_download_configuration_invalid", requestId }, 503, requestId);
+  }
+
   return json({
     data: {
       available: true,
+      published: true,
       tag: row.tag,
       version: row.version,
       versionCode: row.version_code,
+      changelog: row.release_notes,
+      date: row.published_at,
       releaseNotes: row.release_notes,
       minSdk: row.min_sdk,
       targetSdk: row.target_sdk,
       publishedAt: row.published_at,
       abi: validAbi(abi) ? abi : null,
+      downloads,
       downloadPaths: { arm64: "/apk/arm64", arm32: "/apk/arm32" },
     },
     requestId,
@@ -258,10 +296,15 @@ async function latestRelease(env, abi, requestId) {
 async function downloadRelease(request, env, abi, requestId) {
   if (!validAbi(abi)) return json({ error: "unsupported_abi", requestId }, 400, requestId);
   if (!env.ASSETS?.get) return json({ error: "release_storage_unavailable", requestId }, 503, requestId);
+  const url = new URL(request.url);
+  const tags = url.searchParams.getAll("tag");
+  if (url.searchParams.size !== 1 || tags.length !== 1 || !validReleaseTag(tags[0])) {
+    return json({ error: "immutable_release_tag_required", requestId }, 400, requestId);
+  }
   const row = await env.DB.prepare(
-    "SELECT tag,version FROM releases WHERE status='PUBLISHED' ORDER BY version_code DESC LIMIT 1"
-  ).first();
-  if (!row) return json({ error: "no_published_release", requestId }, 404, requestId);
+    "SELECT tag,version FROM releases WHERE status='PUBLISHED' AND tag=?1 LIMIT 1"
+  ).bind(tags[0]).first();
+  if (!row) return json({ error: "published_release_not_found", requestId }, 404, requestId);
   const key = "releases/" + row.tag + "/" + abi + ".apk";
   const object = await env.ASSETS.get(key);
   if (!object) return json({ error: "release_asset_not_found", requestId }, 404, requestId);
