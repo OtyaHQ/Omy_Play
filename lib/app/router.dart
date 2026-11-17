@@ -451,7 +451,7 @@ class AppRouter {
             state: s,
             child: OtyaWebViewScreen(
               url: args['url'] as String? ??
-                  'https://petersmartlink.com/otya-player',
+                  'https://otya.site/otya-player',
               title: args['title'] as String?,
             ),
           );
