@@ -30,7 +30,7 @@ export function validAbi(value) {
 export function validReleaseTag(value) {
   return typeof value === "string"
     && value.length <= 32
-    && /^v[0-9]+\\.[0-9]+\\.[0-9]+\\+[1-9][0-9]*$/.test(value);
+    && /^v[0-9]+\.[0-9]+\.[0-9]+\+[1-9][0-9]*$/.test(value);
 }
 
 export function exactApkUrl(apiBase, abi, tag) {
@@ -41,7 +41,8 @@ export function exactApkUrl(apiBase, abi, tag) {
   if (base.protocol !== "https:" || base.username || base.password || base.hash || base.search) {
     throw new Error("invalid_public_api_base_url");
   }
-  const prefix = base.pathname.replace(/\\/+$/, "");
+  let prefix = base.pathname;
+  while (prefix.endsWith("/")) prefix = prefix.slice(0, -1);
   base.pathname = `${prefix}/apk/${abi}`;
   base.searchParams.set("tag", tag);
   return base.toString();
