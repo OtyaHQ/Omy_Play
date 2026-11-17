@@ -31,7 +31,8 @@ PUBSPEC_CODE="${PUBSPEC_VERSION##*+}"
 }
 VERSION_CODE="$PUBSPEC_CODE"
 
-WORKER_URL="${WORKER_URL:-https://otya.site}"
+WORKER_URL="${WORKER_URL:-https://api.otya.site/omy-play}"
+PUBLIC_SITE_URL="${PUBLIC_SITE_URL:-https://otya.site}"
 WORKER_URL="${WORKER_URL%/}"
 
 : "${AWS_ACCESS_KEY_ID:?R2 access key is required}"
@@ -46,6 +47,10 @@ WORKER_URL="${WORKER_URL%/}"
 }
 [[ "$WORKER_URL" == https://* ]] || {
   echo "ERROR: WORKER_URL must use HTTPS"
+  exit 1
+}
+[[ "$PUBLIC_SITE_URL" == https://* ]] || {
+  echo "ERROR: PUBLIC_SITE_URL must use HTTPS"
   exit 1
 }
 
@@ -258,5 +263,5 @@ fi
 
 echo "====================================================="
 echo " Omy Play ${RAW_TAG} is ready"
-echo " Download: ${WORKER_URL}/download/omy-play"
+echo " Download: ${PUBLIC_SITE_URL}/download/omy-play"
 echo "====================================================="
