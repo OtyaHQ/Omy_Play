@@ -43,6 +43,8 @@ abstract final class Environment {
   static const String appName = AppContract.appName;
   static const String appPackageId = AppContract.appPackageId;
   static const String websiteUrl = publicSiteUrl;
+  static const String spaceUrl = 'https://space.otya.site';
+  static const String termsUrl = '$publicSiteUrl/terms';
 
   // Canonical online API endpoints. Keep this list small: each online job has
   // one owner, while local playback/scanning continue without these services.
@@ -55,7 +57,7 @@ abstract final class Environment {
 
   static const String arm64DownloadUrl = '$workerUrl/apk/arm64';
   static const String arm32DownloadUrl = '$workerUrl/apk/arm32';
-  static const String downloadUrl = '$workerUrl/download/omy-play';
+  static const String downloadUrl = '$publicSiteUrl/download/omy-play';
   static const String docsUrl = String.fromEnvironment(
     'DOCS_URL',
     defaultValue: 'https://docs.otya.site',
@@ -65,13 +67,19 @@ abstract final class Environment {
   static const String themesUrl = '$workerUrl/api/themes';
   static const String downloadPageUrl = '$publicSiteUrl/download/omy-play';
 
-  /// Only Otya-owned HTTPS hosts may execute in the privileged in-app WebView.
-  /// Matching on a complete DNS suffix prevents lookalike domains such as
-  /// `otya.site.attacker.example` from being trusted.
-  static bool isOfficialHost(String rawHost) {
-    final host = rawHost.trim().toLowerCase();
-    return host == 'otya.site' || host.endsWith('.otya.site');
-  }
+  /// Only exact, controlled Otya HTTPS hosts may execute in the privileged
+  /// in-app WebView or be opened from a trusted notification.
+  static const Set<String> officialHosts = {
+    'otya.site',
+    'www.otya.site',
+    'api.otya.site',
+    'docs.otya.site',
+    'status.otya.site',
+    'space.otya.site',
+  };
+
+  static bool isOfficialHost(String rawHost) =>
+      officialHosts.contains(rawHost.trim().toLowerCase());
 
   /// Self-installing APK updates are opt-in. Keep disabled by default so a
   /// release cannot accidentally enable installer behavior.
