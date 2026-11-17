@@ -15,7 +15,7 @@ class UpdateDownloads(private val activity: Activity) {
     companion object {
         private const val APK_CONTENT_TYPE = "application/vnd.android.package-archive"
         private val TAG_RE = Regex("^v[0-9]+\\.[0-9]+\\.[0-9]+\\+[1-9][0-9]*$")
-        private val OFFICIAL_HOSTS = setOf("petersmartlink.com", "www.petersmartlink.com")
+        private val OFFICIAL_HOSTS = setOf("api.otya.site")
         private val APK_PATHS = setOf("/apk/arm64", "/apk/arm32")
     }
 
