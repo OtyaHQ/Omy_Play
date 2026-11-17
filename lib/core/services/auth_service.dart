@@ -1,6 +1,6 @@
 // lib/core/services/auth_service.dart
 //
-// Calls https://petersmartlink.com/auth/* endpoints.
+// Calls the product-scoped Omy Play API: https://api.otya.site/omy-play/auth/*.
 //
 // SECURITY: access_token and refresh_token are stored ONLY in
 // flutter_secure_storage (Android Keystore / iOS Secure Enclave).
