@@ -15,7 +15,7 @@ void main() {
       expect(text, contains('Firebase'));
       expect(text, contains('Together'));
       expect(text, contains('Google Drive'));
-      expect(text, contains('support@petersmartlink.com'));
+      expect(text, contains('support@otya.site'));
       expect(text, isNot(contains('Privacy Policy — Played')));
       expect(text, isNot(contains('Messages you send to an AI assistant')));
       expect(text, isNot(contains('Appwrite')));
