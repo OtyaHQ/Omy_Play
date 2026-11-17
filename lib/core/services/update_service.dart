@@ -113,9 +113,11 @@ class UpdateService {
         _lastError = 'Release service returned invalid data.';
         return null;
       }
-      final data = decoded;
+      final rawData = decoded['data'];
+      final data = rawData is Map<String, dynamic> ? rawData : decoded;
 
-      if (data['published'] != true) {
+      final isPublished = data['published'] == true || data['available'] == true;
+      if (!isPublished || data['available'] == false) {
         _lastState = UpdateCheckState.preRelease;
         _lastError = 'No public Otya release is published yet.';
         await prefs.setInt(_prefLastCheck, DateTime.now().millisecondsSinceEpoch);
@@ -219,7 +221,13 @@ class UpdateService {
     if (safe == null) return null;
     final uri = Uri.parse(safe);
     final tagValues = uri.queryParametersAll['tag'];
-    if (uri.path != '/apk/$abi' ||
+    final apiBase = Uri.parse(Environment.workerUrl);
+    var apiPathPrefix = apiBase.path;
+    while (apiPathPrefix.endsWith('/')) {
+      apiPathPrefix = apiPathPrefix.substring(0, apiPathPrefix.length - 1);
+    }
+    if (uri.origin != apiBase.origin ||
+        uri.path != '$apiPathPrefix/apk/$abi' ||
         uri.fragment.isNotEmpty ||
         uri.queryParametersAll.length != 1 ||
         tagValues == null ||
