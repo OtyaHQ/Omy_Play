@@ -33,20 +33,26 @@ void main() {
     );
   });
 
-  test('in-app browser matches exact PeterSmart Link production surfaces', () {
+  test('in-app browser trusts only centrally configured Otya HTTPS hosts', () {
     final browser = File(
       'lib/features/webview/otya_webview_screen.dart',
     ).readAsStringSync();
+    final environment = File(
+      'lib/core/config/environment.dart',
+    ).readAsStringSync();
 
+    expect(browser, contains('Environment.isOfficialHost(uri.host)'));
     for (final host in [
-      'petersmartlink.com',
-      'www.petersmartlink.com',
-      'space.petersmartlink.com',
-      'docs.petersmartlink.com',
-      'status.petersmartlink.com',
+      'otya.site',
+      'www.otya.site',
+      'api.otya.site',
+      'docs.otya.site',
+      'status.otya.site',
+      'space.otya.site',
     ]) {
-      expect(browser, contains("'$host'"));
+      expect(environment, contains("'$host'"));
     }
+    expect(environment, isNot(contains('petersmartlink.com')));
     expect(browser, contains("path.startsWith('/apk/')"));
     expect(browser, contains('LaunchMode.externalApplication'));
   });
