@@ -1,28 +1,39 @@
-# Omy Play Firebase identity and Android package migration
+# Omy Play Firebase identity and Android package decision
 
-## Verified identifiers
+## Canonical Omy Play identity
 
-The Android application ID currently present on the compatibility/rebrand branch is `com.otyaplayer.app` (Gradle namespace, applicationId and manifest package). The Firebase Android App ID previously supplied for Omy Play is:
+The current Omy Play rebuild uses:
 
+- Android namespace: `com.otya.omyplay`
+- Android application ID: `com.otya.omyplay`
 - Firebase project ID: `omyplay-otya-prod`
-- Project number / sender ID: `181484175543`
+- Firebase project number / sender ID: `181484175543`
 - Firebase Android App ID: `1:181484175543:android:b7eae0234df6eb7e370d32`
-- Package associated with that registration: `com.otya.omyplay`
 
-These package identifiers do not match. A Firebase Android App registration is package-specific. Do not copy a `google-services.json` for `com.otya.omyplay` into a build whose application ID is `com.otyaplayer.app`.
+The Firebase registration and Android application ID match. The new Omy Play release workflow must verify the packaged APK application ID before publishing either ABI.
 
-## Safe default
+## Legacy Otya Player compatibility
 
-Preserve `com.otyaplayer.app` on the compatibility/rebrand branch until the Play Console listing, prior release artifacts and signing identity are checked. The display name can become Omy Play without changing the Android package.
+Older Otya Player test artifacts used `com.otyaplayer.app` and were published under legacy Otya release names. They are not Omy Play release artifacts.
 
-If preserving the existing package, register an additional Android app in the dedicated `omyplay-otya-prod` Firebase project using package `com.otyaplayer.app`, download its own `google-services.json`, and verify its project ID, sender ID, app ID and package before building. Keep the existing `com.otya.omyplay` registration intact; do not overwrite or delete it.
+- Do not rename, relabel or overwrite old Otya Player APKs as Omy Play.
+- Do not publish old Otya Player objects through the canonical Omy Play download endpoints.
+- Keep legacy downloads and metadata separate until the owner deliberately retires those URLs.
+- An Android application ID change creates a distinct app identity; it is not an in-place update for an existing installation.
 
-## Optional clean package migration
+The Omy Play rebuild is intentionally being treated as a new product identity under the owner's direction that prior ecosystem data and usage were testing-only. Before the first public Omy Play release, verify in the relevant distribution console that `com.otya.omyplay` is available for the intended release channel and confirm the signing/distribution plan. Do not claim an existing store listing or upgrade path unless it is independently verified.
 
-Only use `com.otya.omyplay` as the release application ID if the owner confirms that no public Play listing or installed production users need upgrade continuity, and the signing/distribution plan explicitly accepts a new app identity. A package-ID change is not an in-place Android app update. Before that decision, run the complete Android package/path, deep-link, notification, OAuth, Firebase, crash telemetry and release-artifact checks.
+## Firebase boundaries
 
-## Firebase service boundaries
+Firebase is limited to Omy Play's mobile platform needs:
 
-Firebase is limited to FCM, App Check / Play Integrity, Crashlytics and Performance Monitoring. Omy Play's Cloudflare backend and D1/R2 remain authoritative. Do not use Firestore or Firebase Storage as a parallel product database. Private/Vault media and local media indexes remain on-device by default.
+- Firebase Cloud Messaging
+- App Check / Play Integrity
+- Crashlytics
+- Performance Monitoring
 
-Never commit service-account JSON, signing keystores or private keys. The client `google-services.json` must be private build configuration if repository visibility is public.
+Cloudflare remains the Omy Play backend and data authority. D1/R2 own connected product data and assets. Firestore and Firebase Storage are not required as parallel product databases. Local media, Private/Vault media and media indexes remain on-device by default.
+
+The Omy Play release workflow must use only Omy Play-specific Firebase project settings and a separately provisioned Omy Play service-account credential. It must never reuse the legacy Otya Player Firebase service account.
+
+Never commit service-account JSON, signing keystores, private keys or production tokens. Keep client configuration in the approved private build-configuration process and verify its `project_id`, `project_number`, `mobilesdk_app_id` and `package_name` before a release.

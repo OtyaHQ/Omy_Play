@@ -41,7 +41,8 @@ void main() {
       network,
       contains('<domain-config cleartextTrafficPermitted="false">'),
     );
-    expect(network, contains('petersmartlink.com'));
+    expect(network, contains('<domain includeSubdomains="true">otya.site</domain>'));
+    expect(network, isNot(contains('petersmartlink.com')));
   });
 
   test('release terminology keeps coded, tested, built and released distinct', () {

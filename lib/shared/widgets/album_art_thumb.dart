@@ -23,7 +23,7 @@ class AlbumArtThumb extends StatefulWidget {
 }
 
 class _AlbumArtThumbState extends State<AlbumArtThumb> {
-  static const _channel = MethodChannel('com.otyaplayer.app/media_store');
+  static const _channel = MethodChannel('com.otya.omyplay/media_store');
   static final LinkedHashMap<String, String?> _cache = LinkedHashMap();
   static final Map<String, Future<String?>> _inFlight = {};
   static const _maxCache = 200;

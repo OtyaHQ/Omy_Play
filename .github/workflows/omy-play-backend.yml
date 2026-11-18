@@ -1,0 +1,28 @@
+name: Omy Play backend checks
+
+on:
+  push:
+    branches:
+      - omy-play-backend-foundation
+    paths:
+      - "backend/worker/**"
+      - ".github/workflows/omy-play-backend.yml"
+  pull_request:
+    paths:
+      - "backend/worker/**"
+      - ".github/workflows/omy-play-backend.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  contract-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Run backend contract tests
+        run: npm test
+        working-directory: backend/worker

@@ -15,6 +15,9 @@ void main() {
       contains('application/vnd.android.package-archive'),
     );
     expect(script, contains('public, max-age=31536000, immutable'));
+    expect(script, contains("'productCode': 'OMY_PLAY'"));
+    expect(script, contains("'applicationId': 'com.otya.omyplay'"));
+    expect(script, contains('https://otya.site'));
     expect(script, contains('public, max-age=300, must-revalidate'));
     expect(script, contains('Upload content type mismatch'));
     expect(script, contains('Upload cache-control mismatch'));
@@ -26,9 +29,13 @@ void main() {
     final immutableUpload = script.indexOf('ARM64_VERSIONED');
     final workflowStart = script.indexOf('WORKFLOW_ID=');
     final latestAlias = script.indexOf(
-      'upload_and_verify "\$ARM64_APK" "Otya-arm64.apk"',
+      'upload_and_verify "\$ARM64_APK" "OmyPlay-arm64.apk"',
     );
 
+    expect(script, contains('releases/\${RAW_TAG}/OmyPlay-arm64.apk'));
+    expect(script, contains('releases/\${RAW_TAG}/OmyPlay-arm32.apk'));
+    expect(script, contains('OmyPlay-arm64.apk'));
+    expect(script, contains('OmyPlay-arm32.apk'));
     expect(immutableUpload, greaterThanOrEqualTo(0));
     expect(workflowStart, greaterThan(immutableUpload));
     expect(latestAlias, greaterThan(workflowStart));

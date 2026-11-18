@@ -20,15 +20,15 @@ abstract final class OtyaFirebaseConfig {
   static const apiKey = String.fromEnvironment('FIREBASE_API_KEY');
   static const appId = String.fromEnvironment(
     'FIREBASE_APP_ID',
-    defaultValue: '1:82776565585:android:085cf9b4eecb76e9535570',
+    defaultValue: '1:181484175543:android:b7eae0234df6eb7e370d32',
   );
   static const messagingSenderId = String.fromEnvironment(
     'FIREBASE_MESSAGING_SENDER_ID',
-    defaultValue: '82776565585',
+    defaultValue: '181484175543',
   );
   static const projectId = String.fromEnvironment(
     'FIREBASE_PROJECT_ID',
-    defaultValue: 'otya-player',
+    defaultValue: 'omyplay-otya-prod',
   );
 
   static bool get configured =>

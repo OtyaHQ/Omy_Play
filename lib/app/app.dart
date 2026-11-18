@@ -22,14 +22,14 @@ import 'router.dart';
 import 'theme/app_colors.dart';
 import 'theme/app_theme.dart';
 
-class OtyaPlayerApp extends ConsumerStatefulWidget {
-  const OtyaPlayerApp({super.key});
+class OmyPlayApp extends ConsumerStatefulWidget {
+  const OmyPlayApp({super.key});
 
   @override
-  ConsumerState<OtyaPlayerApp> createState() => _OtyaPlayerAppState();
+  ConsumerState<OmyPlayApp> createState() => _OmyPlayAppState();
 }
 
-class _OtyaPlayerAppState extends ConsumerState<OtyaPlayerApp> {
+class _OmyPlayAppState extends ConsumerState<OmyPlayApp> {
   bool _onboardingDone = false;
   bool _checking = true;
   bool _startupDialogsScheduled = false;

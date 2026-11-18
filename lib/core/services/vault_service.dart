@@ -10,7 +10,7 @@ import '../database/otya_database.dart';
 import '../models/media_item.dart';
 import '../models/vault_item.dart';
 
-const _kMediaChannel = MethodChannel('com.otyaplayer.app/media_store');
+const _kMediaChannel = MethodChannel('com.otya.omyplay/media_store');
 
 /// Moves media into Otya's app-private storage and restores it on demand.
 ///

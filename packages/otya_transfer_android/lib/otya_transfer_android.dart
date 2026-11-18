@@ -48,7 +48,7 @@ class OtyaTransferAndroid {
   OtyaTransferAndroid._();
 
   static const MethodChannel _channel =
-      MethodChannel('com.otyaplayer.app/transfer_android');
+      MethodChannel('com.otya.omyplay/transfer_android');
 
   static bool get isSupportedPlatform => Platform.isAndroid;
 

@@ -1,4 +1,4 @@
-# Otya production release pipeline.
+# Omy Play production release pipeline.
 # Each verified public release uses its exact semantic version and immutable
 # build-specific tag, for example v1.1.0+5.
 
@@ -33,7 +33,7 @@ env:
 
 jobs:
   build_and_publish:
-    name: Build and publish Otya release
+    name: Build and publish Omy Play release
     runs-on: ubuntu-latest
     timeout-minutes: 65
     environment: production
@@ -62,7 +62,7 @@ jobs:
             exit 1
           }
           [[ "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+\+[1-9][0-9]*$ ]] || {
-            echo "ERROR: Otya release tags must look like v<version>+<positive-build>; refusing $TAG"
+            echo "ERROR: Omy Play release tags must look like v<version>+<positive-build>; refusing $TAG"
             exit 1
           }
           echo "tag=$TAG" >> "$GITHUB_OUTPUT"
@@ -145,7 +145,7 @@ jobs:
             exit 1
           }
           [[ "$APP_VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+\+[1-9][0-9]*$ ]] || {
-            echo "ERROR: expected Otya <version>+<positive build>; found $APP_VERSION"
+            echo "ERROR: expected Omy Play <version>+<positive build>; found $APP_VERSION"
             exit 1
           }
 
@@ -247,13 +247,13 @@ jobs:
           test -s "$RAW_ARM32" || { echo "ERROR: arm32 APK missing"; exit 1; }
           test -s "$RAW_AAB" || { echo "ERROR: AAB missing"; exit 1; }
 
-          cp "$RAW_ARM64" "$OUT/Otya-arm64.apk"
-          cp "$RAW_ARM32" "$OUT/Otya-arm32.apk"
-          cp "$RAW_AAB" "$OUT/Otya.aab"
+          cp "$RAW_ARM64" "$OUT/OmyPlay-arm64.apk"
+          cp "$RAW_ARM32" "$OUT/OmyPlay-arm32.apk"
+          cp "$RAW_AAB" "$OUT/OmyPlay.aab"
 
-          ARM64="$OUT/Otya-arm64.apk"
-          ARM32="$OUT/Otya-arm32.apk"
-          AAB="$OUT/Otya.aab"
+          ARM64="$OUT/OmyPlay-arm64.apk"
+          ARM32="$OUT/OmyPlay-arm32.apk"
+          AAB="$OUT/OmyPlay.aab"
 
           # The same final-binary checks used by PR release validation must pass
           # on the exact APKs that are about to be published.
@@ -262,8 +262,8 @@ jobs:
 
           APKSIGNER="$(find "$ANDROID_HOME/build-tools" -type f -name apksigner -print | sort -V | tail -n 1)"
           test -x "$APKSIGNER" || { echo "ERROR: apksigner not found"; exit 1; }
-          "$APKSIGNER" verify --verbose --print-certs "$ARM64" | tee "$OUT/Otya-arm64-signing.txt"
-          "$APKSIGNER" verify --verbose --print-certs "$ARM32" | tee "$OUT/Otya-arm32-signing.txt"
+          "$APKSIGNER" verify --verbose --print-certs "$ARM64" | tee "$OUT/OmyPlay-arm64-signing.txt"
+          "$APKSIGNER" verify --verbose --print-certs "$ARM32" | tee "$OUT/OmyPlay-arm32-signing.txt"
 
           EXPECTED_SHA256="$(keytool -list -v \
             -keystore android/app/keystore.jks \
@@ -275,21 +275,21 @@ jobs:
             | tr '[:upper:]' '[:lower:]')"
           test -n "$EXPECTED_SHA256" || { echo "ERROR: official signing certificate unavailable"; exit 1; }
 
-          for REPORT in "$OUT/Otya-arm64-signing.txt" "$OUT/Otya-arm32-signing.txt"; do
+          for REPORT in "$OUT/OmyPlay-arm64-signing.txt" "$OUT/OmyPlay-arm32-signing.txt"; do
             ACTUAL_SHA256="$(sed -n 's/^.*certificate SHA-256 digest: //p' "$REPORT" \
               | head -n 1 | tr -d ':[:space:]' | tr '[:upper:]' '[:lower:]')"
             test "$ACTUAL_SHA256" = "$EXPECTED_SHA256" || {
-              echo "ERROR: APK certificate does not match official Otya signing key"
+              echo "ERROR: APK certificate does not match official Omy Play signing key"
               exit 1
             }
           done
 
-          jarsigner -verify "$AAB" | tee "$OUT/Otya-aab-signing.txt"
-          keytool -printcert -jarfile "$AAB" >> "$OUT/Otya-aab-signing.txt"
-          AAB_SHA256="$(sed -n 's/^[[:space:]]*SHA256: //p' "$OUT/Otya-aab-signing.txt" \
+          jarsigner -verify "$AAB" | tee "$OUT/OmyPlay-aab-signing.txt"
+          keytool -printcert -jarfile "$AAB" >> "$OUT/OmyPlay-aab-signing.txt"
+          AAB_SHA256="$(sed -n 's/^[[:space:]]*SHA256: //p' "$OUT/OmyPlay-aab-signing.txt" \
             | head -n 1 | tr -d ':[:space:]' | tr '[:upper:]' '[:lower:]')"
           test "$AAB_SHA256" = "$EXPECTED_SHA256" || {
-            echo "ERROR: AAB certificate does not match official Otya signing key"
+            echo "ERROR: AAB certificate does not match official Omy Play signing key"
             exit 1
           }
 
@@ -302,7 +302,7 @@ jobs:
       - name: Save exact release evidence
         uses: actions/upload-artifact@v4
         with:
-          name: Otya-${{ steps.release.outputs.tag }}
+          name: OmyPlay-${{ steps.release.outputs.tag }}
           if-no-files-found: error
           retention-days: 3
           path: |
@@ -328,7 +328,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.release.outputs.tag }}
-          name: Otya ${{ steps.release.outputs.tag }}
+          name: Omy Play ${{ steps.release.outputs.tag }}
           generate_release_notes: true
           fail_on_unmatched_files: true
           files: |

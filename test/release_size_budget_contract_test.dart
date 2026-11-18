@@ -11,7 +11,7 @@ void main() {
     expect(publisher, contains(r'[ "$SIZE" -le "$MAX_APK_BYTES" ]'));
     expect(
       publisher,
-      contains(r'Otya split APKs must stay at or below $MAX_APK_BYTES bytes'),
+      contains(r'Omy Play split APKs must stay at or below $MAX_APK_BYTES bytes'),
     );
     expect(
       publisher.indexOf(r'[ "$SIZE" -le "$MAX_APK_BYTES" ]'),

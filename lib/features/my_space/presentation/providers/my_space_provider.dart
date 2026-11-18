@@ -14,7 +14,7 @@ import '../../data/media_repository.dart';
 
 /// Live media change event stream from Android MediaStore.
 /// Channel name MUST match the one registered in MainActivity.kt.
-const _mediaEventChannel = EventChannel('com.otyaplayer.app/media_events');
+const _mediaEventChannel = EventChannel('com.otya.omyplay/media_events');
 
 /// The full media library — all songs + all videos.
 ///

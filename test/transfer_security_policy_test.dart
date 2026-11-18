@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:otya_player/features/transfer/data/transfer_security_policy.dart';
+import 'package:omy_play/features/transfer/data/transfer_security_policy.dart';
 
 void main() {
   const token = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';

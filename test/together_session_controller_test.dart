@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:otya_player/features/together/application/together_policy.dart';
-import 'package:otya_player/features/together/application/together_session_controller.dart';
-import 'package:otya_player/features/together/domain/together_message.dart';
-import 'package:otya_player/features/together/domain/together_session.dart';
+import 'package:omy_play/features/together/application/together_policy.dart';
+import 'package:omy_play/features/together/application/together_session_controller.dart';
+import 'package:omy_play/features/together/domain/together_message.dart';
+import 'package:omy_play/features/together/domain/together_session.dart';
 
 TogetherSession _session(DateTime now) {
   return TogetherSession(

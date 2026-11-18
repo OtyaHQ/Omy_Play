@@ -121,7 +121,7 @@ void main() {
       );
       expect(updateService, contains('downloads[exactKey]'));
       expect(updateService, contains('_officialExactApk('));
-      expect(updateService, contains("uri.path != '/apk/\$abi'"));
+      expect(updateService, contains("uri.path != '\$apiPathPrefix/apk/\$abi'"));
       expect(updateService, contains('tagValues.single != tag'));
       expect(updateService, isNot(contains('final aliasKey =')));
       expect(updateService, isNot(contains('downloads[exactKey] ??')));

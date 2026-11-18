@@ -1,0 +1,37 @@
+name = "omy-play-api-staging"
+main = "backend/src/index.mjs"
+compatibility_date = "2026-11-11"
+workers_dev = true
+keep_vars = false
+
+[vars]
+ENVIRONMENT = "staging"
+PRODUCT_CODE = "OMY_PLAY"
+APP_PACKAGE_ID = "com.otya.omyplay"
+FIREBASE_PROJECT_ID = "omyplay-otya-prod"
+AI_ENABLED = "false"
+
+[observability]
+enabled = true
+redact_query_string = true
+
+[observability.logs]
+enabled = true
+head_sampling_rate = 1
+
+[observability.traces]
+enabled = true
+head_sampling_rate = 0.05
+
+[[d1_databases]]
+binding = "DB"
+database_name = "omy-play-staging-db"
+database_id = "006b1ac1-0e92-4480-b07e-4232724710e8"
+
+[[r2_buckets]]
+binding = "ASSETS"
+bucket_name = "omy-play-staging-assets"
+
+[[services]]
+binding = "OTYA_ID"
+service = "otya-auth"

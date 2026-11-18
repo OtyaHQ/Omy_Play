@@ -3,6 +3,6 @@ contact_links:
   - name: OTYA security report
     url: https://github.com/PeterSmartLink/OtyaPlayer/security/advisories/new
     about: Report vulnerabilities privately. Do not post secrets, tokens or exploit details publicly.
-  - name: OTYA website and downloads
-    url: https://petersmartlink.com
+  - name: Otya website and Omy Play downloads
+    url: https://otya.site
     about: Production website, downloads and official OTYA information.

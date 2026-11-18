@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Shared Android production/release configuration for every Otya artifact.
+# Shared Android production/release configuration for Omy Play.
 # Workflows may intentionally vary only SELF_UPDATE:
 # - direct/R2 APK: true
 # - Google Play AAB: false
@@ -9,9 +9,9 @@
 : "${FIREBASE_API_KEY:?FIREBASE_API_KEY is required}"
 
 OTYA_GOOGLE_WEB_CLIENT_ID='82776565585-obr8k53b8n6djsggissv8qne81cm3u5u.apps.googleusercontent.com'
-OTYA_FIREBASE_APP_ID='1:82776565585:android:085cf9b4eecb76e9535570'
-OTYA_FIREBASE_MESSAGING_SENDER_ID='82776565585'
-OTYA_FIREBASE_PROJECT_ID='otya-player'
+OTYA_FIREBASE_APP_ID='1:181484175543:android:b7eae0234df6eb7e370d32'
+OTYA_FIREBASE_MESSAGING_SENDER_ID='181484175543'
+OTYA_FIREBASE_PROJECT_ID='omyplay-otya-prod'
 OTYA_ENABLE_WATCH_TOGETHER='true'
 
 configure_otya_release_defines() {

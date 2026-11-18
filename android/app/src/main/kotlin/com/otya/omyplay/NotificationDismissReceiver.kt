@@ -1,4 +1,4 @@
-package com.otyaplayer.app
+package com.otya.omyplay
 
 import android.content.BroadcastReceiver
 import android.content.Context

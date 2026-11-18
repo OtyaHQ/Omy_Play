@@ -131,8 +131,8 @@ Otya account screen or your Google account. Information that must be retained
 for security, fraud prevention or legal compliance may be kept only for the
 applicable purpose and period.
 
-For help with access or deletion, contact **support@petersmartlink.com** or use
-the privacy controls at **https://space.petersmartlink.com**.
+For help with access or deletion, contact **support@otya.site** or use
+the privacy controls at **https://space.otya.site**.
 
 ## Security
 
@@ -158,6 +158,6 @@ acceptance is required, Otya will request it through the relevant account flow.
 
 Peter Katabira · Otya (current individual operator)
 
-Email: **support@petersmartlink.com**
+Email: **support@otya.site**
 
-Website: **https://petersmartlink.com**
+Website: **https://otya.site**

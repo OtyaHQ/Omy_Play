@@ -77,7 +77,7 @@ void main() {
     expect(about, contains("label: 'Share Otya'"));
     expect(about, contains("subject: 'Otya'"));
     expect(update, contains("uri.scheme != 'https'"));
-    expect(update, contains('_officialHosts.contains(uri.host.toLowerCase())'));
+    expect(update, contains('Environment.isOfficialHost(uri.host)'));
     expect(update, contains('Open the downloaded update in Android to approve installation.'));
     expect(update, contains("invokeMethod<int>('download'"));
     expect(update, contains('const OtyaMark(size: 46)'));
@@ -90,7 +90,7 @@ void main() {
 
     expect(source, contains("if (uri.scheme == 'file')"));
     expect(source, contains("uri.scheme != 'https'"));
-    expect(source, contains("host == _officialHost || host.endsWith('.\$_officialHost')"));
+    expect(source, contains('Environment.isOfficialHost(uri.host)'));
     expect(source, isNot(contains("uri.scheme != 'https' && uri.scheme != 'http'")));
     expect(source, contains('Otya Tools — Progress'));
     expect(source, contains('Otya Tools — Complete'));

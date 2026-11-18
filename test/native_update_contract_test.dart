@@ -30,7 +30,7 @@ void main() {
 
   test('completed direct update hands off to Android Downloads, not web', () {
     final native = File(
-      'android/app/src/main/kotlin/com/otyaplayer/app/UpdateDownloads.kt',
+      'android/app/src/main/kotlin/com/otya/omyplay/UpdateDownloads.kt',
     ).readAsStringSync();
     final dialog =
         File('lib/core/widgets/update_dialog.dart').readAsStringSync();

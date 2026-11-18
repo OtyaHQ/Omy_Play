@@ -1,12 +1,12 @@
 import 'dart:ffi';
 
-/// Values that define the installed Otya application and must stay stable
+/// Values that define the installed Omy Play application and must stay stable
 /// across environments. These are safe to compile into the APK.
 abstract final class AppContract {
   static const String appName = 'Omy Play';
-  static const String appPackageId = 'com.otyaplayer.app';
+  static const String appPackageId = 'com.otya.omyplay';
 
-  /// Otya's current authentication contract. The server is authoritative;
+  /// Otya ID's current authentication contract. The server is authoritative;
   /// keeping the client copy centralized prevents UI drift.
   static const int otpLength = 5;
   static const String otpExample = 'A1234';
@@ -26,23 +26,25 @@ abstract final class AppContract {
 abstract final class Environment {
   static const String workerUrl = String.fromEnvironment(
     'WORKER_URL',
-    defaultValue: 'https://petersmartlink.com',
+    defaultValue: 'https://api.otya.site/omy-play',
   );
 
   static const String publicSiteUrl = String.fromEnvironment(
     'PUBLIC_SITE_URL',
-    defaultValue: 'https://petersmartlink.com',
+    defaultValue: 'https://otya.site',
   );
 
   static const String supportEmail = String.fromEnvironment(
     'SUPPORT_EMAIL',
-    defaultValue: 'support@petersmartlink.com',
+    defaultValue: 'support@otya.site',
   );
 
   // Compatibility aliases used throughout the current app.
   static const String appName = AppContract.appName;
   static const String appPackageId = AppContract.appPackageId;
   static const String websiteUrl = publicSiteUrl;
+  static const String spaceUrl = 'https://space.otya.site';
+  static const String termsUrl = '$publicSiteUrl/terms';
 
   // Canonical online API endpoints. Keep this list small: each online job has
   // one owner, while local playback/scanning continue without these services.
@@ -55,15 +57,29 @@ abstract final class Environment {
 
   static const String arm64DownloadUrl = '$workerUrl/apk/arm64';
   static const String arm32DownloadUrl = '$workerUrl/apk/arm32';
-  static const String downloadUrl = '$workerUrl/download/otya-player';
+  static const String downloadUrl = '$publicSiteUrl/download/omy-play';
   static const String docsUrl = String.fromEnvironment(
     'DOCS_URL',
-    defaultValue: 'https://docs.petersmartlink.com',
+    defaultValue: 'https://docs.otya.site',
   );
   static const String authUrl = '$workerUrl/auth';
   static const String appConfigUrl = '$workerUrl/api/app-config';
   static const String themesUrl = '$workerUrl/api/themes';
-  static const String downloadPageUrl = '$publicSiteUrl/download/otya-player';
+  static const String downloadPageUrl = '$publicSiteUrl/download/omy-play';
+
+  /// Only exact, controlled Otya HTTPS hosts may execute in the privileged
+  /// in-app WebView or be opened from a trusted notification.
+  static const Set<String> officialHosts = {
+    'otya.site',
+    'www.otya.site',
+    'api.otya.site',
+    'docs.otya.site',
+    'status.otya.site',
+    'space.otya.site',
+  };
+
+  static bool isOfficialHost(String rawHost) =>
+      officialHosts.contains(rawHost.trim().toLowerCase());
 
   /// Self-installing APK updates are opt-in. Keep disabled by default so a
   /// release cannot accidentally enable installer behavior.

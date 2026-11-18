@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:otya_player/features/together/data/anywhere_together_protocol.dart';
+import 'package:omy_play/features/together/data/anywhere_together_protocol.dart';
 
 void main() {
   test('Anywhere Together packet round-trips bounded peer data', () {

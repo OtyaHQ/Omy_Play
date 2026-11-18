@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   final auth = File('lib/core/services/auth_service.dart').readAsStringSync();
   final account = File('lib/features/profile/account_screen.dart').readAsStringSync();
+  final environment = File('lib/core/config/environment.dart').readAsStringSync();
   final linking = File('lib/core/services/account_link_service.dart').readAsStringSync();
   final google = File('lib/core/services/google_account_service.dart').readAsStringSync();
 
@@ -20,7 +21,8 @@ void main() {
     expect(account, contains('AccountLinkService.instance.addPrimaryEmail'));
     expect(account, contains("title: 'Add email'"));
     expect(account, contains("title: 'Sign-in methods'"));
-    expect(account, contains('https://space.petersmartlink.com/u/'));
+    expect(environment, contains('static const String spaceUrl = \'https://space.otya.site\';'));
+    expect(account, contains('\${Environment.spaceUrl}/u/\$publicId/\$canonicalSection'));
     expect(account, contains("'sessions' => 'devices'"));
     expect(account, contains("'connected' => 'providers'"));
   });

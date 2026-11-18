@@ -46,9 +46,9 @@ Remote services start after the first Flutter frame and fail non-fatally.
 | Video/audio playback | MediaKit + OTYA playback coordinator |
 | Local media discovery | Android MediaStore through one OTYA media repository/provider |
 | Playback queue | OTYA queue provider |
-| OTYA account/session authority | Cloudflare `otya-auth` |
-| Email/password + OTP/2FA | OTYA Auth + Resend |
-| Firebase/Google identity | Linked identity behind OTYA Auth |
+| OTYA account/session authority | Cloudflare Otya ID |
+| Email/password + OTP/2FA | Otya ID + Resend |
+| Firebase/Google identity | Linked identity behind Otya ID |
 | Push transport | Firebase Cloud Messaging |
 | Server push decisions | Cloudflare |
 | Canonical application/account data | D1 |
@@ -154,9 +154,9 @@ OTYA must remain responsive on lower-end Android phones and adapt to tablets, fo
 
 ## Trusted web and update surfaces
 
-OTYA's in-app WebView is a trusted product surface, not a general browser. Only official `petersmartlink.com` HTTPS pages may execute inside its unrestricted JavaScript context; off-domain links open in the system browser.
+OTYA's in-app WebView is a trusted product surface, not a general browser. Only the exact approved Otya HTTPS hosts defined by `Environment.officialHosts` may execute inside its unrestricted JavaScript context; off-domain links open in the system browser.
 
-Update metadata may only launch official PeterSmart Link HTTPS destinations. OTYA does not request package-installer permission and does not silently install APKs.
+Update metadata may only launch official Otya HTTPS destinations. OTYA does not request package-installer permission and does not silently install APKs.
 
 ## Updates and releases
 

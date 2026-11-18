@@ -5,6 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../app/router.dart';
 import '../widgets/update_dialog.dart';
+import '../config/environment.dart';
 import 'shared_notification_plugin.dart';
 
 /// Push/announcement notification owner for Otya.
@@ -23,7 +24,6 @@ class PushNotificationService {
 
   static const _prefixUpdate = 'update:';
   static const _prefixUrl = 'url:';
-  static const _officialHost = 'petersmartlink.com';
   static const _nativeUpdatePayload = '${_prefixUpdate}native';
 
   bool _initialized = false;
@@ -44,8 +44,7 @@ class PushNotificationService {
     if (uri == null || uri.scheme != 'https' || uri.userInfo.isNotEmpty) {
       return false;
     }
-    final host = uri.host.toLowerCase();
-    return host == _officialHost || host.endsWith('.$_officialHost');
+    return Environment.isOfficialHost(uri.host);
   }
 
   void _onTap(NotificationResponse response) {

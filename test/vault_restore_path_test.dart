@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:otya_player/core/services/vault_service.dart';
+import 'package:omy_play/core/services/vault_service.dart';
 
 void main() {
   group('Otya Private restore paths', () {

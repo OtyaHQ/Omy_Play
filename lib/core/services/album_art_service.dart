@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 /// Resolves `albumid:NNNN` album-art paths to real file-system paths by
-/// calling the `getAlbumArt` method on the `com.otyaplayer.app/media_store`
+/// calling the `getAlbumArt` method on the `com.otya.omyplay/media_store`
 /// MethodChannel.
 ///
 /// The MediaScanner returns `albumArtPath: 'albumid:<id>'` for audio items
@@ -18,7 +18,7 @@ class AlbumArtService {
   AlbumArtService._();
   static final AlbumArtService instance = AlbumArtService._();
 
-  static const _channel = MethodChannel('com.otyaplayer.app/media_store');
+  static const _channel = MethodChannel('com.otya.omyplay/media_store');
 
   /// Maximum number of entries kept in the in-memory cache.
   static const int _maxCacheSize = 500;

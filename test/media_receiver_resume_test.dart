@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:otya_player/features/transfer/data/media_receiver.dart';
+import 'package:omy_play/features/transfer/data/media_receiver.dart';
 
 void main() {
   const tokenA = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';

@@ -3,6 +3,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../config/environment.dart';
 import 'shared_notification_plugin.dart';
 
 /// Manages Otya local notifications.
@@ -14,7 +15,6 @@ class NotificationService {
   NotificationService._();
   static final NotificationService instance = NotificationService._();
 
-  static const _officialHost = 'petersmartlink.com';
   static const _permissionPromptKey = 'notification_permission_prompted_v1';
   Future<bool?>? _permissionPromptInFlight;
 
@@ -80,8 +80,7 @@ class NotificationService {
     if (uri.scheme != 'https' || uri.host.isEmpty || uri.userInfo.isNotEmpty) {
       return false;
     }
-    final host = uri.host.toLowerCase();
-    return host == _officialHost || host.endsWith('.$_officialHost');
+    return Environment.isOfficialHost(uri.host);
   }
 
   Future<void> _openPayload(String payload) async {
@@ -108,7 +107,7 @@ class NotificationService {
     await initSharedNotificationsPlugin();
     final safeProgress = progress.clamp(0, 100).toInt();
     final androidDetails = AndroidNotificationDetails(
-      'com.otyaplayer.app.tools.progress',
+      'com.otya.omyplay.tools.progress',
       'Otya Tools — Progress',
       channelDescription: 'Audio extraction and video trim progress (silent)',
       importance: Importance.low,
@@ -135,7 +134,7 @@ class NotificationService {
   }) async {
     await initSharedNotificationsPlugin();
     const androidDetails = AndroidNotificationDetails(
-      'com.otyaplayer.app.tools.complete',
+      'com.otya.omyplay.tools.complete',
       'Otya Tools — Complete',
       channelDescription: 'Audio extraction and video trim completion alerts',
       importance: Importance.high,
@@ -159,7 +158,7 @@ class NotificationService {
   }) async {
     await initSharedNotificationsPlugin();
     const androidDetails = AndroidNotificationDetails(
-      'com.otyaplayer.app.tools.error',
+      'com.otya.omyplay.tools.error',
       'Otya Tools — Error',
       channelDescription: 'Audio extraction and video trim error alerts',
       importance: Importance.high,

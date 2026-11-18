@@ -25,7 +25,7 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-echo "=== OTYA Player — version.json generator ==="
+echo "=== Omy Play — version.json generator ==="
 echo "Root: $ROOT_DIR"
 
 # ── 1. Read version from pubspec.yaml ────────────────────────────────────────
@@ -92,12 +92,12 @@ data = {
     "version":     "$VERSION_NAME",
     "versionCode": int("$VERSION_CODE"),
     "date":        "$DATE",
-    "arm64":       "OtyaPlayer-arm64.apk",
-    "arm32":       "OtyaPlayer-arm32.apk",
+    "arm64":       "OmyPlay-arm64.apk",
+    "arm32":       "OmyPlay-arm32.apk",
     "changelog":   changelog,
     "minSdk":      int("$MIN_SDK"),
     "targetSdk":   int("$TARGET_SDK"),
-    "workerUrl":   "https://petersmartlink.com"
+    "workerUrl":   "https://api.otya.site/omy-play"
 }
 
 with open("$OUTPUT_FILE", "w") as f:

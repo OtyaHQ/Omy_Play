@@ -8,8 +8,8 @@ Otya supports Google Sign-In and stores recovery data in the signed-in user's hi
 2. Enable **Google Drive API**.
 3. Configure the OAuth consent screen with the public product brand **Otya**. Keep the current verified operator/legal contact details in the Google project owner and consent disclosures until the company is incorporated and the project is formally transferred.
 4. Add the scope `https://www.googleapis.com/auth/drive.appdata` as the optional Drive recovery permission.
-5. Create an **Android OAuth client** for package `com.otyaplayer.app` and register the SHA-1/SHA-256 fingerprints of the real release signing certificate. Add the debug certificate only if local debug Google Sign-In is required.
-6. Create a **Web OAuth client**. Its client ID is the server client ID/audience used by both Flutter and `otya-auth`.
+5. Create an **Android OAuth client** for package `com.otya.omyplay` and register the SHA-1/SHA-256 fingerprints of the real release signing certificate. Add the debug certificate only if local debug Google Sign-In is required.
+6. Create a **Web OAuth client**. Its client ID is the server client ID/audience used by both Flutter and Otya ID.
 
 ## GitHub
 
@@ -21,7 +21,7 @@ Debug and release workflows pass this value using `--dart-define=GOOGLE_WEB_CLIE
 
 The Android OAuth client ID is configured in Google Cloud for package/signing-certificate recognition. It is **not** the value supplied to the backend audience check.
 
-## Cloudflare `otya-auth`
+## Cloudflare Otya ID
 
 Set the Worker secret/variable named:
 
@@ -32,8 +32,8 @@ Do not place a Google client secret in Flutter. Otya does not require a Google O
 ## Runtime flow
 
 1. Basic Google Sign-In requests identity scopes (`email`, `profile`) only.
-2. Flutter sends the Google ID token to `https://petersmartlink.com/auth/google`.
-3. `otya-auth` verifies audience, issuer, expiry and `email_verified`, then issues an Otya JWT and refresh token.
+2. Flutter sends the Google ID token to `https://api.otya.site/omy-play/auth/google`.
+3. Otya ID verifies audience, issuer, expiry and `email_verified`, then issues an Otya JWT and refresh token.
 4. Google Drive permission is requested **only when the user explicitly starts backup, restore or cloud-backup deletion**.
 5. The optional Drive permission is the narrow `drive.appdata` scope.
 6. Backup data is stored as `otya-backup.json` inside the user's Drive `appDataFolder`.

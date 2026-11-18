@@ -36,9 +36,9 @@
 # ── App classes (workers, receivers, services, activities) ───────────────
 # Explicit keeps for all app-defined classes.
 # Preserve the app activity, native media bridge and notification receiver.
--keep class com.otyaplayer.app.** { *; }
--keep class com.otyaplayer.app.MainActivity { *; }
--keep class com.otyaplayer.app.NotificationDismissReceiver { *; }
+-keep class com.otya.omyplay.** { *; }
+-keep class com.otya.omyplay.MainActivity { *; }
+-keep class com.otya.omyplay.NotificationDismissReceiver { *; }
 
 # connectivity_plus
 -keep class dev.fluttercommunity.plus.connectivity.** { *; }

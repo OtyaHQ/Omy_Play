@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:otya_player/features/together/application/playback_sync_engine.dart';
+import 'package:omy_play/features/together/application/playback_sync_engine.dart';
 
 TogetherPlaybackState state({
   int sequence = 1,
