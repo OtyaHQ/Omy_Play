@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:omy_play/core/config/environment.dart';
 
 void main() {
   test('Android notification surfaces use the canonical Otya brand', () {
@@ -28,7 +29,7 @@ void main() {
     expect(push, isNot(contains("contentTitle: 'Otya \$version is available'")));
     expect(push, contains("'Otya — Announcements'"));
     expect(push, contains("uri.scheme != 'https'"));
-    expect(push, contains("host.endsWith('.\$_officialHost')"));
+    expect(push, contains('Environment.isOfficialHost(uri.host)'));
     expect(mainSource, isNot(contains("androidNotificationChannelName: 'OTYA")));
   });
 
@@ -47,6 +48,22 @@ void main() {
     expect(logo, contains("'Otya'"));
     expect(brandNote, contains('current owner-approved cyan/blue Otya app icon'));
     expect(brandNote, contains('Do not restore the retired'));
+  });
+
+  test('official network hosts use the exact shared Otya allow-list', () {
+    expect(Environment.isOfficialHost('otya.site'), isTrue);
+    expect(Environment.isOfficialHost('api.otya.site'), isTrue);
+    expect(Environment.isOfficialHost('space.otya.site'), isTrue);
+    expect(Environment.isOfficialHost('OTYA.SITE'), isTrue);
+    for (final host in [
+      'petersmartlink.com',
+      'evil.otya.site',
+      'otya.site.evil.example',
+      'evilotya.site',
+      'example.com',
+    ]) {
+      expect(Environment.isOfficialHost(host), isFalse, reason: host);
+    }
   });
 
   test('Together join keeps network details behind user-facing language', () {
