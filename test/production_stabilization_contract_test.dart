@@ -63,7 +63,7 @@ void main() {
 
     expect(updates, contains("'exactArm64' : 'exactArm32'"));
     expect(updates, contains('_officialExactApk('));
-    expect(updates, contains("uri.path != '/apk/\$abi'"));
+    expect(updates, contains("uri.path != '\$apiPathPrefix/apk/\$abi'"));
     expect(updates, contains('tagValues.single != tag'));
     expectNotContains(updates, 'aliasKey');
     expectNotContains(updates, 'downloads[exactKey] ??');
