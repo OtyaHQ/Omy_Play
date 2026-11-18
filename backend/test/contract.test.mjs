@@ -70,6 +70,6 @@ test("FCM ciphertext cannot be decrypted with a different key", async () => {
 
 test("Omy Play staging uses isolated Otya ID, not the production identity binding", () => {
   const config = readFileSync(new URL("../../wrangler.omy-play-staging.toml", import.meta.url), "utf8");
-  assert.match(config, /binding = "OTYA_ID"\\s*\\nservice = "otya-id-staging"/);
+  assert.ok(config.includes('binding = "OTYA_ID"\\nservice = "otya-id-staging"'));
   assert.doesNotMatch(config, /service = "otya-auth"/);
 });
