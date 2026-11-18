@@ -11,7 +11,7 @@ Independent backend for the Omy Play Android product. It is deployed separately 
 - Android application ID: `com.otya.omyplay`
 - Product: `OMY_PLAY`; environment: `staging`
 - `AI_ENABLED=false`: local playback never depends on AI/cloud availability.
-- Identity currently uses `otya-auth`; replace with isolated `otya-id-staging` before external tester onboarding.
+- Staging identity uses the isolated `otya-id-staging` service. Production must use the single canonical Otya ID production service; Omy Play must never own or copy an identity database.
 
 ## Responsibilities
 
