@@ -9,7 +9,7 @@ const workflow = readRoot('.github/workflows/deploy-omy-play-staging.yml')
 
 test('Omy Play staging is private and uses its own package and storage resources', () => {
   assert.match(manifest, /^name = "omy-play-api-staging"$/m)
-  assert.match(manifest, /^workers_dev = false$/m)
+  assert.match(manifest, /^workers_dev = true$/m)
   assert.match(manifest, /^keep_vars = true$/m)
   assert.match(manifest, /APP_PACKAGE_ID = "com\.otya\.omyplay"/)
   assert.match(manifest, /database_name = "omy-play-staging-db"/)
@@ -21,7 +21,7 @@ test('Omy Play staging is private and uses its own package and storage resources
 
 test('Omy Play staging redeploy is manual and waits for isolated Otya ID', () => {
   assert.match(workflow, /workflow_dispatch:/)
-  assert.match(workflow, /github\.ref == 'refs\/heads\/omy-play-backend-foundation'/)
+  assert.match(workflow, /github\.ref == 'refs\/heads\/main'/)
   assert.match(workflow, /DEPLOY-STAGING/)
   assert.match(workflow, /CLOUDFLARE_API_TOKEN_STAGING/)
   assert.match(workflow, /workers\/scripts\/otya-id-staging\/settings/)
