@@ -18,7 +18,7 @@ concurrency:
 jobs:
   deploy-omy-play-staging:
     name: Validate and redeploy Omy Play staging API
-    if: github.ref == 'refs/heads/omy-play-backend-foundation'
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
