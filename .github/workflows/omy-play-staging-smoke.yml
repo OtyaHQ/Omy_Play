@@ -1,11 +1,11 @@
 name: Omy Play staging smoke (workers.dev)
 on:
   push:
-    branches: [omy-play-backend-foundation]
+    branches: [main]
     paths:
       - ".github/workflows/omy-play-staging-smoke.yml"
       - "backend/**"
-      - "wrangler.omy-play-staging.toml"
+      - "backend/worker/wrangler.toml"
   workflow_dispatch:
 permissions:
   contents: read
