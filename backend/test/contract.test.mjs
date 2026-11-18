@@ -1,4 +1,5 @@
 import test from "node:test";
+import { readFileSync } from "node:fs";
 import assert from "node:assert/strict";
 import worker, { sanitizeCrashText, validAbi, encryptFcmToken, decryptFcmToken, REQUIRED_TABLES, REQUIRED_MIGRATIONS } from "../src/index.mjs";
 
@@ -64,4 +65,11 @@ test("FCM ciphertext cannot be decrypted with a different key", async () => {
   const decrypted = await decryptFcmToken(encrypted.value, keyB);
   assert.equal(decrypted.ok, false);
   assert.equal(decrypted.error, "fcm_token_decryption_failed");
+});
+
+
+test("Omy Play staging uses isolated Otya ID, not the production identity binding", () => {
+  const config = readFileSync(new URL("../../wrangler.omy-play-staging.toml", import.meta.url), "utf8");
+  assert.match(config, /binding = "OTYA_ID"\\s*\\nservice = "otya-id-staging"/);
+  assert.doesNotMatch(config, /service = "otya-auth"/);
 });
