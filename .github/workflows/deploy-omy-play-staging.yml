@@ -106,3 +106,19 @@ jobs:
           }
           console.log('Omy Play staging identity binding verified.');
           NODE
+
+      - name: Smoke test deployed Omy Play staging API
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="https://omy-play-api-staging.petersmartlink.workers.dev"
+          health="$(curl --retry 3 --retry-delay 2 --retry-all-errors --max-time 25 -fsS "$base/health")"
+          echo "$health"
+          node -e 'const x=JSON.parse(process.argv[1]); if(x.status!=="ready" || x.schemaReady!==true || x.aiEnabled!==false) process.exit(1)' "$health"
+          config="$(curl --max-time 20 -fsS "$base/v1/config")"
+          themes="$(curl --max-time 20 -fsS "$base/v1/themes")"
+          node -e 'JSON.parse(process.argv[1])' "$config"
+          node -e 'const x=JSON.parse(process.argv[1]); if(!Array.isArray(x.data)) process.exit(1)' "$themes"
+          status="$(curl --max-time 20 -sS -o /tmp/omy-protected.json -w '%{http_code}' "$base/v1/notifications")"
+          cat /tmp/omy-protected.json
+          test "$status" = "401"
