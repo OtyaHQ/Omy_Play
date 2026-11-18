@@ -21,7 +21,7 @@ void main() {
     expect(account, contains('AccountLinkService.instance.addPrimaryEmail'));
     expect(account, contains("title: 'Add email'"));
     expect(account, contains("title: 'Sign-in methods'"));
-    expect(environment, contains("static const String spaceUrl = 'https://space.otya.site';"));
+    expect(environment, contains('static const String spaceUrl = 'https://space.otya.site';'));
     expect(account, contains("\${Environment.spaceUrl}/u/\$publicId/\$canonicalSection"));
     expect(account, contains("'sessions' => 'devices'"));
     expect(account, contains("'connected' => 'providers'"));
