@@ -34,4 +34,4 @@ bucket_name = "omy-play-staging-assets"
 
 [[services]]
 binding = "OTYA_ID"
-service = "otya-auth"
+service = "otya-id-staging"
