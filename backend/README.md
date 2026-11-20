@@ -1,38 +1,46 @@
 # Omy Play backend
 
-Independent backend for the Omy Play Android product. It is deployed separately from Opoint and Otya End.
+The dedicated product backend for **Omy Play**. It owns only connected-service data; local media, playback, folders and Private/Vault content remain on the device.
 
-## Runtime boundary
+## Production runtime
 
-- Worker: `omy-play-api-staging`
-- D1: `omy-play-staging-db`
-- R2: `omy-play-staging-assets`
-- Firebase: `omyplay-otya-prod`
-- Android application ID: `com.otya.omyplay`
-- Product: `OMY_PLAY`; environment: `staging`
-- `AI_ENABLED=false`: local playback never depends on AI/cloud availability.
-- Staging identity uses the isolated `otya-id-staging` service. Production must use the single canonical Otya ID production service; Omy Play must never own or copy an identity database.
+| Component | Production resource |
+|---|---|
+| Cloudflare Worker | `omy-play` |
+| Public API base | `https://api.otya.site/omy-play` |
+| Worker access | Private Worker reached through the OEnd API route; no `workers.dev` endpoint |
+| D1 | `omy-play-prod-db` |
+| R2 | `omy-play-prod-assets` |
+| Shared identity | Otya ID through OEnd's production identity service |
+| Firebase project | `omyplay-otya-prod` |
+| Android package | `com.otya.omyplay` |
+
+The production D1 schema and migration ledger are applied. The production database contains the real app configuration and four existing Omy Play theme definitions transferred from the previous service store. It has no registered devices, crash reports, ratings, feedback, Together sessions, notifications or releases.
 
 ## Responsibilities
 
-App configuration, version/update metadata, release metadata, device registration, crash intake, feedback, ratings, theme catalog, notifications and Together signaling. It does not store users' local media libraries, music/video files, Vault content or raw playback history.
+App configuration, version/update metadata, release metadata, device registration, crash intake, feedback, ratings, theme catalogue, notifications and Together signaling. It does not store users' local media libraries, music/video files, Vault content or raw playback history.
 
-Compatibility routes include `/api/app-config`, `/api/crash-report`, `/api/device`, `/api/feedback`, `/api/themes`, `/api/version`, `/apk/arm32`, `/apk/arm64`, `/check-update`, `/latest`, and the corresponding `/v1/*` endpoints for config, crashes, device registration, feedback, notifications, ratings, releases and themes.
+Routes are served under the single product prefix `/omy-play`, including `/api/app-config`, `/api/themes`, `/api/device`, `/api/feedback`, `/api/crash-report`, `/api/version`, `/latest`, `/apk/arm32`, `/apk/arm64` and their versioned `/v1/*` counterparts.
 
-## Security
+The configuration response exposes `config` for the Android remote-control client and retains `data` as a documented API alias. Theme responses expose `themes` and the `data` alias.
 
-- Crash messages are sanitized before persistence.
-- FCM registration tokens are encrypted at rest using AES-256-GCM; missing key fails closed.
-- Push messages are hints only; clients fetch authoritative state from the API.
-- FCM sending remains disabled pending product-specific admin credentials, queue retry/DLQ handling and delivery tests.
-- Omy Play must not share Opoint's D1, R2, Firebase service account or operational keys.
-- Local playback, scan, folders, search, transfer and Vault must work offline.
+## Security and operating rules
 
-## Files
+- The Worker is not exposed on `workers.dev`; Cloudflare observability is enabled and query strings are redacted.
+- Otya ID is the sole identity provider. Omy Play does not own or duplicate an identity database.
+- FCM registration tokens are encrypted at rest with a unique production AES-256-GCM Worker secret. The secret is not stored in Git.
+- FCM sending remains disabled until the production sender credential, retry/DLQ handling and real device delivery checks are completed.
+- AI is disabled for this backend. Omy Play core playback remains local-first and independent of Cloudflare, Firebase and AI.
+- The R2 bucket is private. Published APKs must be signed, immutable, checksum-verified and linked to a real production release record.
+- Do not insert placeholder devices, accounts, releases, feedback or ratings to make dashboards appear populated.
 
-- `worker/src/index.mjs`: exact single-module source deployed to staging on 2026-11-11.
-- `worker/snapshots/2026-11-11-current.sql`: schema-only snapshot of 13 app tables plus migration history, without device/activity rows.
-- `worker/wrangler.toml`: staging bindings only.
-- `worker/test/contract.test.mjs`: pure helper tests.
+## Source and deployment
 
-Run tests with `cd backend/worker && npm test`. Production still requires secret review, signed device App Check/FCM tests, backup/restore validation, privacy review and explicit approval.
+- Canonical Worker source: `backend/src/index.mjs`.
+- Schema-only bootstrap: `backend/schema/bootstrap.sql`.
+- Production Worker configuration: `wrangler.omy-play-production.toml`.
+- Backend validation: `npm --prefix backend run check`, `npm --prefix backend test` and `npm --prefix backend run verify:schema`.
+- Production deployment uses the dedicated manual workflow and must pass live health, configuration, theme and unauthenticated-access smoke checks.
+
+A healthy API schema is not proof of a signed app release, device delivery or store publication. Publish those only after the real signing and device acceptance checks pass.
