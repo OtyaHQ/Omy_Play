@@ -55,7 +55,7 @@ abstract class AppColors {
   );
 
   static const LinearGradient darkOverlay = LinearGradient(
-    colors: [Colors.transparent, Color(0xE0101014)],
+    colors: [Colors.transparent, Color(0xE0050812)],
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
   );
