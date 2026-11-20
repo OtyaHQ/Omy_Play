@@ -12,31 +12,32 @@ abstract class AppColors {
   static const Color border = Color(0xFF353442);
   static const Color borderSubtle = Color(0xFF282732);
 
-  // Otya uses one restrained violet family. Cyan remains available only for
-  // explicit media/connection status, never as decorative chrome.
-  static const Color brandViolet = Color(0xFF8B6CFF);
-  static const Color brandVioletDeep = Color(0xFF6547DB);
-  static const Color brandCyan = Color(0xFF45D8E6);
-  static const Color brandBlue = brandViolet;
-  static const Color brandDeepBlue = brandVioletDeep;
+  // Owner-approved Otya identity: cyan, bright blue and deep blue.
+  // Violet names remain source-compatible aliases; they no longer define
+  // a separate purple product palette.
+  static const Color brandCyan = Color(0xFF27E8FF);
+  static const Color brandBlue = Color(0xFF126BFF);
+  static const Color brandDeepBlue = Color(0xFF173BFF);
+  static const Color brandViolet = brandBlue;
+  static const Color brandVioletDeep = brandDeepBlue;
 
   static const Color brandRed = Color(0xFFFF5A63);
   static const Color brandYellow = Color(0xFFF2C94C);
 
-  static const Color accent = brandViolet;
-  static const Color accentBlue = brandViolet;
+  static const Color accent = brandBlue;
+  static const Color accentBlue = brandBlue;
   static const Color accentCyan = brandCyan;
-  static const Color accentViolet = brandViolet;
+  static const Color accentViolet = brandDeepBlue;
   static const Color accentPink = brandRed;
   static const Color accentOrange = Color(0xFFFF9A62);
   static const Color accentGreen = Color(0xFF48C78E);
   static const Color accentAmber = brandYellow;
 
-  static const Color glowBlue = Color(0x1F8B6CFF);
-  static const Color glowViolet = Color(0x168B6CFF);
+  static const Color glowBlue = Color(0x1F126BFF);
+  static const Color glowViolet = Color(0x16126BFF);
 
   static const LinearGradient accentGradient = LinearGradient(
-    colors: [brandViolet, brandVioletDeep],
+    colors: [brandBlue, brandDeepBlue],
     begin: Alignment.centerLeft,
     end: Alignment.centerRight,
   );
