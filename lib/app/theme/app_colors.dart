@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 /// The product canvas is deliberately quiet: content and media artwork carry
 /// the personality, while surfaces establish calm hierarchy and readability.
 abstract class AppColors {
-  static const Color background = Color(0xFF101014);
-  static const Color surface = Color(0xFF18181E);
+  static const Color background = Color(0xFF050812);
+  static const Color surface = Color(0xFF0A1020);
   static const Color surfaceElevated = Color(0xFF202027);
   static const Color surfaceHighlight = Color(0xFF2A2934);
   static const Color border = Color(0xFF353442);
@@ -43,7 +43,7 @@ abstract class AppColors {
   );
 
   static const LinearGradient accentGradientDiag = LinearGradient(
-    colors: [brandViolet, brandVioletDeep],
+    colors: [brandBlue, brandDeepBlue],
     begin: Alignment.bottomLeft,
     end: Alignment.topRight,
   );
