@@ -3,6 +3,7 @@ on:
   pull_request:
     paths:
       - "backend/**"
+      - "wrangler.omy-play-production.toml"
       - "wrangler.omy-play-staging.toml"
       - ".github/workflows/omy-play-backend-ci.yml"
   push:
