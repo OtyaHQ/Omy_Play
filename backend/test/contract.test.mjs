@@ -28,6 +28,69 @@ test("Omy Play readiness contract contains only media-product schema", () => {
   assert.deepEqual(REQUIRED_MIGRATIONS, ["0001_omy_play_core"]);
 });
 
+test("production API strips the Omy Play path prefix and returns the app configuration contract", async () => {
+  const expected = { features: { onlineThemes: true }, maintenance: { enabled: false } };
+  const env = {
+    DB: {
+      prepare(sql) {
+        assert.match(sql, /FROM app_config/);
+        return {
+          first: async () => ({
+            revision: 1,
+            config_json: JSON.stringify(expected),
+            updated_at: "2026-11-20 00:00:00",
+          }),
+        };
+      },
+    },
+  };
+  const response = await worker.fetch(
+    new Request("https://api.otya.site/omy-play/api/app-config"),
+    env,
+  );
+  assert.equal(response.status, 200);
+  const payload = await response.json();
+  assert.deepEqual(payload.config, expected);
+  assert.deepEqual(payload.data, expected);
+});
+
+test("production API returns the online theme catalogue under the client contract", async () => {
+  const expectedTheme = {
+    id: "rwenzori-echo",
+    name: "Rwenzori Echo",
+    story: "A calm evening theme.",
+    scene: "mountain_lake",
+    version: 1,
+    overlay: 0.38,
+    palette: { skyTop: "#150B2E", accent: "#8B5CF6" },
+  };
+  const env = {
+    DB: {
+      prepare(sql) {
+        assert.match(sql, /FROM theme_catalog/);
+        return {
+          all: async () => ({
+            results: [{
+              theme_id: expectedTheme.id,
+              position: 1,
+              theme_json: JSON.stringify(expectedTheme),
+              updated_at: "2026-11-20 00:00:00",
+            }],
+          }),
+        };
+      },
+    },
+  };
+  const response = await worker.fetch(
+    new Request("https://api.otya.site/omy-play/api/themes"),
+    env,
+  );
+  assert.equal(response.status, 200);
+  const payload = await response.json();
+  assert.deepEqual(payload.themes, [expectedTheme]);
+  assert.deepEqual(payload.data, [expectedTheme]);
+});
+
 test("protected notifications reject missing bearer tokens", async () => {
   let queried = false;
   const env = { DB: { prepare() { queried = true; throw new Error("unexpected database read"); } } };
