@@ -1,0 +1,46 @@
+# Omy Play production Worker.
+# Product API is routed through api.otya.site/omy-play and is not exposed on workers.dev.
+name = "omy-play"
+main = "backend/src/index.mjs"
+compatibility_date = "2026-11-11"
+workers_dev = false
+keep_vars = true
+
+[vars]
+ENVIRONMENT = "production"
+PRODUCT_CODE = "OMY_PLAY"
+APP_PACKAGE_ID = "com.otya.omyplay"
+FIREBASE_PROJECT_ID = "omyplay-otya-prod"
+PUBLIC_API_BASE_URL = "https://api.otya.site/omy-play"
+AI_ENABLED = "false"
+
+[observability]
+enabled = true
+redact_query_string = true
+
+[observability.logs]
+enabled = true
+invocation_logs = true
+persist = true
+head_sampling_rate = 1
+
+[observability.traces]
+enabled = true
+head_sampling_rate = 0.05
+
+[[d1_databases]]
+binding = "DB"
+database_name = "omy-play-prod-db"
+database_id = "1863a908-b89e-4787-8789-cd4a22d45417"
+
+[[r2_buckets]]
+binding = "ASSETS"
+bucket_name = "omy-play-prod-assets"
+
+[[services]]
+binding = "OTYA_ID"
+service = "otya-auth"
+environment = "production"
+
+# FCM_TOKEN_ENCRYPTION_KEY is a unique production Worker secret.
+# FCM Admin sending remains disabled until the dedicated sender credential is provisioned.

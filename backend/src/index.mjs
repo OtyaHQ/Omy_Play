@@ -150,7 +150,12 @@ async function handleConfig(env, requestId) {
   const row = await env.DB.prepare("SELECT revision,config_json,updated_at FROM app_config WHERE config_id='default' LIMIT 1").first();
   if (!row) return json({ error: "configuration_unavailable", requestId }, 503, requestId);
   try {
-    return json({ data: JSON.parse(row.config_json), revision: row.revision, updatedAt: row.updated_at, requestId }, 200, requestId);
+    const config = JSON.parse(row.config_json);
+    if (!config || typeof config !== "object" || Array.isArray(config)) {
+      return json({ error: "configuration_invalid", requestId }, 503, requestId);
+    }
+    // The Omy Play Android client consumes "config"; "data" remains an API compatibility alias.
+    return json({ config, data: config, revision: row.revision, updatedAt: row.updated_at, requestId }, 200, requestId);
   } catch {
     return json({ error: "configuration_invalid", requestId }, 503, requestId);
   }
@@ -162,7 +167,7 @@ async function handleThemes(env, requestId) {
   for (const row of result.results || []) {
     try { themes.push({ id: row.theme_id, ...JSON.parse(row.theme_json) }); } catch { /* Skip invalid catalogue row; report remaining valid entries. */ }
   }
-  return json({ data: themes, requestId }, 200, requestId);
+  return json({ themes, data: themes, requestId }, 200, requestId);
 }
 
 async function registerDevice(request, env, identity, body, requestId) {
@@ -297,9 +302,9 @@ async function handle(request, env) {
       const missingTables = REQUIRED_TABLES.filter(name => !tables.has(name));
       const missingMigrations = REQUIRED_MIGRATIONS.filter(name => !versions.has(name));
       const ready = missingTables.length === 0 && missingMigrations.length === 0;
-      return json({ service: "omy-play-api-staging", status: ready ? "ready" : "schema_not_ready", schemaReady: ready, aiEnabled: false, requestId }, ready ? 200 : 503, requestId);
+      return json({ service: "Omy Play", status: ready ? "ready" : "schema_not_ready", schemaReady: ready, aiEnabled: false, requestId }, ready ? 200 : 503, requestId);
     } catch {
-      return json({ service: "omy-play-api-staging", status: "database_unavailable", requestId }, 503, requestId);
+      return json({ service: "Omy Play", status: "database_unavailable", requestId }, 503, requestId);
     }
   }
 
@@ -363,7 +368,11 @@ async function handle(request, env) {
 export default {
   async fetch(request, env) {
     try {
-      return await handle(request, env);
+      const url = new URL(request.url);
+      if (url.pathname === "/omy-play") url.pathname = "/";
+      else if (url.pathname.startsWith("/omy-play/")) url.pathname = url.pathname.slice("/omy-play".length);
+      const routedRequest = new Request(url, request);
+      return await handle(routedRequest, env);
     } catch (error) {
       const requestId = request.headers.get("cf-ray") || crypto.randomUUID();
       console.error("[omy-play] unhandled request error", { type: error?.name || "Error" });
