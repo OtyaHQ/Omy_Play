@@ -39,7 +39,7 @@ bucket_name = "omy-play-prod-assets"
 
 [[services]]
 binding = "OTYA_ID"
-service = "otya-auth"
+service = "oend-identity"
 environment = "production"
 
 # FCM_TOKEN_ENCRYPTION_KEY is a unique production Worker secret.
