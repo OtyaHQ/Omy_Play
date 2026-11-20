@@ -11,7 +11,7 @@ The dedicated product backend for **Omy Play**. It owns only connected-service d
 | Worker access | Private Worker reached through the OEnd API route; no `workers.dev` endpoint |
 | D1 | `omy-play-prod-db` |
 | R2 | `omy-play-prod-assets` |
-| Shared identity | Otya ID through OEnd's production identity service |
+| Shared identity | OID through OEnd's production identity service |
 | Firebase project | `omyplay-otya-prod` |
 | Android package | `com.otya.omyplay` |
 
@@ -28,7 +28,7 @@ The configuration response exposes `config` for the Android remote-control clien
 ## Security and operating rules
 
 - The Worker is not exposed on `workers.dev`; Cloudflare observability is enabled and query strings are redacted.
-- Otya ID is the sole identity provider. Omy Play does not own or duplicate an identity database.
+- OID is the sole identity provider. Omy Play does not own or duplicate an identity database.
 - FCM registration tokens are encrypted at rest with a unique production AES-256-GCM Worker secret. The secret is not stored in Git.
 - FCM sending remains disabled until the production sender credential, retry/DLQ handling and real device delivery checks are completed.
 - AI is disabled for this backend. Omy Play core playback remains local-first and independent of Cloudflare, Firebase and AI.
