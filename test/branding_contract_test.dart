@@ -54,9 +54,11 @@ void main() {
       reason: 'Flutter must not silently fall back from the corrupted old PNG.',
     );
     expect(pubspec, contains('- assets/branding/'));
-    expect(colors, contains('brandViolet = Color(0xFF8B6CFF)'));
-    expect(colors, contains('brandBlue = brandViolet'));
-    expect(colors, contains('colors: [brandViolet, brandVioletDeep]'));
+    expect(colors, contains('brandCyan = Color(0xFF27E8FF)'));
+    expect(colors, contains('brandBlue = Color(0xFF126BFF)'));
+    expect(colors, contains('brandDeepBlue = Color(0xFF173BFF)'));
+    expect(colors, contains('brandViolet = brandBlue'));
+    expect(colors, contains('colors: [brandBlue, brandDeepBlue]'));
 
     expect(File('assets/branding/otya_app_icon.webp').existsSync(), isTrue);
     expect(
