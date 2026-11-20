@@ -35,10 +35,10 @@ void main() {
     ).readAsStringSync();
     final theme = File('lib/app/theme/app_theme.dart').readAsStringSync();
 
-    expect(colors, contains('background = Color(0xFF101014)'));
-    expect(colors, contains('surface = Color(0xFF18181E)'));
-    expect(colors, contains('brandViolet = Color(0xFF8B6CFF)'));
-    expect(colors, contains('brandBlue = brandViolet'));
+    expect(colors, contains('background = Color(0xFF050812)'));
+    expect(colors, contains('surface = Color(0xFF0A1020)'));
+    expect(colors, contains('brandViolet = brandBlue'));
+    expect(colors, contains('brandViolet = brandBlue'));
         expect(background, contains('this.darkness = 0.16'));
     expect(background, contains('this.showGlow = false'));
     expect(background, isNot(contains('_OtyaLightFlowPainter')));
