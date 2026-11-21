@@ -3,8 +3,8 @@
 These bundled WebP assets are source-derived from the owner's supplied Otya brand image. They are used locally so Omy Play branding works offline.
 
 ## Files
-- otya_app_icon.webp — Omy Play's square launcher icon, based on the exact purple play-button product mark from the supplied artwork.
-- omy_play_icon.webp — direct product-icon crop from the supplied artwork.
+- otya_app_icon.webp — exact Omy Play product-icon crop from the supplied artwork; the Android launcher uses this same source artwork.
+- omy_play_icon.webp — same exact product-icon crop, used in Flutter product surfaces.
 - otya_master_lockup.webp — Otya master wordmark and tagline crop.
 - otya_orbital_mark.webp — Otya orbital symbol crop.
 
