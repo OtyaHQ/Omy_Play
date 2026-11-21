@@ -27,7 +27,7 @@ class OtyaLogo extends StatelessWidget {
     }
 
     final height = fontSize * 1.9;
-    final width = height * (560 / 179);
+    final width = height * (560 / 208);
     return Padding(
       padding: padding,
       child: Image.asset(
