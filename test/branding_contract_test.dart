@@ -63,6 +63,11 @@ void main() {
 
     expect(File('assets/branding/otya_app_icon.webp').existsSync(), isTrue);
     expect(
+      File('assets/branding/otya_app_icon.webp').readAsBytesSync(),
+      equals(File('assets/branding/omy_play_icon.webp').readAsBytesSync()),
+      reason: 'Launcher and product surfaces must use the exact same supplied product-icon crop.',
+    );
+    expect(
       File('assets/branding/otya_mark_current.png').existsSync(),
       isFalse,
       reason: 'Malformed retired product marks must not remain as dormant assets.',
