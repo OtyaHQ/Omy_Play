@@ -121,8 +121,8 @@ class _BrandAtmosphere extends StatelessWidget {
             center: Alignment(.72, -.92),
             radius: 1.2,
             colors: [
-              Color(0x2927E8FF),
-              Color(0x1F126BFF),
+              Color(0x2900BDEB),
+              Color(0x1F1677FF),
               AppColors.background,
             ],
             stops: [0, .34, 1],
