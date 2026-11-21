@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/branding/otya_app_icon.webp" alt="Otya" width="112" height="112" />
+<img src="assets/branding/otya_app_icon.webp" alt="Omy Play app icon" width="112" height="112" />
 
 # Omy Play
 
