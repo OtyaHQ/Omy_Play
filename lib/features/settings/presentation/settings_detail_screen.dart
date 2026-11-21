@@ -234,7 +234,7 @@ class SettingsDetailScreen extends ConsumerWidget {
       builder: (dialogContext) => AlertDialog(
         title: const Text('Keep music playing'),
         content: const Text(
-          'Omy Play keeps music in Android\'s foreground media service. If your phone still stops it after a few minutes, open Android settings, choose Battery, then allow Unrestricted battery use for Omy Play. Do not force-stop Otya while music is playing.',
+          'Omy Play keeps music in Android\'s foreground media service. If your phone still stops it after a few minutes, open Android settings, choose Battery, then allow Unrestricted battery use for Omy Play. Do not force-stop Omy Play while music is playing.',
         ),
         actions: [
           TextButton(
