@@ -1,9 +1,24 @@
-# Current Otya mark
+# Approved Otya and Omy Play artwork
 
-The single canonical Otya product mark is `otya_app_icon.webp`, the current owner-approved cyan/blue Otya app icon supplied on 2026-09-05.
+These bundled WebP assets are source-derived from the owner's supplied Otya brand image. They are used locally so Omy Play branding works offline.
 
-Flutter product UI, Android adaptive/legacy launcher generation and brand-sync publishing must all derive from this same decoded WebP. Do not create parallel PNG launcher copies or use retired fallback marks as product identity.
+## Files
+- otya_app_icon.webp — Omy Play's square launcher icon, based on the exact purple play-button product mark from the supplied artwork.
+- omy_play_icon.webp — direct product-icon crop from the supplied artwork.
+- otya_master_lockup.webp — Otya master wordmark and tagline crop.
+- otya_orbital_mark.webp — Otya orbital symbol crop.
 
-Use the cyan → electric-blue → deep-blue identity for product UI. Red/yellow remain functional/assistant compatibility colors and are not the primary product palette.
+## Exact master brand wording
+- Otya
+- One ecosystem. Endless possibilities.
+- Innovate | Connect | Grow
+- Developed by OtyaHQ
+- Otya Holdings Limited
+- Powering a smarter, more connected world.
 
-Do not restore the retired white/grey folded mark, the old purple music-note launcher, or the malformed `otya_mark_current.png` asset.
+## Rules
+- Do not redraw the orbital symbol or wordmark.
+- Do not substitute fonts, change gradients, recolour, or invent product icons.
+- Use the Otya master lockup for the company brand and the Omy Play product mark for Omy Play's launcher/product identity.
+- Keep the original proportions and white background of the artwork.
+- The original full-resolution 1536 × 1024 image remains the high-resolution reference; these are optimized WebP derivatives.
