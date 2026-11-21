@@ -138,21 +138,7 @@ class _Wordmark extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
-      children: [
-        OtyaMark(size: 32),
-        SizedBox(width: 10),
-        Text(
-          'OTYA',
-          style: TextStyle(
-            color: AppColors.textPrimary,
-            fontSize: 16.5,
-            fontWeight: FontWeight.w900,
-            letterSpacing: 2.1,
-          ),
-        ),
-      ],
-    );
+    return const Center(child: OtyaLogo(fontSize: 32));
   }
 }
 
@@ -181,9 +167,25 @@ class _Hero extends StatelessWidget {
               ),
             ],
           ),
-          child: const OtyaMark(size: 78),
+          child: Image.asset(
+            'assets/branding/omy_play_icon.webp',
+            width: 82,
+            height: 76,
+            fit: BoxFit.contain,
+          ),
         ),
-        const SizedBox(height: 26),
+        const SizedBox(height: 18),
+        const Text(
+          'Omy Play · Watch. Enjoy.',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: AppColors.brandCyan,
+            fontSize: 12,
+            fontWeight: FontWeight.w800,
+            letterSpacing: .7,
+          ),
+        ),
+        const SizedBox(height: 10),
         const Text(
           'Your media, ready when you are.',
           textAlign: TextAlign.center,
