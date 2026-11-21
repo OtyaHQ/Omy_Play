@@ -157,9 +157,9 @@ class _ImageThemeBackground extends StatelessWidget {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-                Color(0x3607152D),
-                Color(0x0807152D),
-                Color(0x7207152D),
+                Color(0x3608265C),
+                Color(0x0808265C),
+                Color(0x7208265C),
               ],
               stops: [0.0, 0.48, 1.0],
             ),
