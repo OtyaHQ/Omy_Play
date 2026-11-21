@@ -60,7 +60,7 @@ void main() {
     expect(source, contains('Completed tasks, security notices and Otya updates'));
     expect(source, isNot(contains('Playback controls, completed tasks')));
     expect(source, isNot(contains("title: 'Next'")));
-    expect(source, contains("title: 'About Otya'"));
+    expect(source, contains("title: 'About Omy Play'"));
     expect(source, contains("const _SectionTitle('Otya')"));
   });
 
@@ -70,10 +70,10 @@ void main() {
     ).readAsStringSync();
     final update = File('lib/core/widgets/update_dialog.dart').readAsStringSync();
 
-    expect(about, contains("title: const Text('About Otya')"));
+    expect(about, contains("title: const Text('About Omy Play')"));
     expect(about, isNot(contains("label: 'Next'")));
     expect(about, isNot(contains("context.push('/support')")));
-    expect(about, contains("subject: 'Otya Problem Report'"));
+    expect(about, contains("subject: 'Omy Play Problem Report'"));
     expect(about, contains("label: 'Share Otya'"));
     expect(about, contains("subject: 'Otya'"));
     expect(update, contains("uri.scheme != 'https'"));
