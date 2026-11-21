@@ -219,7 +219,7 @@ class _AboutScreenState extends State<AboutScreen> {
 
   Future<void> _launchEmail(
     BuildContext context, {
-    String subject = 'Otya Support',
+    String subject = 'Omy Play Support',
   }) async {
     final uri = Uri(
       scheme: 'mailto',
@@ -283,7 +283,7 @@ class _ProductCard extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           const Text(
-            'Otya',
+            'Omy Play',
             style: TextStyle(
               fontSize: 26,
               fontWeight: FontWeight.w900,
