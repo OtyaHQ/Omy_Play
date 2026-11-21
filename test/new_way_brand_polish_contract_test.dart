@@ -47,7 +47,7 @@ void main() {
     expect(logo, contains('assets/branding/otya_orbital_mark.webp'));
     expect(logo, isNot(contains('assets/branding/otya_mark_current.png')));
     expect(logo, contains('One ecosystem. Endless possibilities.'));
-    expect(brandNote, contains('Omy Play'))
+    expect(brandNote, contains('Omy Play'));
     expect(brandNote, contains('Do not redraw the orbital symbol or wordmark'));
   });
 
