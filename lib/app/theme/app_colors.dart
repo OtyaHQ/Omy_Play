@@ -33,8 +33,8 @@ abstract class AppColors {
   static const Color accentGreen = Color(0xFF48C78E);
   static const Color accentAmber = brandYellow;
 
-  static const Color glowBlue = Color(0x1F126BFF);
-  static const Color glowViolet = Color(0x16126BFF);
+  static const Color glowBlue = Color(0x1F1677FF);
+  static const Color glowViolet = Color(0x161677FF);
 
   static const LinearGradient accentGradient = LinearGradient(
     colors: [brandBlue, brandDeepBlue],
