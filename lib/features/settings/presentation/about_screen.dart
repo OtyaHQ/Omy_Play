@@ -43,7 +43,7 @@ class _AboutScreenState extends State<AboutScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         surfaceTintColor: Colors.transparent,
-        title: const Text('About Otya'),
+        title: const Text('About Omy Play'),
         leading: IconButton(
           tooltip: 'Back',
           icon: const Icon(Icons.arrow_back_rounded),
@@ -66,10 +66,10 @@ class _AboutScreenState extends State<AboutScreen> {
               _NavTile(
                 icon: Icons.bug_report_outlined,
                 label: 'Report a problem',
-                subtitle: 'Email Otya Support with a problem report',
+                subtitle: 'Email Omy Play Support with a problem report',
                 onTap: () => _launchEmail(
                   context,
-                  subject: 'Otya Problem Report',
+                  subject: 'Omy Play Problem Report',
                 ),
               ),
               const _Divider(),
@@ -108,7 +108,7 @@ class _AboutScreenState extends State<AboutScreen> {
               _NavTile(
                 icon: Icons.system_update_outlined,
                 label: 'Check for updates',
-                subtitle: 'Check the official Otya release service',
+                subtitle: 'Check the official Omy Play release service',
                 onTap: () => _checkForUpdates(context),
               ),
               const _Divider(),
@@ -121,7 +121,7 @@ class _AboutScreenState extends State<AboutScreen> {
               const _Divider(),
               _NavTile(
                 icon: Icons.share_rounded,
-                label: 'Share Otya',
+                label: 'Share Omy Play',
                 subtitle: 'Send the official download page to a friend',
                 onTap: () => _shareApp(context),
               ),
@@ -129,13 +129,13 @@ class _AboutScreenState extends State<AboutScreen> {
               _NavTile(
                 icon: Icons.privacy_tip_outlined,
                 label: 'Privacy',
-                subtitle: 'How Otya handles account and service data',
+                subtitle: 'How Omy Play handles account and service data',
                 onTap: () => context.push('/privacy'),
               ),
               const _Divider(),
               _NavTile(
                 icon: Icons.star_outline_rounded,
-                label: 'Rate Otya',
+                label: 'Rate Omy Play',
                 subtitle: 'Send product feedback and a rating',
                 onTap: () => RateUsSheet.show(context),
               ),
@@ -144,7 +144,7 @@ class _AboutScreenState extends State<AboutScreen> {
           const SizedBox(height: 28),
           Center(
             child: Text(
-              _version.isEmpty ? 'Otya' : 'Otya v$_version · build $_build',
+              _version.isEmpty ? 'Omy Play' : 'Omy Play v$_version · build $_build',
               style: const TextStyle(
                 fontSize: 12,
                 color: AppColors.textMuted,
@@ -193,13 +193,13 @@ class _AboutScreenState extends State<AboutScreen> {
       if (info == null) {
         final service = UpdateService.instance;
         final message = switch (service.lastState) {
-          UpdateCheckState.current => 'Otya is up to date.',
+          UpdateCheckState.current => 'Omy Play is up to date.',
           UpdateCheckState.preRelease =>
-            'No public Otya release is published yet.',
+            'No public Omy Play release is published yet.',
           UpdateCheckState.skipped =>
             service.lastError ?? 'The update check was skipped.',
           UpdateCheckState.unavailable =>
-            service.lastError ?? 'The Otya release service is unavailable.',
+            service.lastError ?? 'The Omy Play release service is unavailable.',
           _ => service.lastError ?? 'No update information is available.',
         };
         messenger.showSnackBar(SnackBar(content: Text(message)));
@@ -237,8 +237,8 @@ class _AboutScreenState extends State<AboutScreen> {
     try {
       final info = await PackageInfo.fromPlatform();
       await Share.share(
-        'Otya v${info.version} is an offline-first media player for Android. Download it from the official page:\n${Environment.downloadPageUrl}',
-        subject: 'Otya',
+        'Omy Play v${info.version} is an offline-first media player for Android. Download it from the official page:\n${Environment.downloadPageUrl}',
+        subject: 'Omy Play',
       );
     } catch (_) {
       if (!context.mounted) return;
