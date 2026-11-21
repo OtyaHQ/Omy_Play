@@ -33,21 +33,22 @@ void main() {
     expect(mainSource, isNot(contains("androidNotificationChannelName: 'OTYA")));
   });
 
-  test('Otya uses the approved current mark and restrained violet palette', () {
+  test('Otya uses the approved artwork and exact brand palette', () {
     final colors = File('lib/app/theme/app_colors.dart').readAsStringSync();
     final logo = File('lib/shared/widgets/otya_logo_v2.dart').readAsStringSync();
     final brandNote = File(
       'assets/branding/README-current-mark.md',
     ).readAsStringSync();
 
-    expect(colors, contains('Color(0xFF126BFF)'));
-    expect(colors, contains('Color(0xFF173BFF)'));
+    expect(colors, contains('Color(0xFF1677FF)'));
+    expect(colors, contains('Color(0xFF08265C)'));
     expect(colors, contains('Color(0xFF050812)'));
-    expect(logo, contains('assets/branding/otya_app_icon.webp'));
+    expect(logo, contains('assets/branding/otya_master_lockup.webp'));
+    expect(logo, contains('assets/branding/otya_orbital_mark.webp'));
     expect(logo, isNot(contains('assets/branding/otya_mark_current.png')));
-    expect(logo, contains("'Otya'"));
-    expect(brandNote, contains('current owner-approved cyan/blue Otya app icon'));
-    expect(brandNote, contains('Do not restore the retired'));
+    expect(logo, contains('One ecosystem. Endless possibilities.'));
+    expect(brandNote, contains('Omy Play'))
+    expect(brandNote, contains('Do not redraw the orbital symbol or wordmark'));
   });
 
   test('official network hosts use the exact shared Otya allow-list', () {
