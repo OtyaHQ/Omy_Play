@@ -25,7 +25,7 @@ void main() {
     expect(source, contains("const _SectionTitle('Otya')"));
     expect(source, contains("title: 'Check for updates'"));
     expect(source, contains("title: 'Privacy policy'"));
-    expect(source, contains("title: 'About Otya'"));
+    expect(source, contains("title: 'About Omy Play'"));
     expect(source, isNot(contains("title: 'Next'")));
     expect(source, isNot(contains("context.push('/support')")));
     expect(source, isNot(contains('Icons.auto_awesome_rounded')));
