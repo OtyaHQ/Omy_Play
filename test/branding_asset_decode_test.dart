@@ -22,8 +22,11 @@ Future<void> expectImageDecodes(String path) async {
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  test('canonical Otya app icon is a decodable image, not just a container', () async {
+  test('approved Omy Play and Otya artwork assets decode', () async {
     await expectImageDecodes('assets/branding/otya_app_icon.webp');
+    await expectImageDecodes('assets/branding/omy_play_icon.webp');
+    await expectImageDecodes('assets/branding/otya_master_lockup.webp');
+    await expectImageDecodes('assets/branding/otya_orbital_mark.webp');
   });
 
   test('active Otya visual pipeline does not depend on known broken binaries', () {
