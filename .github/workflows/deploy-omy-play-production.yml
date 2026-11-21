@@ -81,7 +81,7 @@ jobs:
           const required = ['DB', 'ASSETS', 'OID', 'PRODUCT_CODE', 'APP_PACKAGE_ID', 'PUBLIC_API_BASE_URL'];
           for (const name of required) if (!names.has(name)) throw new Error('Missing production binding: ' + name);
           const id = bindings.find(item => item.name === 'OID');
-          if (id?.type !== 'service' || id.service !== 'oid') throw new Error('Omy Play must use the canonical OID service');
+          if (id?.type !== 'service' || id.service !== 'oid') throw new Error('Omy Play must use the OEnd identity service');
           if (!secretNames.has('FCM_TOKEN_ENCRYPTION_KEY')) throw new Error('Production FCM token encryption secret is missing');
           if (settings.result?.workers_dev !== false) throw new Error('Production Worker must remain private');
           NODE
