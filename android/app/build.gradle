@@ -6,8 +6,8 @@ plugins {
     id "dev.flutter.flutter-gradle-plugin"
 }
 
-// Omy Play has one canonical product app-icon binary. Android launcher resources are
-// generated from the same validated Omy Play WebP Flutter ships in-app so launcher,
+// Omy Play has one canonical product icon crop. Android launcher resources are
+// generated from the same validated Omy Play source-derived product crop Flutter ships in-app so launcher,
 // splash/header identity and public branding cannot drift independently.
 def otyaBrandSource = file("../../assets/branding/otya_app_icon.webp")
 def generatedOtyaBrandRes = file("${buildDir}/generated/otya-brand-res")
