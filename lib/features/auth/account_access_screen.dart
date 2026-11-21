@@ -61,7 +61,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
     }
     await ref.read(authNotifierProvider.notifier).signIn(
       userId: user.id,
-      displayName: user.name ?? user.email ?? 'Otya user',
+      displayName: user.name ?? user.email ?? 'OID user',
       email: user.email,
       photoUrl: user.avatarUrl,
     );
