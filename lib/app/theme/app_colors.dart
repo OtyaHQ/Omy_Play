@@ -15,9 +15,9 @@ abstract class AppColors {
   // Owner-approved Otya identity: cyan, bright blue and deep blue.
   // Violet names remain source-compatible aliases; they no longer define
   // a separate purple product palette.
-  static const Color brandCyan = Color(0xFF27E8FF);
-  static const Color brandBlue = Color(0xFF126BFF);
-  static const Color brandDeepBlue = Color(0xFF173BFF);
+  static const Color brandCyan = Color(0xFF00BDEB);
+  static const Color brandBlue = Color(0xFF1677FF);
+  static const Color brandDeepBlue = Color(0xFF08265C);
   static const Color brandViolet = brandBlue;
   static const Color brandVioletDeep = brandDeepBlue;
 
