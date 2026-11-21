@@ -19,7 +19,7 @@ void main() {
   });
 
   test('onboarding stays focused on one clear completion action', () {
-    expect(onboarding, contains("'Start using Otya'"));
+    expect(onboarding, contains("'Start using Omy Play'"));
     expect(onboarding, contains("setBool('isFirstLaunch', false)"));
   });
 }
