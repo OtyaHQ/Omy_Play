@@ -13,7 +13,7 @@ import '../../../core/widgets/update_dialog.dart';
 import '../../../shared/widgets/wallpaper_scaffold.dart';
 import '../settings_provider.dart';
 
-/// Otya preferences.
+/// Omy Play preferences.
 ///
 /// This screen intentionally exposes only settings that have a real runtime
 /// owner. Legacy controls that no longer affect playback are not shown.
@@ -60,7 +60,7 @@ class SettingsDetailScreen extends ConsumerWidget {
             _NavTile(
               icon: Icons.hide_image_rounded,
               title: 'Remove wallpaper',
-              subtitle: 'Return to the selected Otya theme background',
+              subtitle: 'Return to the selected Omy Play theme background',
               onTap: () => _removeWallpaper(context),
             ),
           ]),
@@ -133,7 +133,7 @@ class SettingsDetailScreen extends ConsumerWidget {
             _SwitchTile(
               icon: Icons.phonelink_lock_rounded,
               title: 'App Lock',
-              subtitle: 'Require your Android screen lock, fingerprint or face after Otya leaves the foreground',
+              subtitle: 'Require your Android screen lock, fingerprint or face after Omy Play leaves the foreground',
               value: settings.appLockEnabled,
               onChanged: (enabled) => _setAppLock(context, notifier, enabled),
             ),
@@ -141,7 +141,7 @@ class SettingsDetailScreen extends ConsumerWidget {
             _SwitchTile(
               icon: Icons.manage_search_rounded,
               title: 'Search history',
-              subtitle: 'Remember recent Otya searches on this device',
+              subtitle: 'Remember recent Omy Play searches on this device',
               value: settings.searchHistory,
               onChanged: notifier.setSearchHistory,
             ),
@@ -149,7 +149,7 @@ class SettingsDetailScreen extends ConsumerWidget {
             _NavTile(
               icon: Icons.notifications_active_rounded,
               title: 'Notifications',
-              subtitle: 'Completed tasks, security notices and Otya updates',
+              subtitle: 'Completed tasks, security notices and Omy Play updates',
               onTap: () async {
                 final granted = await NotificationService.instance.requestPermission();
                 if (!context.mounted) return;
@@ -160,7 +160,7 @@ class SettingsDetailScreen extends ConsumerWidget {
                     content: Text(
                       granted
                           ? 'Notifications are enabled.'
-                          : 'Notifications are off. Enable them in Android settings to receive Otya updates and security notices.',
+                          : 'Notifications are off. Enable them in Android settings to receive Omy Play updates and security notices.',
                     ),
                     action: granted
                         ? null
@@ -178,7 +178,7 @@ class SettingsDetailScreen extends ConsumerWidget {
             _NavTile(
               icon: Icons.battery_saver_rounded,
               title: 'Keep music playing',
-              subtitle: 'If Android stops Otya in the background, set Battery to Unrestricted',
+              subtitle: 'If Android stops Omy Play in the background, set Battery to Unrestricted',
               onTap: () => _showBackgroundPlaybackHelp(context),
             ),
             const _Line(),
@@ -192,17 +192,17 @@ class SettingsDetailScreen extends ConsumerWidget {
             _NavTile(
               icon: Icons.storage_rounded,
               title: 'Storage',
-              subtitle: 'Inspect Otya media and device storage',
+              subtitle: 'Inspect Omy Play media and device storage',
               onTap: () => context.push('/settings/storage'),
             ),
           ]),
           const SizedBox(height: 24),
-          const _SectionTitle('Otya'),
+          const _SectionTitle('Omy Play'),
           _Card(children: [
             _NavTile(
               icon: Icons.system_update_rounded,
               title: 'Check for updates',
-              subtitle: 'Check the canonical Otya release service',
+              subtitle: 'Check the canonical Omy Play release service',
               onTap: () async {
                 HapticFeedback.selectionClick();
                 await UpdateDialog.checkAndShow(context, forceCheck: true);
@@ -212,13 +212,13 @@ class SettingsDetailScreen extends ConsumerWidget {
             _NavTile(
               icon: Icons.privacy_tip_outlined,
               title: 'Privacy policy',
-              subtitle: 'How Otya handles account and service data',
+              subtitle: 'How Omy Play handles account and service data',
               onTap: () => context.push('/privacy'),
             ),
             const _Line(),
             _NavTile(
               icon: Icons.info_outline_rounded,
-              title: 'About Otya',
+              title: 'About Omy Play',
               subtitle: 'Version, product information and legal links',
               onTap: () => context.push('/about'),
             ),
@@ -234,7 +234,7 @@ class SettingsDetailScreen extends ConsumerWidget {
       builder: (dialogContext) => AlertDialog(
         title: const Text('Keep music playing'),
         content: const Text(
-          'Otya keeps music in Android\'s foreground media service. If your phone still stops it after a few minutes, open Android settings, choose Battery, then allow Unrestricted battery use for Otya. Do not force-stop Otya while music is playing.',
+          'Omy Play keeps music in Android\'s foreground media service. If your phone still stops it after a few minutes, open Android settings, choose Battery, then allow Unrestricted battery use for Omy Play. Do not force-stop Otya while music is playing.',
         ),
         actions: [
           TextButton(
@@ -279,7 +279,7 @@ class SettingsDetailScreen extends ConsumerWidget {
       }
 
       final verified = await auth.authenticate(
-        localizedReason: 'Verify your device authentication to enable Otya App Lock',
+        localizedReason: 'Verify your device authentication to enable Omy Play App Lock',
         options: const AuthenticationOptions(
           biometricOnly: false,
           stickyAuth: true,
@@ -326,7 +326,7 @@ class SettingsDetailScreen extends ConsumerWidget {
     } catch (_) {
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Otya could not use that image.')),
+        const SnackBar(content: Text('Omy Play could not use that image.')),
       );
     }
   }
