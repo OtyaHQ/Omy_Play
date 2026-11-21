@@ -48,7 +48,7 @@ class _PolicyBody extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: const [
-        _PolicyHeading('Otya Privacy Policy'),
+        _PolicyHeading('Omy Play Privacy Policy'),
         _PolicyText('Effective date: November 10, 2026 · Version 1.1'),
         SizedBox(height: 24),
         _PolicySection(
@@ -114,15 +114,15 @@ class _PolicyBody extends StatelessWidget {
               'camera access for QR pairing, biometric/device authentication, '
               'foreground media playback and notifications. Android performs '
               'biometric matching; Otya does not receive or store your '
-              'biometric template. Otya v1 does not request all-files or '
+              'biometric template. Omy Play v1 does not request all-files or '
               'package-installer access.',
         ),
         _PolicySection(
           title: '7. Retention and deletion',
           body:
-              'Local information remains until you remove it, clear Otya '
+              'Local information remains until you remove it, clear Omy Play '
               'storage or uninstall the app. You can delete an authenticated '
-              'Otya cloud account from the account screen. Google Drive '
+              'OID account from the account screen. Google Drive '
               'recovery data is controlled separately and can also be deleted. '
               'Visit space.otya.site or contact support for '
               'data-access or deletion help.',
