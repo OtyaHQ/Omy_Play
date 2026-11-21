@@ -51,8 +51,11 @@ jobs:
           from PIL import Image
 
           p = Path('assets/branding/otya_app_icon.webp')
+          product = Path('assets/branding/omy_play_icon.webp')
           if not p.is_file():
               raise SystemExit('ERROR: canonical Omy Play app icon is missing')
+          if not product.is_file() or p.read_bytes() != product.read_bytes():
+              raise SystemExit('ERROR: launcher source must be the exact Omy Play product-icon crop')
           try:
               with Image.open(p) as image:
                   if image.format != 'WEBP':
