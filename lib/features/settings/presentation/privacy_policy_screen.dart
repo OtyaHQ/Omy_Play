@@ -86,7 +86,7 @@ class _PolicyBody extends StatelessWidget {
         _PolicySection(
           title: '4. Optional connected features',
           body:
-              'An Otya account is optional for local playback, Smart Search '
+              'An OID account is optional for local playback, Smart Search '
               'and nearby Send. Google Sign-In and Google Drive recovery are '
               'used only when you choose them. Drive recovery stores supported '
               'playlist data in the hidden app data folder, not raw media or '
