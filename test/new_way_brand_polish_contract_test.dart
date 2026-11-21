@@ -40,9 +40,9 @@ void main() {
       'assets/branding/README-current-mark.md',
     ).readAsStringSync();
 
-    expect(colors, contains('Color(0xFF8B6CFF)'));
-    expect(colors, contains('Color(0xFF6547DB)'));
-    expect(colors, contains('Color(0xFF101014)'));
+    expect(colors, contains('Color(0xFF126BFF)'));
+    expect(colors, contains('Color(0xFF173BFF)'));
+    expect(colors, contains('Color(0xFF050812)'));
     expect(logo, contains('assets/branding/otya_app_icon.webp'));
     expect(logo, isNot(contains('assets/branding/otya_mark_current.png')));
     expect(logo, contains("'Otya'"));

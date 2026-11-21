@@ -32,8 +32,8 @@ class OtyaMountainBackground extends StatelessWidget {
                   center: Alignment(1.0, -1.0),
                   radius: 1.2,
                   colors: [
-                    Color(0x128B6CFF),
-                    Color(0x008B6CFF),
+                    Color(0x12126BFF),
+                    Color(0x00126BFF),
                   ],
                 ),
               ),

@@ -63,7 +63,7 @@ void main() {
     expect(background, contains('this.showGlow = false'));
     expect(background, isNot(contains('_OtyaLightFlowPainter')));
     expect(background, contains('const ColoredBox(color: AppColors.background)'));
-    expect(colors, contains('brandViolet = Color(0xFF8B6CFF)'));
-    expect(colors, contains('brandBlue = brandViolet'));
+    expect(colors, contains('brandViolet = brandBlue'));
+    expect(colors, contains('brandViolet = brandBlue'));
   });
 }

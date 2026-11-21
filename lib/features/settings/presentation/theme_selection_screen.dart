@@ -231,7 +231,7 @@ class _ThemeSelectionScreenState extends State<ThemeSelectionScreen> {
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: const Color(0xA6101014),
+              color: const Color(0xA6050812),
               borderRadius: BorderRadius.circular(16),
               border: Border.all(color: AppColors.border),
             ),
@@ -351,7 +351,7 @@ class _DefaultThemeCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       onTap: onTap,
-      tileColor: const Color(0xA6101014),
+      tileColor: const Color(0xA6050812),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(18),
         side: BorderSide(color: active ? AppColors.accent : AppColors.border),
@@ -459,7 +459,7 @@ class _CatalogError extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
-        color: const Color(0xA6101014),
+        color: const Color(0xA6050812),
         borderRadius: BorderRadius.circular(18),
         border: Border.all(color: AppColors.border),
       ),

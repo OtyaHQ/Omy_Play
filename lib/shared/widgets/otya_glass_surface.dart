@@ -42,7 +42,7 @@ class OtyaGlassSurface extends StatelessWidget {
         filter: ImageFilter.blur(sigmaX: blur, sigmaY: blur),
         child: DecoratedBox(
           decoration: BoxDecoration(
-            color: const Color(0xFF101014).withValues(alpha: opacity),
+            color: AppColors.surface.withValues(alpha: opacity),
             borderRadius: borderRadius,
             border: Border.all(
               color: Colors.white.withValues(alpha: borderOpacity),
