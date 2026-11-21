@@ -76,7 +76,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
   bool _validateRegistrationConsent() {
     if (!_termsAccepted || !_privacyAccepted) {
       setState(() => _error =
-          'Accept the Terms of Service and Privacy Policy to create your Otya account.');
+          'Accept the Terms of Service and Privacy Policy to create your OID account.');
       return false;
     }
     return true;
@@ -95,7 +95,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
     if (_register && !_validateRegistrationConsent()) return;
     if (_twoFactorRequired && _twoFactor.text.trim().isEmpty) {
       setState(() => _error = _useRecoveryCode
-          ? 'Enter one of your Otya recovery codes.'
+          ? 'Enter one of your OID recovery codes.'
           : 'Enter the 6-digit code from your authenticator app.');
       return;
     }
@@ -176,7 +176,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
               ShaderMask(
                 shaderCallback: AppColors.accentGradient.createShader,
                 child: const Text(
-                  'Otya Account',
+                  'OID Account',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.white,
@@ -189,7 +189,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
               const SizedBox(height: 8),
               Text(
                 _twoFactorRequired
-                    ? 'Confirm this sign-in with your Otya two-step verification.'
+                    ? 'Confirm this sign-in with your OID two-step verification.'
                     : 'One secure account for verification, recovery, supported backup services and saved Next conversations.',
                 textAlign: TextAlign.center,
                 style: const TextStyle(color: AppColors.textSecondary, fontSize: 13),
@@ -270,7 +270,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                         ? 'Recovery code'
                         : 'Authenticator code',
                     helperText: _useRecoveryCode
-                        ? 'Use one unused recovery code from your Otya account.'
+                        ? 'Use one unused recovery code from your OID account.'
                         : 'Enter the 6-digit code from your authenticator app.',
                     prefixIcon: Icon(_useRecoveryCode
                         ? Icons.vpn_key_outlined
@@ -355,7 +355,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                         )
                       : Text(_twoFactorRequired
                           ? 'Verify and sign in'
-                          : (_register ? 'Create Otya Account' : 'Login')),
+                          : (_register ? 'Create OID Account' : 'Login')),
                 ),
               ),
               if (_twoFactorRequired) ...[
@@ -375,7 +375,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
               Text(
                 _twoFactorRequired
                     ? 'Otya never asks you to share authenticator or recovery codes outside the official sign-in flow.'
-                    : 'Google and email/password both connect to the same Otya account. Local playback does not require sign-in.',
+                    : 'Google and email/password both connect to the same OID account. Local playback does not require sign-in.',
                 textAlign: TextAlign.center,
                 style: const TextStyle(color: AppColors.textMuted, fontSize: 11),
               ),
