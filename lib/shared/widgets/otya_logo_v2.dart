@@ -76,7 +76,7 @@ class OtyaMark extends StatelessWidget {
   }
 }
 
-/// Compact animated presentation of the same approved orbital artwork.
+/// Compact presentation of the same approved orbital artwork.
 class OtyaThinkingMark extends StatelessWidget {
   const OtyaThinkingMark({
     super.key,
