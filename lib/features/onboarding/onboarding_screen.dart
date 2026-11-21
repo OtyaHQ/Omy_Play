@@ -77,7 +77,7 @@ class _OnboardingOverlayState extends State<OnboardingOverlay> {
                                       ),
                                     )
                                   : const Text(
-                                      'Start using Otya',
+                                      'Start using Omy Play',
                                       style: TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.w800,
