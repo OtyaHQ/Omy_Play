@@ -38,7 +38,7 @@ binding = "ASSETS"
 bucket_name = "omy-play-prod-assets"
 
 [[services]]
-binding = "OTYA_ID"
+binding = "OID"
 service = "oid"
 environment = "production"
 
