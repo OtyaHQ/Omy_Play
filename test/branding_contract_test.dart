@@ -47,16 +47,17 @@ void main() {
     expect(gradle, contains('assets/branding/otya_app_icon.webp'));
     expect(gradle, contains('prepareOtyaBrandResources'));
     expect(gradle, contains('otya_launcher_source.webp'));
-    expect(logo, contains("'assets/branding/otya_app_icon.webp'"));
+    expect(logo, contains('assets/branding/otya_master_lockup.webp'));
+    expect(logo, contains('assets/branding/otya_orbital_mark.webp'));
     expect(
       logo,
       isNot(contains("'assets/branding/otya_mark_current.png'")),
       reason: 'Flutter must not silently fall back from the corrupted old PNG.',
     );
     expect(pubspec, contains('- assets/branding/'));
-    expect(colors, contains('brandCyan = Color(0xFF27E8FF)'));
-    expect(colors, contains('brandBlue = Color(0xFF126BFF)'));
-    expect(colors, contains('brandDeepBlue = Color(0xFF173BFF)'));
+    expect(colors, contains('brandCyan = Color(0xFF00BDEB)'));
+    expect(colors, contains('brandBlue = Color(0xFF1677FF)'));
+    expect(colors, contains('brandDeepBlue = Color(0xFF08265C)'));
     expect(colors, contains('brandViolet = brandBlue'));
     expect(colors, contains('colors: [brandBlue, brandDeepBlue]'));
 
