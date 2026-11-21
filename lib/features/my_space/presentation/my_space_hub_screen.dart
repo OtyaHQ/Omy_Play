@@ -135,7 +135,7 @@ class MySpaceHubScreen extends ConsumerWidget {
                 children: [
                   _ActionRow(
                     icon: Icons.info_outline_rounded,
-                    title: 'About Otya',
+                    title: 'About Omy Play',
                     subtitle: 'Version, privacy, terms and product information',
                     onTap: () => context.push('/about'),
                   ),
