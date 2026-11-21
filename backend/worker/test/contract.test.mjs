@@ -55,3 +55,10 @@ test("publishes exact immutable Omy Play APK URLs under the product API prefix",
   assert.throws(() => exactApkUrl("http://api.otya.site/omy-play", "arm64", "v1.0.0+1"));
   assert.throws(() => exactApkUrl("https://api.otya.site/omy-play", "x86", "v1.0.0+1"));
 });
+
+
+test("health endpoint reports the canonical Omy Play service identity", async () => {
+  const source = (await import("node:fs")).readFileSync(new URL("../src/index.mjs", import.meta.url), "utf8");
+  assert.match(source, /service: "omy-play-api"/);
+  assert.doesNotMatch(source, /omy-play-api-staging/);
+});

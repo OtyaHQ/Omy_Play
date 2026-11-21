@@ -338,9 +338,9 @@ async function handle(request, env) {
       const missingTables = REQUIRED_TABLES.filter(name => !tables.has(name));
       const missingMigrations = REQUIRED_MIGRATIONS.filter(name => !versions.has(name));
       const ready = missingTables.length === 0 && missingMigrations.length === 0;
-      return json({ service: "omy-play-api-staging", status: ready ? "ready" : "schema_not_ready", schemaReady: ready, aiEnabled: false, requestId }, ready ? 200 : 503, requestId);
+      return json({ service: "omy-play-api", status: ready ? "ready" : "schema_not_ready", schemaReady: ready, aiEnabled: false, requestId }, ready ? 200 : 503, requestId);
     } catch {
-      return json({ service: "omy-play-api-staging", status: "database_unavailable", requestId }, 503, requestId);
+      return json({ service: "omy-play-api", status: "database_unavailable", requestId }, 503, requestId);
     }
   }
 
